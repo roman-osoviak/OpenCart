@@ -1,2 +1,5 @@
 environment:
   site_url: https://demo.opencart.com/index.php
+user:
+  existing_email: ometux7@i.ua
+  password: 12345
