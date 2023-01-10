@@ -17,5 +17,7 @@ def test_login(browser, get_env):
 
     assert browser.title == PageTitle.LOGIN_PAGE_TITLE
 
-    class_page.login()
+    class_page.login(email, password)
+
+    # after success login user should see specific title
     assert browser.title == PageTitle.MY_ACCOUNT_PAGE_TITLE

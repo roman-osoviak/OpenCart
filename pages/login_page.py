@@ -2,8 +2,17 @@
 This module describes Login Page
 LoginPage is inherited from BasePage
 """
+from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
+
+
+# pylint: disable=too-few-public-methods
+class LoginPageLocators:
+    """Locators for Login page"""
+    EMAIL_INPUT = (By.ID, 'input-email')
+    PASSWORD_INPUT = (By.ID, 'input-password')
+    LOGIN_BUTTON = (By.XPATH, '//*[@value="Login"]')
 
 
 class LoginPage(BasePage):
@@ -33,6 +42,8 @@ class LoginPage(BasePage):
         :param email: email address need to enter
         :return:
         """
+        self.type_text_in_ui_element(self.driver.find_element(*LoginPageLocators.EMAIL_INPUT),
+                                     email)
 
     def set_password(self, password: str):
         """
@@ -41,6 +52,9 @@ class LoginPage(BasePage):
         :param password: password field need to enter
         :return:
         """
+        self.type_text_in_ui_element(self.driver.find_element(*LoginPageLocators.PASSWORD_INPUT),
+                                     password)
 
     def click_login_btn(self):
         """Click on Login btn"""
+        self.find_element(LoginPageLocators.LOGIN_BUTTON).click()
