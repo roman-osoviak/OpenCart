@@ -12,7 +12,7 @@ class LoginPageLocators:
     """Locators for Login page"""
     EMAIL_INPUT = (By.ID, 'input-email')
     PASSWORD_INPUT = (By.ID, 'input-password')
-    LOGIN_BUTTON = (By.XPATH, '//*[@value="Login"]')
+    LOGIN_BUTTON = (By.XPATH, '//*[@type="submit"]')
 
 
 class LoginPage(BasePage):
@@ -25,7 +25,7 @@ class LoginPage(BasePage):
 
     def login(self, email: str, password: str):
         """
-       Positive login procedure
+       Login method implementation
 
        :param email: email address to login with
        :param password:  password to login with
@@ -34,6 +34,7 @@ class LoginPage(BasePage):
         self.set_email(email)
         self.set_password(password)
         self.click_login_btn()
+        print("pass")
 
     def set_email(self, email: str):
         """
