@@ -34,7 +34,6 @@ class LoginPage(BasePage):
         self.set_email(email)
         self.set_password(password)
         self.click_login_btn()
-        print("pass")
 
     def set_email(self, email: str):
         """

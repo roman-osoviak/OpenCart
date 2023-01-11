@@ -57,3 +57,15 @@ class BasePage:
         elem = locator
         elem.clear()
         elem.send_keys(text)
+
+    def _trigger_checkbox(self, locator: Tuple, value: bool):
+        """
+        Selecting/deselecting checkbox according to the provided value
+
+        :param locator: locator that describes an element
+        :param value: True in case we need to check, otherwise False
+        :return: None
+        """
+        state = self.find_element(locator).is_selected()
+        if value != state:
+            self.find_element(locator).click()

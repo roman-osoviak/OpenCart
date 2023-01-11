@@ -16,10 +16,95 @@ class RegistrationLocators:
     PASSWORD_INPUT = (By.XPATH, '//*[@id="input-password"]')
     SUBSCRIBE_YES = (By.CSS_SELECTOR, '#input-newsletter-yes')
     SUBSCRIBE_NO = (By.CSS_SELECTOR, '#input-newsletter-no')
-    AGREE_FLAG = (By.NAME, 'agree')
+    SUBSCRIBE_FLAG = (By.NAME, 'agree')
     CONTINUE_BUTTON = (By.XPATH, '//*[@type="submit"]')
 
 
-class RegitrationPage(BasePage):
+class RegistrationPage(BasePage):
     """This class collects methods for Registration Page"""
     _URL_PATH = '?route=account/register'
+
+    def go_to_site(self):
+        """Open registration page method"""
+        return self.driver.get(self.base_url + self._URL_PATH)
+
+    # pylint: disable=too-many-arguments
+    def register_user(self, first_name: str, last_name: str, email: str,
+                      password: str, subscribe_flag: bool):
+        """
+        User registration procedure
+
+        :param first_name: first Name value
+        :param last_name: last Name value
+        :param email: email address field value
+        :param password: password value
+        :param subscribe_flag: subscribe flag value
+        :return: None
+        """
+        self.set_first_name(first_name)
+        self.set_last_name(last_name)
+        self.set_email(email)
+        self.set_password(password)
+        self.set_subscribe_flag(subscribe_flag)
+        self.click_on_continue_btn()
+
+    def set_first_name(self, first_name: str):
+        """
+        Method to input First Name
+
+        :param first_name: First Name need to be entered
+        :return: None
+        """
+        self.type_text_in_ui_element(
+            self.driver.find_element(*RegistrationLocators.FIRST_NAME_INPUT),
+            first_name)
+
+    def set_last_name(self, last_name: str):
+        """
+        Method to input Last Name
+
+        :param last_name: Last Name need to be entered
+        :return: None
+        """
+        self.type_text_in_ui_element(
+            self.driver.find_element(*RegistrationLocators.LAST_NAME_INPUT),
+            last_name)
+
+    def set_email(self, email: str):
+        """
+        Input email field
+
+        :param email: Email address need to enter
+        :return: None
+        """
+        self.type_text_in_ui_element(
+            self.driver.find_element(*RegistrationLocators.EMAIL_INPUT),
+            email)
+
+    def set_password(self, password: str):
+        """
+        Input password field
+
+        :param password: Password need to enter
+        :return: None
+        """
+        self.type_text_in_ui_element(
+            self.driver.find_element(*RegistrationLocators.PASSWORD_INPUT),
+            password)
+
+    def set_subscribe_flag(self, subscribe_state: bool):
+        """
+        Method to set yes or no for subscription
+
+        :param subscribe_state: Check subscribe flag is True, otherwise False
+        :return: state of check-box
+        """
+        return self._trigger_checkbox(RegistrationLocators.SUBSCRIBE_FLAG, subscribe_state)
+
+    def click_on_continue_btn(self):
+        """
+        Press Continue button method
+
+        :return: None
+        """
+        return self.find_element(RegistrationLocators.CONTINUE_BUTTON).click()
