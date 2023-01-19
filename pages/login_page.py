@@ -2,6 +2,8 @@
 This module describes Login Page
 LoginPage is inherited from BasePage
 """
+import logging
+
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -31,9 +33,12 @@ class LoginPage(BasePage):
        :param password:  password to login with
        :return:
        """
+        logging.info("Trying to register user with %s email and '%s' as a password",
+                     email, password)
         self.set_email(email)
         self.set_password(password)
         self.click_login_btn()
+        logging.info("Login is successful")
 
     def set_email(self, email: str):
         """

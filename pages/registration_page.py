@@ -51,6 +51,7 @@ class RegistrationPage(BasePage):
         self.set_password(password)
         self.set_subscribe_flag(subscribe_flag)
         self.click_on_continue_btn()
+        logging.info("User is successfully registered")
 
     def set_first_name(self, first_name: str):
         """
