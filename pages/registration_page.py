@@ -2,6 +2,8 @@
 This module describes Registration Page
 RegistrationPage is inherited from BasePage
 """
+import logging
+
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -41,6 +43,8 @@ class RegistrationPage(BasePage):
         :param subscribe_flag: subscribe flag value
         :return: None
         """
+        logging.info("Trying to register user with %s email and '%s' as a password",
+                     email, password)
         self.set_first_name(first_name)
         self.set_last_name(last_name)
         self.set_email(email)
