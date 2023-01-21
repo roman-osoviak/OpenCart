@@ -22,6 +22,7 @@ class RegistrationLocators:
     SUBSCRIBE_FLAG = (By.NAME, 'agree')
     CONTINUE_BUTTON = (By.XPATH, '//*[@type="submit"]')
     ERRORS_TEXT_ON_PAGE = (By.XPATH, '//*[@class="text-danger"]')
+    ERROR_XPATH = '//input[@id="{}"]/following-sibling::*'
 
 
 class RegistrationPage(BasePage):
