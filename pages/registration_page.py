@@ -20,6 +20,7 @@ class RegistrationLocators:
     SUBSCRIBE_NO = (By.CSS_SELECTOR, '#input-newsletter-no')
     SUBSCRIBE_FLAG = (By.NAME, 'agree')
     CONTINUE_BUTTON = (By.XPATH, '//*[@type="submit"]')
+    ERRORS_TEXT_ON_PAGE = (By.XPATH, '//*[@class="text-danger"]')
 
 
 class RegistrationPage(BasePage):
@@ -113,3 +114,16 @@ class RegistrationPage(BasePage):
         :return: None
         """
         return self.find_element(RegistrationLocators.CONTINUE_BUTTON).click()
+
+    def get_errors_count(self):
+        """
+        Count a number of error text on the page
+
+        :return: Number of errors on the page
+        """
+
+        error_counter = 0
+        for element in self.find_elements(RegistrationLocators.ERRORS_TEXT_ON_PAGE):
+            error_counter += 1
+            print(element)
+        return error_counter
