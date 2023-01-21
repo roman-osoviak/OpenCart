@@ -7,6 +7,7 @@ import logging
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
+from utils.enums import RegPageErrorType
 
 
 # pylint: disable=too-few-public-methods
