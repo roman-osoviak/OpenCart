@@ -127,3 +127,14 @@ class RegistrationPage(BasePage):
             error_counter += 1
             print(element)
         return error_counter
+
+    def get_error_message(self, error_text: RegPageErrorType):
+        """
+        Return specific error text
+
+        :param error_text: specific id field where error occurs
+        :return: error text
+        """
+
+        return self.find_element((By.XPATH,
+                                  (RegistrationLocators.ERROR_XPATH.format(error_text.value)))).text
