@@ -33,7 +33,6 @@ class RegistrationPage(BasePage):
         """Open registration page method"""
         return self.driver.get(self.base_url + self._URL_PATH)
 
-    # pylint: disable=too-many-arguments
     def register_user(self, first_name: str, last_name: str, email: str,
                       password: str, subscribe_flag: bool):
         """
@@ -55,6 +54,7 @@ class RegistrationPage(BasePage):
         self.set_subscribe_flag(subscribe_flag)
         self.click_on_continue_btn()
         logging.info("User is successfully registered")
+    # pylint: disable=too-many-arguments
 
     def set_first_name(self, first_name: str):
         """

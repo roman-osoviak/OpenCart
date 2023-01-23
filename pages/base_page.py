@@ -34,7 +34,7 @@ class BasePage:
 
     def find_elements(self, locator: Tuple, time=10):
         """
-        Wrapper for webdriver find_elemets method
+        Wrapper for webdriver find_elements method
 
         :param locator: locator itself
         :param time: time to wait for an element
@@ -69,3 +69,12 @@ class BasePage:
         state = self.find_element(locator).is_selected()
         if value != state:
             self.find_element(locator).click()
+
+    def click_on_element(self, locator: Tuple):
+        """
+        Click on UI element
+
+        :param locator: locator itself
+        :return: None
+        """
+        self.find_element(locator).click()

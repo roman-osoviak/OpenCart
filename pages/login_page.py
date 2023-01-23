@@ -15,6 +15,7 @@ class LoginPageLocators:
     EMAIL_INPUT = (By.ID, 'input-email')
     PASSWORD_INPUT = (By.ID, 'input-password')
     LOGIN_BUTTON = (By.XPATH, '//*[@type="submit"]')
+    CONTINUE_BUTTON = (By.XPATH, '//*[contains(text(), "Continue")]')
 
 
 class LoginPage(BasePage):
@@ -37,7 +38,7 @@ class LoginPage(BasePage):
                      email, password)
         self.set_email(email)
         self.set_password(password)
-        self.click_login_btn()
+        self.click_login_button()
         logging.info("Login is successful")
 
     def set_email(self, email: str):
@@ -60,6 +61,10 @@ class LoginPage(BasePage):
         self.type_text_in_ui_element(self.driver.find_element(*LoginPageLocators.PASSWORD_INPUT),
                                      password)
 
-    def click_login_btn(self):
-        """Click on Login btn"""
-        self.find_element(LoginPageLocators.LOGIN_BUTTON).click()
+    def click_login_button(self):
+        """Click on Login button"""
+        self.click_on_element(LoginPageLocators.LOGIN_BUTTON)
+
+    def click_continue_button(self):
+        """Click on Continue button"""
+        self.click_on_element(LoginPageLocators.CONTINUE_BUTTON)
