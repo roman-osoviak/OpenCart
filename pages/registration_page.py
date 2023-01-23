@@ -54,6 +54,7 @@ class RegistrationPage(BasePage):
         self.set_subscribe_flag(subscribe_flag)
         self.click_on_continue_btn()
         logging.info("User is successfully registered")
+
     # pylint: disable=too-many-arguments
 
     def set_first_name(self, first_name: str):
@@ -115,7 +116,7 @@ class RegistrationPage(BasePage):
 
         :return: None
         """
-        return self.find_element(RegistrationLocators.CONTINUE_BUTTON).click()
+        return self.click_on_element(RegistrationLocators.CONTINUE_BUTTON)
 
     def get_errors_count(self):
         """

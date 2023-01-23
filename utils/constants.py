@@ -1,6 +1,7 @@
 """For storing common constants"""
 
 
+# pylint: disable=too-few-public-methods
 class ForgotPasswordPageWarning:
     """Common warnings on the Login page"""
     EMAIL_NOT_FOUND = ' Warning: The E-Mail Address was not found in our records!'
@@ -14,6 +15,7 @@ class PageTitle:
     REGISTERED_PAGE_TITLE = 'Your Account Has Been Created!'
     FORGOT_PASSWORD_PAGE_TITLE = 'Forgot Your Password?'
     FORGOT_PASSWORD_SUCCESS = 'Your Password Was Restored'
+    SHOPPING_CART_PAGE_TITLE = 'Your Store'
 
 
 # pylint: disable=too-few-public-methods
