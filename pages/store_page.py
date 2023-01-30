@@ -10,10 +10,11 @@ from pages.base_page import BasePage
 # pylint: disable=too-few-public-methods
 class StoreLocators:
     """Locators on Your Store page"""
-    SHOPPING_CART_BUTTON = (By.XPATH, '//*[@id="header-cart"]/div/button')
+    SHOPPING_CART_BUTTON = (By.XPATH, '//div[@id="header-cart"]//button')
     NEXT_ITEM_BUTTON = (By.XPATH, '//*[@id="carousel-banner-0"]/button[2]/span')
     PREVIOUS_ITEM_BUTTON = (By.XPATH, '//*[@id="carousel-banner-0"]/button[1]/span')
-    SHOPPING_CART_DROPDOWN_MENU_EXPANDED = (By.XPATH, '//*[@id="header-cart"]')
+    SHOPPING_CART_DROPDOWN_MENU_EXPANDED = (By.XPATH,
+                                            '//div[@id="header-cart"]//p[@class="text-center"]')
 
 
 class StorePage(BasePage):
@@ -46,3 +47,11 @@ class StorePage(BasePage):
         except NoSuchElementException:
             print('No such element on the page')
         return is_shown
+
+    def get_shopping_cart_text(self):
+        """
+        Gets text from shopping cart button
+
+        :return: element text
+        """
+        return self.get_element_text(StoreLocators.SHOPPING_CART_BUTTON)

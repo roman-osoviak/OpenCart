@@ -27,3 +27,9 @@ class RegPageError:
     BAD_TELEPHONE = 'Telephone must be between 3 and 32 characters!'
     BAD_PASSWORD = 'Password must be between 4 and 20 characters!'
     PASSWORD_MISMATCH = 'Password confirmation does not match password!'
+
+
+class StoreItems:
+    """  Captions from Store Page """
+    SHOPPING_CART_DROPDOWN_EMPTY_TEXT = 'Your shopping cart is empty!'
+    SHOPPING_CART_BUTTON_ZERO_COST = '0 item(s) - $0.00'

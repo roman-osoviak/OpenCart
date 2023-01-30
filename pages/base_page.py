@@ -78,3 +78,12 @@ class BasePage:
         :return: None
         """
         self.find_element(locator).click()
+
+    def get_element_text(self, locator: Tuple):
+        """
+        Get text from element
+
+        :param locator: locator itself
+        :return: element text
+        """
+        return self.find_element(locator).text
