@@ -48,10 +48,20 @@ class StorePage(BasePage):
             print('No such element on the page')
         return is_shown
 
-    def get_shopping_cart_text(self):
+    def get_shopping_cart_default_button_text(self):
         """
-        Gets text from shopping cart button
+        Gets default text from shopping cart button
 
         :return: element text
         """
         return self.get_element_text(StoreLocators.SHOPPING_CART_BUTTON)
+
+    def get_shopping_cart_empty_text(self):
+        """
+        Get empty cart dropdown text method
+
+        :return: text
+        """
+        # we need to expand dropdown before reading text
+        self.click_on_shopping_cart()
+        return self.get_element_text(StoreLocators.SHOPPING_CART_DROPDOWN_MENU_EXPANDED)
