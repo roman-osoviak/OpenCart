@@ -2,6 +2,7 @@
 
 from pages.store_page import StorePage
 from utils.constants import PageTitle, StoreItems
+from utils.enums import StoreCurrency
 
 
 def test_click_on_shopping_cart_button(browser, get_env):
@@ -13,5 +14,5 @@ def test_click_on_shopping_cart_button(browser, get_env):
 
     assert browser.title == PageTitle.SHOPPING_CART_PAGE_TITLE
     assert store_page.get_shopping_cart_default_button_text() == \
-           StoreItems.SHOPPING_CART_BUTTON_ZERO_COST
+           StoreCurrency.SHOPPING_CART_BUTTON_ZERO_COST_USD.value
     assert store_page.get_shopping_cart_empty_text() == StoreItems.SHOPPING_CART_DROPDOWN_EMPTY_TEXT

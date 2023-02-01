@@ -13,4 +13,3 @@ def test_currency_switching(browser, get_env):
 
     store_page.select_currency(Currency.POUNDS)
     assert StoreCurrency.SHOPPING_CART_BUTTON_ZERO_COST_EURO
-
