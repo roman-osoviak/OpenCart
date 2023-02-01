@@ -16,11 +16,10 @@ class StoreLocators:
     PREVIOUS_ITEM_BUTTON = (By.XPATH, '//*[@id="carousel-banner-0"]//span')
     SHOPPING_CART_DROPDOWN_MENU_EXPANDED = (By.XPATH,
                                             '//div[@id="header-cart"]//p[@class="text-center"]')
-    CURRENCY = (By.XPATH, '//*[@id="form-currency"]//span')
-    CURRENCY_OPTION_COMMON = (By.XPATH, '//*[@id="form-currency"]//li')
-    CURRENCY_OPTION_EURO = (By.XPATH, '//*[@id="form-currency"]//li[1]')
-    CURRENCY_OPTION_POUNDS = (By.XPATH, '//*[@id="form-currency"]//li[2]')
-    CURRENCY_OPTION_USD = (By.XPATH, '//*[@id="form-currency"]//li[3]')
+    CURRENCY_DROP_DOWN = (By.XPATH, '//*[@id="form-currency"]//span')
+    CURRENCY_OPTION_EURO = (By.XPATH, '//*[contains(text(), "Euro"")]')
+    CURRENCY_OPTION_POUNDS = (By.XPATH, '//*[contains(text(), "Pound Sterling")]')
+    CURRENCY_OPTION_USD = (By.XPATH, '//*[contains(text(), "US Dollar")]')
 
 
 class StorePage(BasePage):
@@ -45,7 +44,7 @@ class StorePage(BasePage):
 
     def click_on_drop_down_currency(self):
         """Method click on currency drop-down"""
-        self.click_on_element(StoreLocators.CURRENCY)
+        self.click_on_element(StoreLocators.CURRENCY_DROP_DOWN)
 
     def empty_shopping_cart_menu_displayed(self):
         """Checks if empty menu dropdown menu is displayed"""
