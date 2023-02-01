@@ -19,3 +19,17 @@ class RegPageErrorType(Enum):
     PHONE = "input-telephone"
     PASSWORD = "input-password"
     CONFIRM_PASSWORD = "input-confirm"
+
+
+class StoreCurrency(Enum):
+    """Default text for all currencies"""
+    SHOPPING_CART_BUTTON_ZERO_COST_USD = '0 item(s) - $0.00'
+    SHOPPING_CART_BUTTON_ZERO_COST_EURO = '0 item(s) - 0.00€'
+    SHOPPING_CART_BUTTON_ZERO_COST_POUND = '0 item(s) - £0.00'
+
+
+class Currency(Enum):
+    """Store currencies"""
+    USD = 'USD'
+    EURO = 'EURO'
+    POUNDS = 'POUND STERLING'

@@ -32,4 +32,3 @@ class RegPageError:
 class StoreItems:
     """  Captions from Store Page """
     SHOPPING_CART_DROPDOWN_EMPTY_TEXT = 'Your shopping cart is empty!'
-    SHOPPING_CART_BUTTON_ZERO_COST = '0 item(s) - $0.00'
