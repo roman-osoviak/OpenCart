@@ -5,7 +5,7 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
-from utils.enums import Currency
+from utils.enums import Currency, StoreCurrency
 
 
 # pylint: disable=too-few-public-methods
@@ -95,3 +95,15 @@ class StorePage(BasePage):
         """
         self.click_on_drop_down_currency()
         self.click_on_currency_option(currency)
+
+    def verify_usd_is_selected(self):
+        """
+        Method checks if USD is selected
+
+        :return: True if USD selected, False otherwise
+        """
+        usd_selected = False
+        if self.get_shopping_cart_default_button_text() == \
+                StoreCurrency.SHOPPING_CART_BUTTON_ZERO_COST_USD.value:
+            usd_selected = True
+        return usd_selected
