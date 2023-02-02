@@ -17,7 +17,7 @@ class StoreLocators:
     SHOPPING_CART_DROPDOWN_MENU_EXPANDED = (By.XPATH,
                                             '//div[@id="header-cart"]//p[@class="text-center"]')
     CURRENCY_DROP_DOWN = (By.XPATH, '//*[@id="form-currency"]//span')
-    CURRENCY_OPTION_EURO = (By.XPATH, '//*[contains(text(), "Euro"")]')
+    CURRENCY_OPTION_EURO = (By.XPATH, '//*[contains(text(), "Euro")]')
     CURRENCY_OPTION_POUNDS = (By.XPATH, '//*[contains(text(), "Pound Sterling")]')
     CURRENCY_OPTION_USD = (By.XPATH, '//*[contains(text(), "US Dollar")]')
 
@@ -57,7 +57,7 @@ class StorePage(BasePage):
             print('No such element on the page')
         return is_shown
 
-    def get_shopping_cart_default_button_text(self):
+    def get_shopping_cart_button_text(self):
         """
         Gets default text from shopping cart button
 
@@ -103,7 +103,7 @@ class StorePage(BasePage):
         :return: True if USD selected, False otherwise
         """
         usd_selected = False
-        if self.get_shopping_cart_default_button_text() == \
+        if self.get_shopping_cart_button_text() == \
                 StoreCurrency.SHOPPING_CART_BUTTON_ZERO_COST_USD.value:
             usd_selected = True
         return usd_selected
