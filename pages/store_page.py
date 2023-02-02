@@ -75,18 +75,7 @@ class StorePage(BasePage):
         self.click_on_shopping_cart()
         return self.get_element_text(StoreLocators.SHOPPING_CART_DROPDOWN_MENU_EXPANDED)
 
-    def click_on_currency_option(self, currency: Currency):
-        """Method click on currency option"""
-        # locator = ''
-        if currency == Currency.USD:
-            locator = StoreLocators.CURRENCY_OPTION_USD
-        elif currency == Currency.EURO:
-            locator = StoreLocators.CURRENCY_OPTION_EURO
-        elif currency == Currency.POUNDS:
-            locator = StoreLocators.CURRENCY_OPTION_POUNDS
-        self.click_on_element(locator)
-
-    def select_currency(self, currency: str = Currency.USD):
+    def select_currency(self, currency: Currency):
         """
         Method for selecting desired currency
 
@@ -94,7 +83,13 @@ class StorePage(BasePage):
         :return: None
         """
         self.click_on_drop_down_currency()
-        self.click_on_currency_option(currency)
+        if currency == Currency.USD:
+            locator = StoreLocators.CURRENCY_OPTION_USD
+        elif currency == Currency.EURO:
+            locator = StoreLocators.CURRENCY_OPTION_EURO
+        elif currency == Currency.POUNDS:
+            locator = StoreLocators.CURRENCY_OPTION_POUNDS
+        self.click_on_element(locator)
 
     def verify_usd_is_selected(self):
         """
