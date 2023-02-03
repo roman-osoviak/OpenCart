@@ -1,11 +1,12 @@
 """
 This module describes Your Store Page
 """
+from hamcrest import assert_that, equal_to
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
-from utils.enums import Currency, StoreCurrency
+from utils.enums import Currency, StoreCurrency, CurrencyTemp
 
 
 # pylint: disable=too-few-public-methods
@@ -16,6 +17,8 @@ class StoreLocators:
     PREVIOUS_ITEM_BUTTON = (By.XPATH, '//*[@id="carousel-banner-0"]//span')
     SHOPPING_CART_DROPDOWN_MENU_EXPANDED = (By.XPATH,
                                             '//div[@id="header-cart"]//p[@class="text-center"]')
+    CURRENCY_SIGN_USD = (By.XPATH, '//*[@id="form-currency"]//strong[starts-with(text(), "$")]')
+    CURRENCY_SIGN = (By.XPATH, '//*[@id="form-currency"]//strong')
     CURRENCY_DROP_DOWN = (By.XPATH, '//*[@id="form-currency"]//span')
     CURRENCY_OPTION_EURO = (By.XPATH, '//*[contains(text(), "Euro")]')
     CURRENCY_OPTION_POUNDS = (By.XPATH, '//*[contains(text(), "Pound Sterling")]')
@@ -65,6 +68,26 @@ class StorePage(BasePage):
         """
         return self.get_element_text(StoreLocators.SHOPPING_CART_BUTTON)
 
+    def verify_shopping_cart_button_text(self, text: StoreCurrency):
+        """
+        Verify text from shopping cart button
+
+        :return: None
+        """
+        text = text.value
+        # StoreLocators.SHOPPING_CART_BUTTON == text
+        assert_that(self.get_element_text(StoreLocators.SHOPPING_CART_BUTTON), equal_to(text))
+
+    def verify_selected_currency_dropdown(self, currency: CurrencyTemp):
+        """
+        Method checks selected currency
+
+        :return: None
+        """
+        if isinstance(currency, CurrencyTemp):
+            currency = currency.value
+        assert_that(self.get_element_text(StoreLocators.CURRENCY_SIGN), equal_to(currency))
+
     def get_shopping_cart_empty_text(self):
         """
         Get empty cart dropdown text method
@@ -90,15 +113,3 @@ class StorePage(BasePage):
         elif currency == Currency.POUNDS:
             locator = StoreLocators.CURRENCY_OPTION_POUNDS
         self.click_on_element(locator)
-
-    def verify_usd_is_selected(self):
-        """
-        Method checks if USD is selected
-
-        :return: True if USD selected, False otherwise
-        """
-        usd_selected = False
-        if self.get_shopping_cart_button_text() == \
-                StoreCurrency.SHOPPING_CART_BUTTON_ZERO_COST_USD.value:
-            usd_selected = True
-        return usd_selected
