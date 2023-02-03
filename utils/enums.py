@@ -33,10 +33,3 @@ class Currency(Enum):
     USD = 'USD', '$'
     EURO = 'EURO', '€'
     POUNDS = 'POUND STERLING', '£'
-
-
-class CurrencyTemp(Enum):
-    """Store currencies"""
-    USD = '$'
-    EURO = '€'
-    POUNDS = '£'

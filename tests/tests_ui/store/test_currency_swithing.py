@@ -1,6 +1,6 @@
 """Module for validating proper currency switching"""
 from pages.store_page import StorePage
-from utils.enums import Currency, StoreCurrency, CurrencyTemp
+from utils.enums import Currency, StoreCurrency
 
 
 def test_currency_switching(browser, get_env):
@@ -27,4 +27,4 @@ def test_currency_switching(browser, get_env):
 
     store_page.verify_shopping_cart_button_text(StoreCurrency.SHOPPING_CART_BUTTON_ZERO_COST_USD)
     # we need to check if sign before currency dropdown is also changed
-    store_page.verify_selected_currency_dropdown(CurrencyTemp.USD)
+    store_page.verify_selected_currency_dropdown(Currency.USD)

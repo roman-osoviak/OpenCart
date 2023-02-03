@@ -6,7 +6,7 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
-from utils.enums import Currency, StoreCurrency, CurrencyTemp
+from utils.enums import Currency, StoreCurrency
 
 
 # pylint: disable=too-few-public-methods
@@ -78,14 +78,15 @@ class StorePage(BasePage):
         # StoreLocators.SHOPPING_CART_BUTTON == text
         assert_that(self.get_element_text(StoreLocators.SHOPPING_CART_BUTTON), equal_to(text))
 
-    def verify_selected_currency_dropdown(self, currency: CurrencyTemp):
+    # def verify_selected_currency_dropdown(self, currency: CurrencyTemp): 1
+    def verify_selected_currency_dropdown(self, currency: Currency):
         """
         Method checks selected currency
 
         :return: None
         """
-        if isinstance(currency, CurrencyTemp):
-            currency = currency.value
+        if isinstance(currency, Currency):
+            currency = currency.value[1]
         assert_that(self.get_element_text(StoreLocators.CURRENCY_SIGN), equal_to(currency))
 
     def get_shopping_cart_empty_text(self):
