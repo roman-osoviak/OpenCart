@@ -16,6 +16,8 @@ class PageTitle:
     FORGOT_PASSWORD_PAGE_TITLE = 'Forgot Your Password?'
     FORGOT_PASSWORD_SUCCESS = 'Your Password Was Restored'
     SHOPPING_CART_PAGE_TITLE = 'Your Store'
+    PRODUCT_DETAILS_TITLE = 'Apple Cinema 30'
+    BRAND_PAGE_TITLE = 'Apple'
 
 
 # pylint: disable=too-few-public-methods
