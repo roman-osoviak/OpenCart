@@ -4,3 +4,4 @@ __pycache__/
 *.log
 reports/
 *.png
+tests/allure_result_folder/
