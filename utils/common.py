@@ -42,3 +42,14 @@ def get_random_first_name():
 def get_random_last_name():
     """Function for generating random last name value"""
     return Faker().last_name()
+
+
+def trim_currency_from_string(string_with_currency: str):
+    """
+    Method that trims first currency symbol from the string
+
+    :param string_with_currency: provided string
+    :return: string without currency
+    """
+    string_without_currency = string_with_currency[1:]
+    return string_without_currency
