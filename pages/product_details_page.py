@@ -16,6 +16,7 @@ class ProductDetailsLocators:
     BRAND_APPLE_LINK = (By.XPATH, '//li[contains(text(), "Brand: ")]//a[text()="Apple"]')
     OLD_PRICE = (By.XPATH, '//*[@class="price-old"]')
     NEW_PRICE = (By.XPATH, '//*[@class="price-new"]')
+    MUST_TO_LOGIN_WISH_LIST = ''
 
 
 class ProductDetailsPage(BasePage):
