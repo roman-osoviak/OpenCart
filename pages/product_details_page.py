@@ -11,8 +11,8 @@ class ProductDetailsLocators:
     """Locator on Product's Details Page"""
     # not unique because of two other related
     ADD_TO_WISH_LIST_BUTTON = (
-        By.XPATH, '//h1/..//*[@type="submit" and @aria-label="Add to Wish List"]')
-    ADD_TO_COMPARE_BUTTON = (By.XPATH, '//*[@type="submit" and @aria-label="Compare this Product"]')
+        By.XPATH, '//h1/..//*[@aria-label="Add to Wish List"]')
+    ADD_TO_COMPARE_BUTTON = (By.XPATH, '//h1/..//*[@aria-label="Compare this Product"]')
     BRAND_APPLE_LINK = (By.XPATH, '//li[contains(text(), "Brand: ")]//a[text()="Apple"]')
 
 
