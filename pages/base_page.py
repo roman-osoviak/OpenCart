@@ -4,6 +4,8 @@ This module describes top level Base Page
 
 from typing import Tuple
 
+from selenium.common import NoSuchElementException, TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -87,3 +89,30 @@ class BasePage:
         :return: element text
         """
         return self.find_element(locator).text
+
+    def is_element_displayed(self, locator: Tuple):
+        """
+        Method that checks if element is displayed with EC (10 sec pause)
+
+        :param locator: locator itself
+        :return: True if element displayed, otherwise False
+        """
+        try:
+            # self.driver.find_element(By.XPATH, locator[1])
+            self.find_element(locator)
+            return True
+        except TimeoutException:
+            return False
+
+    def is_element_invisible(self, locator: Tuple):
+        """
+        Method that checks if element is displayed without 10 sec pause
+
+        :param locator: locator itself
+        :return: True if element displayed, otherwise False
+        """
+        try:
+            self.driver.find_element(By.XPATH, locator[1])
+            return False
+        except NoSuchElementException:
+            return True

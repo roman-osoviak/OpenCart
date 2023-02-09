@@ -8,8 +8,12 @@ def test_click_add_to_wish_list_by_unauthorised_user(browser, get_env):
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
 
+    prod_details_page.verify_alert_is_displayed(False)
     prod_details_page.click_on_add_wish_button()
-    assert 1 == 1 # need to check if opacity window shows
+    prod_details_page.verify_alert_is_displayed()
+    # need to check if opacity window shows
+    assert 'You must' in prod_details_page.get_alert_text()
+
 
 def test_click_add_to_wish_list_by_authorised_user(browser, get_env):
     """Verifying flow with authorized user"""

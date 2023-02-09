@@ -16,7 +16,8 @@ class ProductDetailsLocators:
     BRAND_APPLE_LINK = (By.XPATH, '//li[contains(text(), "Brand: ")]//a[text()="Apple"]')
     OLD_PRICE = (By.XPATH, '//*[@class="price-old"]')
     NEW_PRICE = (By.XPATH, '//*[@class="price-new"]')
-    MUST_TO_LOGIN_WISH_LIST = ''
+    TOP_ALERT = (By.XPATH, '//div[@id="alert"]')
+    MUST_TO_LOGIN_WISH_LIST = (By.XPATH, '//div[@id="alert"]/div[contains(@class, "alert")]')
 
 
 class ProductDetailsPage(BasePage):
@@ -53,3 +54,23 @@ class ProductDetailsPage(BasePage):
                     )) > 0:
             new_price_is_greater = True
         return new_price_is_greater
+
+    def get_alert_text(self):
+        """
+        Method returns alert's text value
+
+        :return: alert's text
+        """
+        return self.get_element_text(ProductDetailsLocators.TOP_ALERT)
+
+    def verify_alert_is_displayed(self, is_displayed: bool = True):
+        """
+        Check if our alert element is shown
+
+        :return: True if success, otherwise None
+        """
+        if is_displayed:
+            assert self.is_element_displayed(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
+        else:
+            # assert not self.is_element_displayed(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
+            assert self.is_element_invisible(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
