@@ -32,7 +32,7 @@ class ProductDetailsPage(BasePage):
         """Method that clicks on Wish btn"""
         self.click_on_element(ProductDetailsLocators.ADD_TO_WISH_LIST_BUTTON)
 
-    def click_on_add_compare_list(self):
+    def click_on_add_compare_button(self):
         """Method that clicks on add to compare list"""
         self.click_on_element(ProductDetailsLocators.ADD_TO_COMPARE_BUTTON)
 
