@@ -17,7 +17,6 @@ def get_env(request):
      Reading config yml file
      """
     project_path = os.path.dirname(os.path.dirname(__file__))
-    # with open("{}/config.yml".format(project_path), "r") as ymlfile:
     with open(f"{project_path}/config.yml", "r") as ymlfile:
         cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
     return cfg

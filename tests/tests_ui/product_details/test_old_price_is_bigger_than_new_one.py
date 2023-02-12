@@ -10,4 +10,4 @@ def test_old_price_is_greater_than_new(browser, get_env):
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
 
-    assert_that(prod_details_page.verify_new_price_is_greater_than_old())
+    assert_that(prod_details_page.verify_old_price_is_greater_than_new())

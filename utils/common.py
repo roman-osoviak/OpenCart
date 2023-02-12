@@ -49,7 +49,7 @@ def trim_currency_from_string(string_with_currency: str):
     Method that trims first currency symbol from the string
 
     :param string_with_currency: provided string
-    :return: string without currency
+    :return: string without currency sign
     """
     string_without_currency = string_with_currency[1:]
     return string_without_currency

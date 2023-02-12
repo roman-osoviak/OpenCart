@@ -40,20 +40,15 @@ class ProductDetailsPage(BasePage):
         """Method clicks on Apple brand link"""
         self.click_on_element(ProductDetailsLocators.BRAND_APPLE_LINK)
 
-    def verify_new_price_is_greater_than_old(self):
+    def verify_old_price_is_greater_than_new(self):
         """
-        Verifying that new price is lower than new one
+        Verifying that new price is lower than old one
 
         :return: True, otherwise False
         """
-        new_price_is_greater = False
-        if (float(trim_currency_from_string
-                      (self.get_element_text(ProductDetailsLocators.OLD_PRICE)))
-            - float(trim_currency_from_string
-                        (self.get_element_text(ProductDetailsLocators.NEW_PRICE))
-                    )) > 0:
-            new_price_is_greater = True
-        return new_price_is_greater
+        old_price = float(trim_currency_from_string(self.get_element_text(ProductDetailsLocators.OLD_PRICE)))
+        new_price = float(trim_currency_from_string(self.get_element_text(ProductDetailsLocators.NEW_PRICE)))
+        return old_price > new_price
 
     def get_alert_text(self):
         """
@@ -61,6 +56,7 @@ class ProductDetailsPage(BasePage):
 
         :return: alert's text
         """
+
         return self.get_element_text(ProductDetailsLocators.TOP_ALERT)
 
     def verify_alert_is_displayed(self, is_displayed: bool = True):
