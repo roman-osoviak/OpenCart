@@ -46,8 +46,10 @@ class ProductDetailsPage(BasePage):
 
         :return: True, otherwise False
         """
-        old_price = float(trim_currency_from_string(self.get_element_text(ProductDetailsLocators.OLD_PRICE)))
-        new_price = float(trim_currency_from_string(self.get_element_text(ProductDetailsLocators.NEW_PRICE)))
+        old_price = float(trim_currency_from_string(
+            self.get_element_text(ProductDetailsLocators.OLD_PRICE)))
+        new_price = float(trim_currency_from_string(
+            self.get_element_text(ProductDetailsLocators.NEW_PRICE)))
         return old_price > new_price
 
     def get_alert_text(self):

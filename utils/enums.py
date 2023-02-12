@@ -33,3 +33,31 @@ class Currency(Enum):
     USD = 'USD', '$'
     EURO = 'EURO', '€'
     POUNDS = 'POUND STERLING', '£'
+
+
+class ProductDetailsPageRadio(Enum):
+    """Class describes radio elements on Product Details page"""
+    RADIO_OPTIONS_HEADER = "Available Options"
+    RADIO_OPTIONS_LABEL = "Radio"
+    RADIO_OPTION_FIRST = "Small (+$14.00)"
+    RADIO_OPTION_SECOND = "Medium (+$26.00)"
+    RADIO_OPTION_THIRD = "Large (+$38.00)"
+
+
+class ProductDetailsPageCheckBox(Enum):
+    """Class describes check-box elements on Product Details page"""
+    CHECKBOX_LABEL = "Checkbox"
+    CHECKBOX_OPTION_FIRST = "Checkbox 1 (+$14.00)"
+    CHECKBOX_OPTION_FIRST = "Checkbox 2 (+$26.00)"
+    CHECKBOX_OPTION_FIRST = "Checkbox 3 (+$38.00)"
+    CHECKBOX_OPTION_FIRST = "Checkbox 4 (+$50.00)"
+
+
+class ProductDetailsPageSelectMenu(Enum):
+    """Class describes select drop-down elements on Product Details page"""
+    SELECT_LABEL = "Select"
+    SELECT_DEFAULT_PLACEHOLDER = " --- Please Select --- "
+    SELECT_OPTION_FIRST = "Green (+$3.20)"
+    SELECT_OPTION_SECOND = "Yellow (+$4.40)"
+    SELECT_OPTION_THIRD = "Blue (+$5.60)"
+    SELECT_OPTION_FOURTH = "Red (+$6.80)"
