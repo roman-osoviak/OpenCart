@@ -48,9 +48,9 @@ class ProductDetailsPageCheckBox(Enum):
     """Class describes check-box elements on Product Details page"""
     CHECKBOX_LABEL = "Checkbox"
     CHECKBOX_OPTION_FIRST = "Checkbox 1 (+$14.00)"
-    CHECKBOX_OPTION_FIRST = "Checkbox 2 (+$26.00)"
-    CHECKBOX_OPTION_FIRST = "Checkbox 3 (+$38.00)"
-    CHECKBOX_OPTION_FIRST = "Checkbox 4 (+$50.00)"
+    CHECKBOX_OPTION_SECOND = "Checkbox 2 (+$26.00)"
+    CHECKBOX_OPTION_THIRD = "Checkbox 3 (+$38.00)"
+    CHECKBOX_OPTION_FOURTH = "Checkbox 4 (+$50.00)"
 
 
 class ProductDetailsPageSelectMenu(Enum):

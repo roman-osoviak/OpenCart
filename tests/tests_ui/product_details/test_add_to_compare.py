@@ -3,6 +3,7 @@ from pages.product_details_page import ProductDetailsPage
 
 
 def test_click_on_compare_product_button_unauthorised_user(browser, get_env):
+    """Test flow with adding item to the compare list as unauthorised user"""
     site_url = get_env['environment']['site_url']
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
