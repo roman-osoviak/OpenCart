@@ -116,3 +116,13 @@ class BasePage:
             return False
         except NoSuchElementException:
             return True
+
+    def get_element_attribute(self, locator: Tuple, attribute: str):
+        """
+        Method that returns attribute by provided locator
+
+        :param locator: locator itself
+        :param attribute: locator attribute
+        :return: value of the attribute
+        """
+        return self.find_element(locator).get_attribute(attribute)

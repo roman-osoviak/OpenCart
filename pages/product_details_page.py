@@ -1,10 +1,12 @@
 """
 This module describes Product's Details Page
 """
+from enum import Enum
+
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
-from utils.common import trim_currency_from_string
+from utils.common import trim_currency_from_string, get_random_string
 
 
 # pylint: disable=too-few-public-methods
@@ -23,6 +25,11 @@ class ProductDetailsLocators:
     CHECKBOX_OPTIONS_LABELS = (By.XPATH, '//*[@id="input-option-223"]//label')
     CHECKBOX_INPUTS = (By.XPATH, '//*[@id="input-option-223"]//input')
     TEXT_INPUT = (By.XPATH, '//input[@placeholder="Text"]')
+
+
+class ProductDetailsAttributes():
+    """Class describes attribute names"""
+    ATTRIBUTE_PLACEHOLDER = 'placeholder'
 
 
 class ProductDetailsPage(BasePage):
@@ -52,6 +59,14 @@ class ProductDetailsPage(BasePage):
         """
         self.click_on_element(ProductDetailsLocators.RADIO_SMALL_OPTIONS)
 
+    def click_on_text_field(self):
+        """
+        Method clicks on text field
+
+        :return: None
+        """
+        self.click_on_element(ProductDetailsLocators.TEXT_INPUT)
+
     def verify_old_price_is_greater_than_new(self):
         """
         Verifying that new price is lower than old one
@@ -73,6 +88,23 @@ class ProductDetailsPage(BasePage):
 
         return self.get_element_text(ProductDetailsLocators.TOP_ALERT)
 
+    def get_text_input_text(self):
+        """
+        Method that retrieve input field text
+
+        :return: input's text
+        """
+        return self.get_element_text(ProductDetailsLocators.TEXT_INPUT)
+
+    def get_attribute_placeholder(self):
+        """
+        Method that returns placeholder attribute
+
+        :return: placeholder text
+        """
+        return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
+                                          ProductDetailsAttributes.ATTRIBUTE_PLACEHOLDER)
+
     def verify_alert_is_displayed(self, is_displayed: bool = True):
         """
         Check if our alert element is shown
@@ -84,3 +116,11 @@ class ProductDetailsPage(BasePage):
         else:
             # assert not self.is_element_displayed(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
             assert self.is_element_invisible(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
+
+    def set_random_string_to_text_input(self):
+        """
+        Generate and input random string into text field
+
+        :return: None
+        """
+        self.type_text_in_ui_element(ProductDetailsLocators.TEXT_INPUT, get_random_string(4))
