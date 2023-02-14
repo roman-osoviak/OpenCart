@@ -19,8 +19,11 @@ class ProductDetailsLocators:
     NEW_PRICE = (By.XPATH, '//*[@class="price-new"]')
     TOP_ALERT = (By.XPATH, '//div[@id="alert"]')
     MUST_TO_LOGIN_WISH_LIST = (By.XPATH, '//div[@id="alert"]/div[contains(@class, "alert")]')
-    RADIO_SMALL_OPTIONS = (By.XPATH, '//*[@id="input-option-218"]//input')
-    RADIO_OPTIONS_LABELS = (By.XPATH, '//*[@id="input-option-218"]//label')
+    # RADIO_SMALL_OPTIONS = (By.XPATH, '//*[@id="input-option-218"]//input')
+    # radio
+    RADIO_BUTTONS = (By.XPATH, '//label[@class="form-label" and text()="Radio"]//..//input')
+    RADIO_OPTIONS_LABELS = (By.XPATH, '//label[@class="form-label" and text()="Radio"]//..//label')
+    # checkbox
     CHECKBOX_OPTIONS_LABELS = (By.XPATH, '//*[@id="input-option-223"]//label')
     CHECKBOX_INPUTS = (By.XPATH, '//*[@id="input-option-223"]//input')
     TEXT_INPUT = (By.XPATH, '//input[@placeholder="Text"]')
@@ -51,13 +54,6 @@ class ProductDetailsPage(BasePage):
     def click_on_brand(self):
         """Method clicks on Apple brand link"""
         self.click_on_element(ProductDetailsLocators.BRAND_APPLE_LINK)
-
-    def click_on_radio_option(self):
-        """
-        Methods that click on first radio option
-        :return: None
-        """
-        self.click_on_element(ProductDetailsLocators.RADIO_SMALL_OPTIONS)
 
     def click_on_text_field(self):
         """
@@ -124,3 +120,20 @@ class ProductDetailsPage(BasePage):
         :return: None
         """
         self.type_text_in_ui_element(ProductDetailsLocators.TEXT_INPUT, get_random_string(4))
+
+    def click_on_radio_button(self, btn_number_in_list: int):
+        """
+        Method that selects desired radio-button
+
+        :return: None
+        """
+        radio_buttons = self.find_elements(ProductDetailsLocators.RADIO_BUTTONS)
+        radio_buttons[btn_number_in_list - 1].click()
+
+    def get_radio_label_text(self, btn_number_in_list: int):
+        """
+        Returns accessible_name from WebElement
+        :return: accessible_name as string
+        """
+        radio_buttons = self.find_elements(ProductDetailsLocators.RADIO_BUTTONS)
+        return radio_buttons[btn_number_in_list - 1].accessible_name
