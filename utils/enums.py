@@ -53,6 +53,11 @@ class ProductDetailsPageCheckBox(Enum):
     CHECKBOX_OPTION_FOURTH = "Checkbox 4 (+$50.00)"
 
 
+class ProductDetailsPageCaptions(Enum):
+    TEXT_PLACEHOLDER = "Text"
+    TEXT_INPUT_DEFAULT_VALUE = "test"
+
+
 class ProductDetailsPageSelectMenu(Enum):
     """Class describes select drop-down elements on Product Details page"""
     SELECT_LABEL = "Select"

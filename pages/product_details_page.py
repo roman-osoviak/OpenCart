@@ -1,7 +1,6 @@
 """
 This module describes Product's Details Page
 """
-from enum import Enum
 
 from selenium.webdriver.common.by import By
 
@@ -27,9 +26,10 @@ class ProductDetailsLocators:
     TEXT_INPUT = (By.XPATH, '//input[@placeholder="Text"]')
 
 
-class ProductDetailsAttributes():
+class ProductDetailsAttributes:
     """Class describes attribute names"""
     ATTRIBUTE_PLACEHOLDER = 'placeholder'
+    ATTRIBUTE_VALUE = 'value'
 
 
 class ProductDetailsPage(BasePage):
@@ -61,11 +61,11 @@ class ProductDetailsPage(BasePage):
 
     def click_on_text_field(self):
         """
-        Method clicks on text field
+        Clicking on text field
 
         :return: None
         """
-        self.click_on_element(ProductDetailsLocators.TEXT_INPUT)
+        self.find_element(ProductDetailsLocators.TEXT_INPUT).click()
 
     def verify_old_price_is_greater_than_new(self):
         """
@@ -96,14 +96,14 @@ class ProductDetailsPage(BasePage):
         """
         return self.get_element_text(ProductDetailsLocators.TEXT_INPUT)
 
-    def get_attribute_placeholder(self):
+    def get_attribute_value(self):
         """
         Method that returns placeholder attribute
 
         :return: placeholder text
         """
         return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
-                                          ProductDetailsAttributes.ATTRIBUTE_PLACEHOLDER)
+                                          ProductDetailsAttributes.ATTRIBUTE_VALUE)
 
     def verify_alert_is_displayed(self, is_displayed: bool = True):
         """

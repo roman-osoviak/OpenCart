@@ -46,17 +46,16 @@ class BasePage:
             until(EC.presence_of_all_elements_located(locator),
                   message=f"Can't find elements by locator {locator}")
 
-    @staticmethod
-    def type_text_in_ui_element(locator: Tuple, text: str):
+    def type_text_in_ui_element(self, locator: Tuple, text: str):
         """
         Method for typing into inputs.
         UI element will be cleared before actual input.
 
         :param locator: locator itself
         :param text: string to input
-        :return:
+        :return: None
         """
-        elem = locator
+        elem = self.find_element(locator)
         elem.clear()
         elem.send_keys(text)
 
