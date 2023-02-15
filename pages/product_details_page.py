@@ -2,10 +2,13 @@
 This module describes Product's Details Page
 """
 
+from typing import Tuple
+
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 from utils.common import trim_currency_from_string, get_random_string
+from utils.enums import ProductDetailsPageRadio
 
 
 # pylint: disable=too-few-public-methods
@@ -19,10 +22,17 @@ class ProductDetailsLocators:
     NEW_PRICE = (By.XPATH, '//*[@class="price-new"]')
     TOP_ALERT = (By.XPATH, '//div[@id="alert"]')
     MUST_TO_LOGIN_WISH_LIST = (By.XPATH, '//div[@id="alert"]/div[contains(@class, "alert")]')
-    # RADIO_SMALL_OPTIONS = (By.XPATH, '//*[@id="input-option-218"]//input')
+
     # radio
-    RADIO_BUTTONS = (By.XPATH, '//label[@class="form-label" and text()="Radio"]//..//input')
+    RADIO_BUTTONS = (By.XPATH, '//label[text()="Radio"]//..//input')
+    RADIO_BUTTON_FIRST = (By.XPATH, '//label[contains(text(), "Small")]//..//input')
+    RADIO_BUTTON_SECOND = (By.XPATH, '//label[contains(text(), "Medium")]//..//input')
+    RADIO_BUTTON_THIRD = (By.XPATH, '//label[contains(text(), "Large")]//..//input')
     RADIO_OPTIONS_LABELS = (By.XPATH, '//label[@class="form-label" and text()="Radio"]//..//label')
+    RADIO_LABEL_SMALL = (By.XPATH, '//label[contains(normalize-space(text()), "Small (+$14.00)")]')
+    RADIO_OPTION_MEDIUM = (By.XPATH, '//label[contains(normalize-space(text()), '
+                                     '"Medium (+$26.00)")]')
+    RADIO_OPTION_LARGE = (By.XPATH, '//label[contains(normalize-space(text()), "Large (+$38.00)")]')
     # checkbox
     CHECKBOX_OPTIONS_LABELS = (By.XPATH, '//*[@id="input-option-223"]//label')
     CHECKBOX_INPUTS = (By.XPATH, '//*[@id="input-option-223"]//input')
@@ -110,7 +120,6 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             assert self.is_element_displayed(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
         else:
-            # assert not self.is_element_displayed(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
             assert self.is_element_invisible(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
 
     def set_random_string_to_text_input(self):
@@ -121,14 +130,27 @@ class ProductDetailsPage(BasePage):
         """
         self.type_text_in_ui_element(ProductDetailsLocators.TEXT_INPUT, get_random_string(4))
 
-    def click_on_radio_button(self, btn_number_in_list: int):
+    def click_on_radio_button(self, radio_btn_option: ProductDetailsPageRadio):
         """
         Method that selects desired radio-button
 
         :return: None
         """
-        radio_buttons = self.find_elements(ProductDetailsLocators.RADIO_BUTTONS)
-        radio_buttons[btn_number_in_list - 1].click()
+        if radio_btn_option.value[0] == ProductDetailsPageRadio.RADIO_OPTION_FIRST.value[0]:
+            locator = self.find_element(ProductDetailsLocators.RADIO_BUTTON_FIRST)
+        if radio_btn_option.value[0] == ProductDetailsPageRadio.RADIO_OPTION_SECOND.value[0]:
+            locator = self.find_element(ProductDetailsLocators.RADIO_BUTTON_SECOND)
+        if radio_btn_option.value[0] == ProductDetailsPageRadio.RADIO_OPTION_THIRD.value[0]:
+            locator = self.find_element(ProductDetailsLocators.RADIO_BUTTON_THIRD)
+        locator.click()
+
+    def verify_radio_button_is_selected(self, locator: Tuple) -> object:
+        """
+        Method that checks if radio button is selected
+
+        :return: True if selected, False otherwise
+        """
+        return self.is_element_selected(locator)
 
     def get_radio_label_text(self, btn_number_in_list: int):
         """

@@ -103,6 +103,15 @@ class BasePage:
         except TimeoutException:
             return False
 
+    def is_element_selected(self, locator: Tuple):
+        """
+        Method checks if element is selected
+
+        :param locator: locator itself
+        :return: True if displayed, False otherwise
+        """
+        return self.find_element(locator).is_selected()
+
     def is_element_invisible(self, locator: Tuple):
         """
         Method that checks if element is displayed without 10 sec pause

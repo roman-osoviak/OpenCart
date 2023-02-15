@@ -1,7 +1,6 @@
 """Module for testing radio options"""
-from hamcrest import assert_that
 
-from pages.product_details_page import ProductDetailsPage
+from pages.product_details_page import ProductDetailsPage, ProductDetailsLocators
 from utils.enums import ProductDetailsPageRadio
 
 
@@ -11,9 +10,23 @@ def test_radio_option_selection(browser, get_env):
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
 
-    assert_that(prod_details_page.get_radio_label_text(1) ==
-                ProductDetailsPageRadio.RADIO_OPTION_FIRST.value)
-    assert_that(prod_details_page.get_radio_label_text(2) ==
-                ProductDetailsPageRadio.RADIO_OPTION_SECOND.value)
-    assert_that(prod_details_page.get_radio_label_text(3) ==
-                ProductDetailsPageRadio.RADIO_OPTION_THIRD.value)
+    # first radio option
+    assert not prod_details_page.verify_radio_button_is_selected(
+        ProductDetailsLocators.RADIO_BUTTON_FIRST)
+    prod_details_page.click_on_radio_button(ProductDetailsPageRadio.RADIO_OPTION_FIRST)
+    assert prod_details_page.verify_radio_button_is_selected(
+        ProductDetailsLocators.RADIO_BUTTON_FIRST)
+
+    # second radio option
+    assert not prod_details_page.verify_radio_button_is_selected(
+        ProductDetailsLocators.RADIO_BUTTON_SECOND)
+    prod_details_page.click_on_radio_button(ProductDetailsPageRadio.RADIO_OPTION_SECOND)
+    assert prod_details_page.verify_radio_button_is_selected(
+        ProductDetailsLocators.RADIO_BUTTON_SECOND)
+
+    # third radio option
+    assert not prod_details_page.verify_radio_button_is_selected(
+        ProductDetailsLocators.RADIO_BUTTON_THIRD)
+    prod_details_page.click_on_radio_button(ProductDetailsPageRadio.RADIO_OPTION_THIRD)
+    assert prod_details_page.verify_radio_button_is_selected(
+        ProductDetailsLocators.RADIO_BUTTON_THIRD)
