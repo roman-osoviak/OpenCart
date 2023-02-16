@@ -108,9 +108,18 @@ class BasePage:
         Method checks if element is selected
 
         :param locator: locator itself
-        :return: True if displayed, False otherwise
+        :return: True if selected, False otherwise
         """
-        return self.find_element(locator).is_selected()
+        assert self.find_element(locator).is_selected()
+
+    def is_element_not_selected(self, locator: Tuple):
+        """
+        Method checks if element is not selected
+
+        :param locator: locator itself
+        :return: True if not selected, False otherwise
+        """
+        assert not self.find_element(locator).is_selected()
 
     def is_element_invisible(self, locator: Tuple):
         """

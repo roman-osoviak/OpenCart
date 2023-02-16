@@ -24,18 +24,26 @@ class ProductDetailsLocators:
     MUST_TO_LOGIN_WISH_LIST = (By.XPATH, '//div[@id="alert"]/div[contains(@class, "alert")]')
 
     # radio
-    RADIO_BUTTONS = (By.XPATH, '//label[text()="Radio"]//..//input')
+    RADIO_BUTTON = lambda text: (By.XPATH, f'//label[contains(text(), "{text}")]//..//input')
     RADIO_BUTTON_FIRST = (By.XPATH, '//label[contains(text(), "Small")]//..//input')
     RADIO_BUTTON_SECOND = (By.XPATH, '//label[contains(text(), "Medium")]//..//input')
     RADIO_BUTTON_THIRD = (By.XPATH, '//label[contains(text(), "Large")]//..//input')
     RADIO_OPTIONS_LABELS = (By.XPATH, '//label[@class="form-label" and text()="Radio"]//..//label')
-    RADIO_LABEL_SMALL = (By.XPATH, '//label[contains(normalize-space(text()), "Small (+$14.00)")]')
-    RADIO_OPTION_MEDIUM = (By.XPATH, '//label[contains(normalize-space(text()), '
-                                     '"Medium (+$26.00)")]')
-    RADIO_OPTION_LARGE = (By.XPATH, '//label[contains(normalize-space(text()), "Large (+$38.00)")]')
+    RADIO_LABEL_SMALL = (By.XPATH, '//label[contains(normalize-space(text()), "Small")]')
+    RADIO_OPTION_MEDIUM = (By.XPATH, '//label[contains(normalize-space(text()), "Medium")]')
+    RADIO_OPTION_LARGE = (By.XPATH, '//label[contains(normalize-space(text()), "Large")]')
     # checkbox
-    CHECKBOX_OPTIONS_LABELS = (By.XPATH, '//*[@id="input-option-223"]//label')
-    CHECKBOX_INPUTS = (By.XPATH, '//*[@id="input-option-223"]//input')
+    CHECKBOX_BUTTONS = (By.XPATH, '//label[text()="Checkbox"]//..//input')
+    CHECKBOX_BUTTON_FIRST = (By.XPATH, '//label[contains(text(), "Checkbox 1")]//../input')
+    CHECKBOX_BUTTON_SECOND = (By.XPATH, '//label[contains(text(), "Checkbox 2")]//../input')
+    CHECKBOX_BUTTON_THIRD = (By.XPATH, '//label[contains(text(), "Checkbox 3")]//../input')
+    CHECKBOX_BUTTON_FOURTH = (By.XPATH, '//label[contains(text(), "Checkbox 4")]//../input')
+    CHECKBOX_LABEL_FIRST = (By.XPATH, '//label[contains(normalize-space(text()), "Checkbox 1 (+$14.00)")]')
+    CHECKBOX_LABEL_SECOND = (By.XPATH, '//label[contains(normalize-space(text()), "Checkbox 2 (+$26.00)")]')
+    CHECKBOX_LABEL_THIRD = (By.XPATH, '//label[contains(normalize-space(text()), "Checkbox 3 (+$38.00)")]')
+    CHECKBOX_LABEL_FOURTH = (By.XPATH, '//label[contains(normalize-space(text()), "Checkbox 4 (+$50.00)")]')
+
+    # text
     TEXT_INPUT = (By.XPATH, '//input[@placeholder="Text"]')
 
 
@@ -136,21 +144,26 @@ class ProductDetailsPage(BasePage):
 
         :return: None
         """
-        if radio_btn_option.value[0] == ProductDetailsPageRadio.RADIO_OPTION_FIRST.value[0]:
-            locator = self.find_element(ProductDetailsLocators.RADIO_BUTTON_FIRST)
-        if radio_btn_option.value[0] == ProductDetailsPageRadio.RADIO_OPTION_SECOND.value[0]:
-            locator = self.find_element(ProductDetailsLocators.RADIO_BUTTON_SECOND)
-        if radio_btn_option.value[0] == ProductDetailsPageRadio.RADIO_OPTION_THIRD.value[0]:
-            locator = self.find_element(ProductDetailsLocators.RADIO_BUTTON_THIRD)
-        locator.click()
+        self.find_element(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value)).click()
+        return self
 
-    def verify_radio_button_is_selected(self, locator: Tuple) -> object:
+    def verify_radio_button_is_selected(self, radio_btn_option: ProductDetailsPageRadio, is_selected: bool = True) -> object:
         """
         Method that checks if radio button is selected
 
         :return: True if selected, False otherwise
         """
-        return self.is_element_selected(locator)
+        # if is_selected:
+        #     self.is_element_selected(locator)
+        # else:
+        #     self.is_element_not_selected(locator)
+        # return self
+        if is_selected:
+            self.is_element_selected(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))
+        else:
+            self.is_element_not_selected(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))
+        return self
+    #          self.find_element(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))
 
     def get_radio_label_text(self, btn_number_in_list: int):
         """

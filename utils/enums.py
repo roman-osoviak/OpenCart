@@ -37,11 +37,9 @@ class Currency(Enum):
 
 class ProductDetailsPageRadio(Enum):
     """Class describes radio elements on Product Details page"""
-    RADIO_OPTIONS_HEADER = "Available Options"
-    RADIO_OPTIONS_LABEL = "Radio"
-    RADIO_OPTION_FIRST = "Small", "Small (+$14.00)"
-    RADIO_OPTION_SECOND = "Medium",  "Medium (+$26.00)"
-    RADIO_OPTION_THIRD = "Large", "Large (+$38.00)"
+    RADIO_OPTION_FIRST = "Small"
+    RADIO_OPTION_SECOND = "Medium"
+    RADIO_OPTION_THIRD = "Large"
 
 
 class ProductDetailsPageCheckBox(Enum):
