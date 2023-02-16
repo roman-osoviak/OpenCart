@@ -97,7 +97,6 @@ class BasePage:
         :return: True if element displayed, otherwise False
         """
         try:
-            # self.driver.find_element(By.XPATH, locator[1])
             self.find_element(locator)
             return True
         except TimeoutException:
