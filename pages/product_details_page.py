@@ -112,14 +112,14 @@ class ProductDetailsPage(BasePage):
         """
         return self.get_element_text(ProductDetailsLocators.TEXT_INPUT)
 
-    # def get_attribute_value(self):
-    #     """
-    #     Method that returns placeholder attribute
-    #
-    #     :return: placeholder text
-    #     """
-    #     # return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
-    #     #                                   ProductDetailsAttributes.ATTRIBUTE_VALUE)
+    def get_attribute_value(self):
+        """
+        Method that returns placeholder attribute
+
+        :return: placeholder text
+        """
+        # return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
+        #                                   ProductDetailsAttributes.ATTRIBUTE_VALUE)
 
     def get_text_attribute_value(self, radio_btn_option: ProductDetailsPageRadio):
         """
@@ -172,3 +172,13 @@ class ProductDetailsPage(BasePage):
             self.is_element_not_selected(
                 ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))
         return self
+
+    def verify_radio_button_label(self, radio_btn_option: ProductDetailsPageRadio, label: str):
+        """
+        Method checks if label is equal to our expectations
+
+        :param radio_btn_option: Option with desired value
+        :param label: label text
+        :return: True if equal, otherwise False
+        """
+        assert radio_btn_option.value in label
