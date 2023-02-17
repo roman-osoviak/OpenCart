@@ -24,7 +24,8 @@ class ProductDetailsLocators:
     # radio
     # pylint: disable=unnecessary-lambda-assignment
     RADIO_BUTTON = lambda text: (By.XPATH, f'//label[contains(text(), "{text}")]//..//input')
-    RADIO_OPTIONS_LABELS = (By.XPATH, '//label[@class="form-label" and text()="Radio"]//..//label')
+    RADIO_OPTIONS_LABELS = lambda text: \
+        (By.XPATH, f'//label[contains(normalize-space(text()), "{text}")]')
     RADIO_LABEL_SMALL = (By.XPATH, '//label[contains(normalize-space(text()), "Small")]')
     RADIO_OPTION_MEDIUM = (By.XPATH, '//label[contains(normalize-space(text()), "Medium")]')
     RADIO_OPTION_LARGE = (By.XPATH, '//label[contains(normalize-space(text()), "Large")]')
@@ -51,6 +52,7 @@ class ProductDetailsAttributes:
     """Class describes attribute names"""
     ATTRIBUTE_PLACEHOLDER = 'placeholder'
     ATTRIBUTE_VALUE = 'value'
+    ATTRIBUTE_TEXT = 'text'
 
 
 class ProductDetailsPage(BasePage):
@@ -110,14 +112,24 @@ class ProductDetailsPage(BasePage):
         """
         return self.get_element_text(ProductDetailsLocators.TEXT_INPUT)
 
-    def get_attribute_value(self):
-        """
-        Method that returns placeholder attribute
+    # def get_attribute_value(self):
+    #     """
+    #     Method that returns placeholder attribute
+    #
+    #     :return: placeholder text
+    #     """
+    #     # return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
+    #     #                                   ProductDetailsAttributes.ATTRIBUTE_VALUE)
 
-        :return: placeholder text
+    def get_text_attribute_value(self, radio_btn_option: ProductDetailsPageRadio):
         """
-        return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
-                                          ProductDetailsAttributes.ATTRIBUTE_VALUE)
+        Method that returns text from element
+
+        :param radio_btn_option:
+        :return:
+        """
+        return self.get_element_text(
+            ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value))
 
     def verify_alert_is_displayed(self, is_displayed: bool = True):
         """
