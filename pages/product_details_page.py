@@ -181,4 +181,6 @@ class ProductDetailsPage(BasePage):
         :param label: label text
         :return: True if equal, otherwise False
         """
-        assert radio_btn_option.value in label
+        # assert ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value) in label
+        assert self.get_element_text(
+            ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value)) == label
