@@ -14,6 +14,15 @@ def test_text_from_selected_radio(browser, get_env):
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
 
+    # small option checking
     prod_details_page.click_on_radio_button(ProductDetailsPageRadio.RADIO_OPTION_FIRST)
     prod_details_page.verify_radio_button_label(
         ProductDetailsPageRadio.RADIO_OPTION_FIRST, 'Small (+$14.00)')
+    # medium option checking
+    prod_details_page.click_on_radio_button(ProductDetailsPageRadio.RADIO_OPTION_SECOND)
+    prod_details_page.verify_radio_button_label(
+        ProductDetailsPageRadio.RADIO_OPTION_SECOND, 'Medium (+$26.00)')
+    # large option checking
+    prod_details_page.click_on_radio_button(ProductDetailsPageRadio.RADIO_OPTION_THIRD)
+    prod_details_page.verify_radio_button_label(
+        ProductDetailsPageRadio.RADIO_OPTION_THIRD, 'Large (+$38.00)')
