@@ -45,13 +45,14 @@ class ProductDetailsPageRadio(Enum):
 class ProductDetailsPageCheckBox(Enum):
     """Class describes check-box elements on Product Details page"""
     CHECKBOX_LABEL = "Checkbox"
-    CHECKBOX_OPTION_FIRST = "Checkbox 1 (+$14.00)"
-    CHECKBOX_OPTION_SECOND = "Checkbox 2 (+$26.00)"
-    CHECKBOX_OPTION_THIRD = "Checkbox 3 (+$38.00)"
-    CHECKBOX_OPTION_FOURTH = "Checkbox 4 (+$50.00)"
+    CHECKBOX_OPTION_FIRST = "Checkbox 1"
+    CHECKBOX_OPTION_SECOND = "Checkbox 2"
+    CHECKBOX_OPTION_THIRD = "Checkbox 3"
+    CHECKBOX_OPTION_FOURTH = "Checkbox 4"
 
 
 class ProductDetailsPageCaptions(Enum):
+    """Enum class consists of different placeholders per page"""
     TEXT_PLACEHOLDER = "Text"
     TEXT_INPUT_DEFAULT_VALUE = "test"
 

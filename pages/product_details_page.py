@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 from utils.common import trim_currency_from_string, get_random_string
-from utils.enums import ProductDetailsPageRadio
+from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox
 
 
 # pylint: disable=too-few-public-methods
@@ -30,7 +30,11 @@ class ProductDetailsLocators:
     RADIO_OPTION_MEDIUM = (By.XPATH, '//label[contains(normalize-space(text()), "Medium")]')
     RADIO_OPTION_LARGE = (By.XPATH, '//label[contains(normalize-space(text()), "Large")]')
     # checkbox
-    CHECKBOX_BUTTONS = (By.XPATH, '//label[text()="Checkbox"]//..//input')
+    # CHECKBOX_BUTTONS = (By.XPATH, '//label[text()="Checkbox"]//..//input')
+    CHECKBOX_BUTTON = lambda text: (By.XPATH, f'//label[contains(text(), "{text}")]/..//input')
+    CHECKBOX_LABELS_TEXT = lambda text: \
+        (By.XPATH, f'//label[contains(normalize-space(text()), "{text}")]')
+    # label[contains(text(), "Checkbox 3")]
     CHECKBOX_BUTTON_FIRST = (By.XPATH, '//label[contains(text(), "Checkbox 1")]//../input')
     CHECKBOX_BUTTON_SECOND = (By.XPATH, '//label[contains(text(), "Checkbox 2")]//../input')
     CHECKBOX_BUTTON_THIRD = (By.XPATH, '//label[contains(text(), "Checkbox 3")]//../input')
@@ -112,15 +116,6 @@ class ProductDetailsPage(BasePage):
         """
         return self.get_element_text(ProductDetailsLocators.TEXT_INPUT)
 
-    def get_attribute_value(self):
-        """
-        Method that returns placeholder attribute
-
-        :return: placeholder text
-        """
-        # return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
-        #                                   ProductDetailsAttributes.ATTRIBUTE_VALUE)
-
     def get_text_attribute_value(self, radio_btn_option: ProductDetailsPageRadio):
         """
         Method that returns text from element
@@ -154,9 +149,39 @@ class ProductDetailsPage(BasePage):
         """
         Method that selects desired radio-button
 
-        :return: None
+        :return: self
         """
         self.find_element(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value)).click()
+        return self
+
+    def click_on_checkbox(self, checkbox_btn_option: ProductDetailsPageCheckBox,
+                          select: bool = True):
+        """
+        Method that clicks on desired checkbox option
+
+        :param select: True if we need to select option, False otherwise
+        :param checkbox_btn_option: checkbox option we want to deal
+        :return: self
+        """
+        self._trigger_checkbox(ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value),
+                               select)
+        return self
+
+    def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
+                                    is_selected: bool = True) -> object:
+        """
+        Method for clicking on checkbox options
+
+        :param checkbox_btn_option: checkbox option we should work
+        :param is_selected: state flag for option
+        :return: True if selected, False otherwise
+        """
+        if is_selected:
+            self.is_element_selected(
+                ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value))
+        else:
+            self.is_element_not_selected(
+                ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value))
         return self
 
     def verify_radio_button_is_selected(self, radio_btn_option: ProductDetailsPageRadio,
@@ -164,7 +189,9 @@ class ProductDetailsPage(BasePage):
         """
         Method that checks if radio button is selected
 
-        :return: True if selected, False otherwise
+        :param radio_btn_option: radio option
+        :param is_selected: desired state True/False
+        :return: self
         """
         if is_selected:
             self.is_element_selected(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))

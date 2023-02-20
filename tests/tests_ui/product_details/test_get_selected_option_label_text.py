@@ -1,4 +1,4 @@
-"""Module for testing radio text label"""
+"""Module for testing radio text labels"""
 from pages.product_details_page import ProductDetailsPage
 from utils.enums import ProductDetailsPageRadio
 

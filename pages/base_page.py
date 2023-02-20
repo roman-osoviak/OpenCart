@@ -14,8 +14,10 @@ class BasePage:
     """This class collects methods for Base Page"""
 
     def __init__(self, driver, base_url: str):
+        """Constructor"""
         self.driver = driver
         self.base_url = base_url
+        self.driver.maximize_window()
 
     def go_to_site(self):
         """
