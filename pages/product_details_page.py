@@ -2,6 +2,8 @@
 This module describes Product's Details Page
 """
 
+import time
+
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -159,13 +161,18 @@ class ProductDetailsPage(BasePage):
         """
         Method that clicks on desired checkbox option
 
-        :param select: True if we need to select option, False otherwise
         :param checkbox_btn_option: checkbox option we want to deal
+        :param select: True if we need to select option, False otherwise
         :return: self
         """
         self._trigger_checkbox(ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value),
                                select)
         return self
+
+    def click_on_third_checkbox_option(self):
+        """Temp solution for clicking on third checkbox element"""
+        time.sleep(5)
+        self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
 
     def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
                                     is_selected: bool = True) -> object:
@@ -173,8 +180,8 @@ class ProductDetailsPage(BasePage):
         Method for clicking on checkbox options
 
         :param checkbox_btn_option: checkbox option we should work
-        :param is_selected: state flag for option
-        :return: True if selected, False otherwise
+        :param is_selected: True if we need to check that flag is selected, False otherwise
+        :return: if True we expect to be selected, False otherwise
         """
         if is_selected:
             self.is_element_selected(

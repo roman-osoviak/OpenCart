@@ -7,7 +7,7 @@ pipeline {
     agent any
 
     stages {
-      stage('First'){
+      stage('First Stage'){
         steps {
           script{
             valuesYaml = loadValuesYaml()
