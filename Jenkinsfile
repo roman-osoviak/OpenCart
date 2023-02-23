@@ -10,8 +10,8 @@ pipeline {
       stage('First Stage'){
         steps {
           echo 'Hello Jenkins!!!'
-          }
         }
+      }
       }
       stage('WorkWithYAMLfile'){
         steps {
