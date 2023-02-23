@@ -172,6 +172,7 @@ class ProductDetailsPage(BasePage):
             self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
         except ElementClickInterceptedException:
             self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
+        return self
 
     def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
                                     is_selected: bool = True) -> object:
