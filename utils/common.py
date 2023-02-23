@@ -7,7 +7,6 @@ import string
 import time
 
 from faker import Faker
-from selenium.common.exceptions import ElementClickInterceptedException
 
 
 def get_random_string(length: int, case=None):
@@ -69,7 +68,7 @@ def retry(timeout=10, polling=0.2):
             while True:
                 try:
                     return func(*args, **kwargs)
-                except ElementClickInterceptedException as e:  # pylint: disable=W0703
+                except Exception as e:  # pylint: disable=W0703
                     if time.time() > end_time:
                         raise AssertionError()
                     time.sleep(polling)

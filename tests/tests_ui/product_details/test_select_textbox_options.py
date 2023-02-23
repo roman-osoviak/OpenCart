@@ -13,20 +13,20 @@ def test_checkbox_selection(browser, get_env):
     # options should be not selected by default
     prod_page_details \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FIRST, False) \
-        .click_on_checkbox_option(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FIRST, True) \
+        .click_on_checkbox(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FIRST, True) \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FIRST, True)
 
     prod_page_details \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_SECOND, False) \
-        .click_on_checkbox_option(ProductDetailsPageCheckBox.CHECKBOX_OPTION_SECOND, True) \
+        .click_on_checkbox(ProductDetailsPageCheckBox.CHECKBOX_OPTION_SECOND, True) \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_SECOND, True)
 
     prod_page_details \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, False) \
-        .click_on_checkbox_option(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD) \
+        .click_on_checkbox_option() \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, True)
 
     prod_page_details \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FOURTH, False) \
-        .click_on_checkbox_option(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FOURTH, True) \
+        .click_on_checkbox(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FOURTH, True) \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FOURTH, True)

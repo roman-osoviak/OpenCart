@@ -9,8 +9,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from utils.common import retry
-
 
 class BasePage:
     """This class collects methods for Base Page"""
@@ -75,7 +73,6 @@ class BasePage:
         if value != state:
             self.find_element(locator).click()
 
-    @retry
     def click_on_element(self, locator: Tuple):
         """
         Click on UI element
