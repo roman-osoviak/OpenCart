@@ -9,9 +9,7 @@ pipeline {
     stages {
       stage('First Stage'){
         steps {
-          script{
-            valuesYaml = loadValuesYaml()
-            println valuesYaml.getClass()
+          echo 'Hello Jenkins!!!'
           }
         }
       }

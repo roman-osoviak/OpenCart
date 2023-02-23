@@ -2,12 +2,12 @@
 This module describes Product's Details Page
 """
 
-from selenium.common import ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 from utils.common import trim_currency_from_string, get_random_string
 from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox
+from utils.common import retry
 
 
 # pylint: disable=too-few-public-methods
@@ -153,8 +153,9 @@ class ProductDetailsPage(BasePage):
         self.find_element(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value)).click()
         return self
 
-    def click_on_checkbox(self, checkbox_btn_option: ProductDetailsPageCheckBox,
-                          select: bool = True):
+    @retry()
+    def click_on_checkbox_option(self, checkbox_btn_option: ProductDetailsPageCheckBox,
+                                 select: bool = True):
         """
         Method that clicks on desired checkbox option
 
@@ -164,15 +165,17 @@ class ProductDetailsPage(BasePage):
         """
         self._trigger_checkbox(ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value),
                                select)
+        # self.click_on_element(
+        #     ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value), select)
         return self
 
-    def click_on_third_checkbox_option(self):
-        """Temp solution for clicking on third checkbox element"""
-        try:
-            self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
-        except ElementClickInterceptedException:
-            self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
-        return self
+    # def click_on_checkbox_option(self):
+    #     """Temp solution for clicking on third checkbox element"""
+    #     try:
+    #         self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
+    #     except ElementClickInterceptedException:
+    #         self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
+    #     return self
 
     def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
                                     is_selected: bool = True) -> object:

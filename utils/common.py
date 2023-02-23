@@ -1,10 +1,13 @@
 """
 This module describes methods that are using widely through the program
 """
+import functools
 import random
 import string
+import time
 
 from faker import Faker
+from selenium.common.exceptions import ElementClickInterceptedException
 
 
 def get_random_string(length: int, case=None):
@@ -53,3 +56,22 @@ def trim_currency_from_string(string_with_currency: str):
     """
     string_without_currency = string_with_currency[1:]
     return string_without_currency
+
+
+#  Create wait decorator that executes function for X seconds until it returns Y.
+
+
+def retry(timeout=10, polling=0.2):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            end_time = time.time() + timeout
+            while True:
+                try:
+                    return func(*args, **kwargs)
+                except ElementClickInterceptedException as e:  # pylint: disable=W0703
+                    if time.time() > end_time:
+                        raise AssertionError()
+                    time.sleep(polling)
+
+        return wrapper
