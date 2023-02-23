@@ -10,7 +10,7 @@ def test_checkbox_selection(browser, get_env):
     prod_page_details = ProductDetailsPage(browser, site_url)
     prod_page_details.go_to_site()
 
-    # options should be deselected by default
+    # options should be not selected by default
     prod_page_details \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FIRST, False) \
         .click_on_checkbox(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FIRST, True) \
@@ -23,8 +23,6 @@ def test_checkbox_selection(browser, get_env):
 
     prod_page_details.verify_checkbox_is_selected(
         ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, False)
-    # time.sleep(5)
-    # prod_page_details.click_on_checkbox(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, True)
     prod_page_details.click_on_third_checkbox_option()
     prod_page_details.verify_checkbox_is_selected(
         ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, True)

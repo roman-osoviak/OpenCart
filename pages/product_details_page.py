@@ -2,8 +2,7 @@
 This module describes Product's Details Page
 """
 
-import time
-
+from selenium.common import ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -32,15 +31,13 @@ class ProductDetailsLocators:
     RADIO_OPTION_MEDIUM = (By.XPATH, '//label[contains(normalize-space(text()), "Medium")]')
     RADIO_OPTION_LARGE = (By.XPATH, '//label[contains(normalize-space(text()), "Large")]')
     # checkbox
-    # CHECKBOX_BUTTONS = (By.XPATH, '//label[text()="Checkbox"]//..//input')
     CHECKBOX_BUTTON = lambda text: (By.XPATH, f'//label[contains(text(), "{text}")]/..//input')
     CHECKBOX_LABELS_TEXT = lambda text: \
         (By.XPATH, f'//label[contains(normalize-space(text()), "{text}")]')
-    # label[contains(text(), "Checkbox 3")]
-    CHECKBOX_BUTTON_FIRST = (By.XPATH, '//label[contains(text(), "Checkbox 1")]//../input')
-    CHECKBOX_BUTTON_SECOND = (By.XPATH, '//label[contains(text(), "Checkbox 2")]//../input')
-    CHECKBOX_BUTTON_THIRD = (By.XPATH, '//label[contains(text(), "Checkbox 3")]//../input')
-    CHECKBOX_BUTTON_FOURTH = (By.XPATH, '//label[contains(text(), "Checkbox 4")]//../input')
+    CHECKBOX_BUTTON_FIRST = (By.XPATH, '//label[contains(text(), "Checkbox 1")]/../input')
+    CHECKBOX_BUTTON_SECOND = (By.XPATH, '//label[contains(text(), "Checkbox 2")]/../input')
+    CHECKBOX_BUTTON_THIRD = (By.XPATH, '//label[contains(text(), "Checkbox 3")]/../input')
+    CHECKBOX_BUTTON_FOURTH = (By.XPATH, '//label[contains(text(), "Checkbox 4")]/../input')
     CHECKBOX_LABEL_FIRST = (By.XPATH,
                             '//label[contains(normalize-space(text()), "Checkbox 1 (+$14.00)")]')
     CHECKBOX_LABEL_SECOND = (By.XPATH,
@@ -171,8 +168,10 @@ class ProductDetailsPage(BasePage):
 
     def click_on_third_checkbox_option(self):
         """Temp solution for clicking on third checkbox element"""
-        time.sleep(5)
-        self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
+        try:
+            self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
+        except ElementClickInterceptedException:
+            self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
 
     def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
                                     is_selected: bool = True) -> object:
