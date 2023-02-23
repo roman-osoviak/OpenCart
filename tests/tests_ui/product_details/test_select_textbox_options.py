@@ -21,11 +21,10 @@ def test_checkbox_selection(browser, get_env):
         .click_on_checkbox(ProductDetailsPageCheckBox.CHECKBOX_OPTION_SECOND, True) \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_SECOND, True)
 
-    prod_page_details.verify_checkbox_is_selected(
-        ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, False)
-    prod_page_details.click_on_third_checkbox_option()
-    prod_page_details.verify_checkbox_is_selected(
-        ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, True)
+    prod_page_details \
+        .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, False) \
+        .click_on_third_checkbox_option() \
+        .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, True)
 
     prod_page_details \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_FOURTH, False) \
