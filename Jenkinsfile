@@ -7,9 +7,12 @@ pipeline {
     agent any
 
     stages {
-      stage('First Stage'){
+      stage('CI/CD Initialization'){
         steps {
-          echo 'Hello Jenkins!!!'
+          script{
+            valuesYaml = loadValuesYaml()
+            println valuesYaml.getClass()
+          }
         }
       }
       stage('WorkWithYAMLfile'){
@@ -18,7 +21,7 @@ pipeline {
           sed -i 's~site_url_address_template~https://demo.opencart.com/index.php~g' config.yml
           """
           echo 'Trying to get site_url value'
-          echo valuesYaml.environment.site_url
+          echo valuesYaml.site_url
           echo 'URL received successfully'
         }
       }
