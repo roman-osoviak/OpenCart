@@ -19,7 +19,7 @@ pipeline {
           """
           echo 'Trying to get site_url value'
           script {
-          echo "${valuesYaml.site_url}"
+          echo "$valuesYaml.site_url"
           }
           echo 'URL received successfully'
         }
