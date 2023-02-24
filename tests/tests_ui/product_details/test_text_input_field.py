@@ -9,9 +9,13 @@ def test_user_can_input_text(browser, get_env):
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
 
-    # verify default input text
-    assert prod_details_page.get_attribute_value() \
+    # check default value of input
+    assert prod_details_page.get_text_input_attribute_value() \
            == ProductDetailsPageCaptions.TEXT_INPUT_DEFAULT_VALUE.value
+    # check placeholder value
+    assert prod_details_page.get_text_input_attribute_placeholder() \
+           == ProductDetailsPageCaptions.TEXT_PLACEHOLDER.value
+
     prod_details_page.set_random_string_to_text_input()
-    assert not prod_details_page.get_attribute_value() \
+    assert not prod_details_page.get_text_input_attribute_value() \
                == ProductDetailsPageCaptions.TEXT_INPUT_DEFAULT_VALUE.value

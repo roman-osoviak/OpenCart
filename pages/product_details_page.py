@@ -105,7 +105,7 @@ class ProductDetailsPage(BasePage):
 
         return self.get_element_text(ProductDetailsLocators.TOP_ALERT)
 
-    def get_text_input_text(self):
+    def get_text_input_attribute_text(self):
         """
         Method that retrieve input field text
 
@@ -113,7 +113,25 @@ class ProductDetailsPage(BasePage):
         """
         return self.get_element_text(ProductDetailsLocators.TEXT_INPUT)
 
-    def get_text_attribute_value(self, radio_btn_option: ProductDetailsPageRadio):
+    def get_text_input_attribute_placeholder(self):
+        """
+        Method that retrieve placeholder input field
+
+        :return: input's text
+        """
+        return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
+                                          ProductDetailsAttributes.ATTRIBUTE_PLACEHOLDER)
+
+    def get_text_input_attribute_value(self):
+        """
+        Returns attribute value for text input element
+
+        :return: string
+        """
+        return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
+                                          ProductDetailsAttributes.ATTRIBUTE_VALUE)
+
+    def get_radio_text_attribute_value(self, radio_btn_option: ProductDetailsPageRadio):
         """
         Method that returns text from element
 
@@ -136,7 +154,7 @@ class ProductDetailsPage(BasePage):
 
     def set_random_string_to_text_input(self):
         """
-        Generate and input random string into text field
+        Generate 4 chars length string and input random string into text field
 
         :return: None
         """
