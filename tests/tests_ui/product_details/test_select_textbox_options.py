@@ -23,7 +23,7 @@ def test_checkbox_selection(browser, get_env):
 
     prod_page_details \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, False) \
-        .click_on_checkbox_option() \
+        .click_on_checkbox(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, True) \
         .verify_checkbox_is_selected(ProductDetailsPageCheckBox.CHECKBOX_OPTION_THIRD, True)
 
     prod_page_details \

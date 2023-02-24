@@ -1,7 +1,6 @@
 """
 This module describes Product's Details Page
 """
-from selenium.common import ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -152,7 +151,6 @@ class ProductDetailsPage(BasePage):
         self.find_element(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value)).click()
         return self
 
-    # @retry()
     def click_on_checkbox(self, checkbox_btn_option: ProductDetailsPageCheckBox,
                           select: bool = True):
         """
@@ -165,14 +163,6 @@ class ProductDetailsPage(BasePage):
         self._trigger_checkbox(ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value),
                                select)
 
-        return self
-
-    def click_on_checkbox_option(self):
-        """Temp solution for clicking on third checkbox element"""
-        try:
-            self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
-        except ElementClickInterceptedException:
-            self.find_element(ProductDetailsLocators.CHECKBOX_BUTTON_THIRD).click()
         return self
 
     def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,

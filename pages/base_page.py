@@ -9,6 +9,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+from utils.common import retry
+
 
 class BasePage:
     """This class collects methods for Base Page"""
@@ -61,6 +63,7 @@ class BasePage:
         elem.clear()
         elem.send_keys(text)
 
+    @retry(20)
     def _trigger_checkbox(self, locator: Tuple, value: bool):
         """
         Selecting/deselecting checkbox according to the provided value
@@ -73,6 +76,7 @@ class BasePage:
         if value != state:
             self.find_element(locator).click()
 
+    @retry(10)
     def click_on_element(self, locator: Tuple):
         """
         Click on UI element

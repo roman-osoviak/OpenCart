@@ -1,7 +1,6 @@
 """
 This module describes methods that are using widely through the program
 """
-import functools
 import random
 import string
 import time
@@ -57,20 +56,27 @@ def trim_currency_from_string(string_with_currency: str):
     return string_without_currency
 
 
-#  Create wait decorator that executes function for X seconds until it returns Y.
+#  Universal solution for all types of exceptions:
+#  wait decorator that executes function for X seconds.
+def retry(time_out: int):
+    """
+    Decorator function
 
+    :param time_out: desired time for trying
+    :return: decorator func
+    """
 
-def retry(timeout=10, polling=0.2):
     def decorator(func):
-        @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            end_time = time.time() + timeout
+            end_time = time.time() + time_out
             while True:
                 try:
                     return func(*args, **kwargs)
-                except Exception as e:  # pylint: disable=W0703
+                except Exception as exception:  # pylint: disable=W0703
                     if time.time() > end_time:
-                        raise AssertionError()
-                    time.sleep(polling)
+                        raise AssertionError(exception) from None
+                    time.sleep(1)
 
         return wrapper
+
+    return decorator
