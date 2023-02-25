@@ -65,3 +65,12 @@ class ProductDetailsPageSelectMenu(Enum):
     SELECT_OPTION_SECOND = "Yellow (+$4.40)"
     SELECT_OPTION_THIRD = "Blue (+$5.60)"
     SELECT_OPTION_FOURTH = "Red (+$6.80)"
+
+
+class ProductDetailsPageSelectMenu(Enum):
+    """Class describes select drop-down elements on Product Details page"""
+    VALUE_ZERO = " --- Please Select --- "
+    VALUE_FIRST = "Green"
+    VALUE_SECOND = "Yellow"
+    VALUE_THIRD = "Blue"
+    VALUE_FOURTH = "Red"

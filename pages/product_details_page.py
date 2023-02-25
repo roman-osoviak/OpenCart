@@ -2,6 +2,8 @@
 This module describes Product's Details Page
 """
 from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.select import Select
 
 from pages.base_page import BasePage
 from utils.common import trim_currency_from_string, get_random_string
@@ -45,8 +47,13 @@ class ProductDetailsLocators:
     CHECKBOX_LABEL_FOURTH = (By.XPATH,
                              '//label[contains(normalize-space(text()), "Checkbox 4 (+$50.00)")]')
 
-    # text
+    # text input
     TEXT_INPUT = (By.XPATH, '//input[@placeholder="Text"]')
+
+    # select drop down
+    SELECT_LABEL = (By.XPATH, '//select/../label[contains(text(), "Select")]')
+    SELECT_MENU = (By.XPATH, '//label[contains(text(), "Select")]//..//select')
+    SELECT_FOURTH_OPTION = (By.XPATH, '//option[contains(text(), "Red")]')
 
 
 class ProductDetailsAttributes:
@@ -141,6 +148,21 @@ class ProductDetailsPage(BasePage):
         return self.get_element_text(
             ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value))
 
+    # def get_select_option_text(self, select_option: ProductDetailsPageSelectMenu):
+    def select_option_by_value(self, value: str = '0'):
+        """Methods returns visible text for option"""
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+        select.select_by_value(value)
+
+    def get_selected_option_text_from_select(self):
+        """
+        Function returns currently selected option text
+
+        :return: text of the preselected option
+        """
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+        return select.first_selected_option.text
+
     def verify_alert_is_displayed(self, is_displayed: bool = True):
         """
         Check if our alert element is shown
@@ -224,6 +246,5 @@ class ProductDetailsPage(BasePage):
         :param label: label text
         :return: True if equal, otherwise False
         """
-        # assert ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value) in label
         assert self.get_element_text(
             ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value)) == label
