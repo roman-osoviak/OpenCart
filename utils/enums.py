@@ -59,18 +59,8 @@ class ProductDetailsPageCaptions(Enum):
 
 class ProductDetailsPageSelectMenu(Enum):
     """Class describes select drop-down elements on Product Details page"""
-    SELECT_LABEL = "Select"
-    SELECT_DEFAULT_PLACEHOLDER = " --- Please Select --- "
-    SELECT_OPTION_FIRST = "Green (+$3.20)"
-    SELECT_OPTION_SECOND = "Yellow (+$4.40)"
-    SELECT_OPTION_THIRD = "Blue (+$5.60)"
-    SELECT_OPTION_FOURTH = "Red (+$6.80)"
-
-
-class ProductDetailsPageSelectMenu(Enum):
-    """Class describes select drop-down elements on Product Details page"""
     VALUE_ZERO = " --- Please Select --- "
-    VALUE_FIRST = "Green"
-    VALUE_SECOND = "Yellow"
-    VALUE_THIRD = "Blue"
-    VALUE_FOURTH = "Red"
+    VALUE_FIRST_GREEN = "Green"
+    VALUE_SECOND_YELLOW = "Yellow"
+    VALUE_THIRD_BLUE = "Blue"
+    VALUE_FOURTH_RED = "Red"

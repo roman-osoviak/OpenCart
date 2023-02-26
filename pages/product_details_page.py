@@ -7,7 +7,8 @@ from selenium.webdriver.support.select import Select
 
 from pages.base_page import BasePage
 from utils.common import trim_currency_from_string, get_random_string
-from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox
+from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, \
+    ProductDetailsPageSelectMenu
 
 
 # pylint: disable=too-few-public-methods
@@ -148,11 +149,29 @@ class ProductDetailsPage(BasePage):
         return self.get_element_text(
             ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value))
 
-    # def get_select_option_text(self, select_option: ProductDetailsPageSelectMenu):
-    def select_option_by_value(self, value: str = '0'):
-        """Methods returns visible text for option"""
+    def select_option_by_tag_value(self, value: str = '0'):
+        """Method that selects drop-down option by value"""
         select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
         select.select_by_value(value)
+
+    def select_option_by_visible_text(self, text: str):
+        """Method selects drop-down option by visible text"""
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+        select.select_by_visible_text(text)
+
+    def select_option_by_desired_color(self, color_option: ProductDetailsPageSelectMenu):
+        """Method selects drop-down option by provided color"""
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+
+        new_list = []
+        for i in select.options:
+            new_list.append(i.text)
+
+        for i in new_list:
+            index = i.find(color_option.value)
+            if index != -1:
+                select.select_by_visible_text(i)
+                break
 
     def get_selected_option_text_from_select(self):
         """
