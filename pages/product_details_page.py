@@ -56,6 +56,10 @@ class ProductDetailsLocators:
     SELECT_MENU = (By.XPATH, '//label[contains(text(), "Select")]//..//select')
     SELECT_FOURTH_OPTION = (By.XPATH, '//option[contains(text(), "Red")]')
 
+    # textarea
+    TEXT_AREA = (By.XPATH, '//textarea[@placeholder="Textarea"]')
+
+
 
 class ProductDetailsAttributes:
     """Class describes attribute names"""
