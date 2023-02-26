@@ -1,14 +1,14 @@
 """
 This module describes Product's Details Page
 """
+from hamcrest import assert_that, equal_to
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.select import Select
 
 from pages.base_page import BasePage
 from utils.common import trim_currency_from_string, get_random_string
 from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, \
-    ProductDetailsPageSelectMenu
+    ProductDetailsPageSelectMenu, ProductDetailsTextarea
 
 
 # pylint: disable=too-few-public-methods
@@ -58,7 +58,6 @@ class ProductDetailsLocators:
 
     # textarea
     TEXT_AREA = (By.XPATH, '//textarea[@placeholder="Textarea"]')
-
 
 
 class ProductDetailsAttributes:
@@ -133,6 +132,28 @@ class ProductDetailsPage(BasePage):
         """
         return self.get_element_attribute(ProductDetailsLocators.TEXT_INPUT,
                                           ProductDetailsAttributes.ATTRIBUTE_PLACEHOLDER)
+
+    def get_textarea_attribute_placeholder(self):
+        """
+        Method that retrieve textarea placeholder
+
+        :return: textarea placeholder
+        """
+        return self.get_element_attribute(ProductDetailsLocators.TEXT_AREA,
+                                          ProductDetailsAttributes.ATTRIBUTE_PLACEHOLDER)
+
+    def verify_textarea_placeholder(self):
+        """Method verifying placeholder text"""
+        assert_that(self.get_textarea_attribute_placeholder(),
+                    equal_to(ProductDetailsTextarea.PLACEHOLDER.value))
+
+    def get_textarea_attribute_text(self):
+        """
+        Method that returns text from Textarea element
+
+        :return: Text from Textarea element
+        """
+        return self.get_element_text(ProductDetailsLocators.TEXT_INPUT)
 
     def get_text_input_attribute_value(self):
         """

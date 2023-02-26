@@ -64,3 +64,9 @@ class ProductDetailsPageSelectMenu(Enum):
     VALUE_SECOND_YELLOW = "Yellow"
     VALUE_THIRD_BLUE = "Blue"
     VALUE_FOURTH_RED = "Red"
+
+
+class ProductDetailsTextarea(Enum):
+    """Class for elements in Textarea component"""
+    LABEL = "Textarea"
+    PLACEHOLDER = "Textarea"

@@ -75,10 +75,9 @@ class StorePage(BasePage):
         :return: None
         """
         text = text.value
-        # StoreLocators.SHOPPING_CART_BUTTON == text
+
         assert_that(self.get_element_text(StoreLocators.SHOPPING_CART_BUTTON), equal_to(text))
 
-    # def verify_selected_currency_dropdown(self, currency: CurrencyTemp): 1
     def verify_selected_currency_dropdown(self, currency: Currency):
         """
         Method checks selected currency
