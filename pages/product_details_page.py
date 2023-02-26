@@ -163,9 +163,8 @@ class ProductDetailsPage(BasePage):
         """Method selects drop-down option by provided color"""
         select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
 
-        new_list = []
-        for i in select.options:
-            new_list.append(i.text)
+        # creating a list with visible text from select options
+        new_list = [element.text for element in select.options]
 
         for i in new_list:
             index = i.find(color_option.value)
