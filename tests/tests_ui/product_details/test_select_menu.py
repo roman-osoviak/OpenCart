@@ -14,18 +14,18 @@ def test_select_drop_down_menu(browser, get_env):
     assert prod_details_page.get_selected_option_text_from_select() == \
            ProductDetailsPageSelectMenu.VALUE_ZERO.value.strip()
 
-    prod_details_page.select_option_by_tag_value('1')
+    prod_details_page.select_option_by_attribute_value('1')
     assert prod_details_page.get_selected_option_text_from_select() == \
            'Green (+$3.20)'
 
-    prod_details_page.select_option_by_tag_value('2')
+    prod_details_page.select_option_by_attribute_value('2')
     assert prod_details_page.get_selected_option_text_from_select() == \
            'Yellow (+$4.40)'
 
-    prod_details_page.select_option_by_tag_value('3')
+    prod_details_page.select_option_by_attribute_value('3')
     assert prod_details_page.get_selected_option_text_from_select() == \
            'Blue (+$5.60)'
 
-    prod_details_page.select_option_by_tag_value('4')
+    prod_details_page.select_option_by_attribute_value('4')
     assert prod_details_page.get_selected_option_text_from_select() == \
            'Red (+$6.80)'
