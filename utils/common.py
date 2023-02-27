@@ -4,6 +4,7 @@ This module describes methods that are using widely through the program
 import random
 import string
 import time
+from random import choice
 
 from faker import Faker
 
@@ -80,3 +81,13 @@ def retry(time_out: int):
         return wrapper
 
     return decorator
+
+
+def get_random_choice(class_choice):
+    """
+    Method for selection random option from available element options
+
+    :param class_choice:
+    :return: one of 'ProductDetailsPageRadio' choice
+    """
+    return choice(list(class_choice))
