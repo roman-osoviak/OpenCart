@@ -14,18 +14,25 @@ def test_select_drop_down_menu(browser, get_env):
     assert prod_details_page.get_selected_option_text_from_select() == \
            ProductDetailsPageSelectMenu.VALUE_ZERO.value.strip()
 
-    prod_details_page.select_option_by_attribute_value('1')
+    prod_details_page \
+        .select_dropdown_option(ProductDetailsPageSelectMenu.VALUE_FIRST_GREEN.value[1])
     assert prod_details_page.get_selected_option_text_from_select() == \
-           'Green (+$3.20)'
+           ProductDetailsPageSelectMenu.VALUE_FIRST_GREEN.value[1]
 
-    prod_details_page.select_option_by_attribute_value('2')
+    prod_details_page \
+        .select_dropdown_option(ProductDetailsPageSelectMenu.VALUE_SECOND_YELLOW.value[1])
     assert prod_details_page.get_selected_option_text_from_select() == \
-           'Yellow (+$4.40)'
+           ProductDetailsPageSelectMenu.VALUE_SECOND_YELLOW.value[1]
+    #
+    prod_details_page \
+        .select_dropdown_option(ProductDetailsPageSelectMenu.VALUE_THIRD_BLUE.value[1])
+    assert prod_details_page.get_selected_option_text_from_select() == \
+           ProductDetailsPageSelectMenu.VALUE_THIRD_BLUE.value[1]
 
-    prod_details_page.select_option_by_attribute_value('3')
+    prod_details_page \
+        .select_dropdown_option(ProductDetailsPageSelectMenu.VALUE_FOURTH_RED.value[1])
     assert prod_details_page.get_selected_option_text_from_select() == \
-           'Blue (+$5.60)'
-
-    prod_details_page.select_option_by_attribute_value('4')
-    assert prod_details_page.get_selected_option_text_from_select() == \
-           'Red (+$6.80)'
+           ProductDetailsPageSelectMenu.VALUE_FOURTH_RED.value[1]
+    # prod_details_page.select_option_by_attribute_value('4')
+    # assert prod_details_page.get_selected_option_text_from_select() == \
+    #        'Red (+$6.80)'

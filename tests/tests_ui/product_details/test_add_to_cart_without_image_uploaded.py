@@ -8,3 +8,6 @@ def test_add_to_cart_without_upload_file(browser, get_env):
     site_url = get_env['environment']['site_url']
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
+
+    prod_details_page.click_on_upload_button()
+    print('1')

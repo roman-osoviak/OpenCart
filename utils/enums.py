@@ -60,10 +60,10 @@ class ProductDetailsPageCaptions(Enum):
 class ProductDetailsPageSelectMenu(Enum):
     """Class describes select drop-down elements on Product Details page"""
     VALUE_ZERO = " --- Please Select --- "
-    VALUE_FIRST_GREEN = "Green"
-    VALUE_SECOND_YELLOW = "Yellow"
-    VALUE_THIRD_BLUE = "Blue"
-    VALUE_FOURTH_RED = "Red"
+    VALUE_FIRST_GREEN = "Green", "Green (+$3.20)"
+    VALUE_SECOND_YELLOW = "Yellow", "Yellow (+$4.40)"
+    VALUE_THIRD_BLUE = "Blue", "Blue (+$5.60)"
+    VALUE_FOURTH_RED = "Red", "Red (+$6.80)"
 
 
 class ProductDetailsTextarea(Enum):

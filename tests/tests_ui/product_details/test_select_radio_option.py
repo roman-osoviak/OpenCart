@@ -8,8 +8,7 @@ def test_radio_option_selection(browser, get_env):
     """Select option"""
     site_url = get_env['environment']['site_url']
     prod_details_page = ProductDetailsPage(browser, site_url)
-    prod_details_page \
-        .go_to_site()
+    prod_details_page.go_to_site()
 
     # first radio option
     prod_details_page \

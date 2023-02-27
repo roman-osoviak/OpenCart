@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from pages.base_page import BasePage
+from utils.common import retry
 from utils.common import trim_currency_from_string, get_random_string
 from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, \
     ProductDetailsPageSelectMenu, ProductDetailsTextarea, ProductDetailsButton
@@ -52,8 +53,10 @@ class ProductDetailsLocators:
     TEXT_INPUT = (By.XPATH, '//input[@placeholder="Text"]')
 
     # select drop down
-    SELECT_LABEL = (By.XPATH, '//select/../label[contains(text(), "Select")]')
-    SELECT_MENU = (By.XPATH, '//label[contains(text(), "Select")]//..//select')
+    SELECT_MENU_LABEL = (By.XPATH, '//select/../label[contains(text(), "Select")]')
+    SELECT_MENU_DROPDOWN = (By.XPATH, '//label[text()="Select"]/../select')
+    SELECT_MENU_DROPDOWN_ITEM = lambda text: (By.XPATH,
+                                              f'//label[text()="Select"]/../select/option[normalize-space(text())="{text}"]')
     SELECT_FOURTH_OPTION = (By.XPATH, '//option[contains(text(), "Red")]')
 
     # textarea
@@ -103,6 +106,15 @@ class ProductDetailsPage(BasePage):
         :return: None
         """
         self.find_element(ProductDetailsLocators.TEXT_INPUT).click()
+
+    @retry(10)
+    def click_on_upload_button(self):
+        """
+        Method clicks on upload button
+
+        :return: None
+        """
+        self.find_element(ProductDetailsLocators.BUTTON).click()
 
     def verify_old_price_is_greater_than_new(self):
         """
@@ -185,29 +197,38 @@ class ProductDetailsPage(BasePage):
 
     def select_option_by_attribute_value(self, value: str = '0'):
         """Method that selects drop-down option by value"""
-        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU_DROPDOWN))
         select.select_by_value(value)
 
     def select_option_by_visible_text(self, text: str):
         """Method selects drop-down option by visible text"""
-        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU_DROPDOWN))
         select.select_by_visible_text(text)
 
     def select_option_by_index(self, index: int):
         """Method selects drop-down option by index"""
-        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU_DROPDOWN))
         select.select_by_index(index)
+        return self
+
+    def select_dropdown_option(self, text: ProductDetailsPageSelectMenu):
+        """Method selects drop-down option by index"""
+        value = self.find_element(
+            ProductDetailsLocators.SELECT_MENU_DROPDOWN_ITEM(
+                text)).get_attribute('value')
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU_DROPDOWN))
+        select.select_by_value(value)
         return self
 
     def select_option_by_desired_color(self, color_option: ProductDetailsPageSelectMenu):
         """Method selects drop-down option by provided color"""
-        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU_DROPDOWN))
 
         # creating a list with visible text from select options
         new_list = [element.text for element in select.options]
 
         for i in new_list:
-            index = i.find(color_option.value)
+            index = i.find(color_option)
             if index != -1:
                 select.select_by_visible_text(i)
                 break
@@ -218,7 +239,7 @@ class ProductDetailsPage(BasePage):
 
         :return: text of the preselected option
         """
-        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU))
+        select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU_DROPDOWN))
         return select.first_selected_option.text
 
     def verify_alert_is_displayed(self, is_displayed: bool = True):

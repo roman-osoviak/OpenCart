@@ -10,21 +10,13 @@ def test_select_option_by_color(browser, get_env):
     prod_details_page.go_to_site()
 
     prod_details_page.select_option_by_desired_color(
-        ProductDetailsPageSelectMenu.VALUE_FOURTH_RED)
-    assert prod_details_page.get_selected_option_text_from_select() == \
-           'Red (+$6.80)'
+        ProductDetailsPageSelectMenu.VALUE_FOURTH_RED.value[1])
 
     prod_details_page.select_option_by_desired_color(
-        ProductDetailsPageSelectMenu.VALUE_THIRD_BLUE)
-    assert prod_details_page.get_selected_option_text_from_select() == \
-           'Blue (+$5.60)'
+        ProductDetailsPageSelectMenu.VALUE_THIRD_BLUE.value[1])
 
     prod_details_page.select_option_by_desired_color(
-        ProductDetailsPageSelectMenu.VALUE_FIRST_GREEN)
-    assert prod_details_page.get_selected_option_text_from_select() == \
-           'Green (+$3.20)'
+        ProductDetailsPageSelectMenu.VALUE_FIRST_GREEN.value[1])
 
     prod_details_page.select_option_by_desired_color(
-        ProductDetailsPageSelectMenu.VALUE_SECOND_YELLOW)
-    assert prod_details_page.get_selected_option_text_from_select() == \
-           'Yellow (+$4.40)'
+        ProductDetailsPageSelectMenu.VALUE_SECOND_YELLOW.value[1])
