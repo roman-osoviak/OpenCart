@@ -70,3 +70,9 @@ class ProductDetailsTextarea(Enum):
     """Class for elements in Textarea component"""
     LABEL = "Textarea"
     PLACEHOLDER = "Textarea"
+
+
+class ProductDetailsButton(Enum):
+    """Class for button elements"""
+    WARNING_MAX_SIZE = "Warning: The uploaded file exceeds the 20mb max file size!"
+    ERROR_FILE_REQUIRED = "File required!"

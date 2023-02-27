@@ -8,7 +8,7 @@ from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from utils.common import trim_currency_from_string, get_random_string
 from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, \
-    ProductDetailsPageSelectMenu, ProductDetailsTextarea
+    ProductDetailsPageSelectMenu, ProductDetailsTextarea, ProductDetailsButton
 
 
 # pylint: disable=too-few-public-methods
@@ -58,6 +58,15 @@ class ProductDetailsLocators:
 
     # textarea
     TEXT_AREA = (By.XPATH, '//textarea[@placeholder="Textarea"]')
+
+    # file upload
+    BUTTON_LABEL = (By.XPATH, '//label[contains(text(), "File")]')
+    BUTTON = (By.XPATH, '//button[contains(text(), " Upload File")]')
+    BUTTON_REQUIRED_ERROR = \
+        (By.XPATH, f'//*[contains(text(), "{ProductDetailsButton.ERROR_FILE_REQUIRED}")]')
+    BUTTON_MAX_SIZE_WARNING = \
+        (By.XPATH,
+         f'//button[@data-oc-size-error="{ProductDetailsButton.WARNING_MAX_SIZE}"]')
 
 
 class ProductDetailsAttributes:
