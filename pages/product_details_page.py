@@ -66,10 +66,13 @@ class ProductDetailsLocators:
     BUTTON_LABEL = (By.XPATH, '//label[contains(text(), "File")]')
     BUTTON = (By.XPATH, '//button[contains(text(), " Upload File")]')
     BUTTON_REQUIRED_ERROR = \
-        (By.XPATH, f'//*[contains(text(), "{ProductDetailsButton.ERROR_FILE_REQUIRED}")]')
+        (By.XPATH, f'//*[contains(text(), "{ProductDetailsButton.ERROR_FILE_REQUIRED.value}")]')
     BUTTON_MAX_SIZE_WARNING = \
         (By.XPATH,
          f'//button[@data-oc-size-error="{ProductDetailsButton.WARNING_MAX_SIZE}"]')
+
+    # add to cart button
+    BUTTON_ADD_TO_CART = (By.XPATH, '//button[@type="submit" and text() = "Add to Cart"]')
 
 
 class ProductDetailsAttributes:
@@ -79,6 +82,7 @@ class ProductDetailsAttributes:
     ATTRIBUTE_TEXT = 'text'
 
 
+# pylint: disable=too-many-public-methods
 class ProductDetailsPage(BasePage):
     """Class for Product's Details Page"""
     _URL_PATH = '?route=product/product&language=en-gb&product_id=42'
@@ -253,13 +257,32 @@ class ProductDetailsPage(BasePage):
         else:
             assert self.is_element_invisible(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
 
-    def set_random_string_to_text_input(self):
+    def verify_file_required_error_is_displayed(self):
         """
-        Generate 4 chars length string and input random string into text field
+        Method checks that file required error is shown
+        :return: None if error shows
+        """
+        assert self.find_element(ProductDetailsLocators.BUTTON_REQUIRED_ERROR).is_displayed()
 
+    def set_random_string_to_text_input(self, text_length: int):
+        """
+        Generate string of desired length and inputs it into text field
+
+        :param text_length: text length
         :return: None
         """
-        self.type_text_in_ui_element(ProductDetailsLocators.TEXT_INPUT, get_random_string(4))
+        self.type_text_in_ui_element(ProductDetailsLocators.TEXT_INPUT,
+                                     get_random_string(text_length))
+
+    def set_random_string_to_textarea(self, text_length: int):
+        """
+        Inputs string of desired length into text area element
+
+        :param text_length: text length
+        :return: None
+        """
+        self.type_text_in_ui_element(ProductDetailsLocators.TEXT_AREA,
+                                     get_random_string(text_length))
 
     def click_on_radio_button(self, radio_btn_option: ProductDetailsPageRadio):
         """
@@ -283,6 +306,13 @@ class ProductDetailsPage(BasePage):
                                select)
 
         return self
+
+    def click_on_add_to_cart_button(self):
+        """
+        Method clicks on "Add to Cart" button
+        :return: None
+        """
+        self.click_on_element(ProductDetailsLocators.BUTTON_ADD_TO_CART)
 
     def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
                                     is_selected: bool = True):

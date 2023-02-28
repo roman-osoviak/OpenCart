@@ -16,6 +16,6 @@ def test_user_can_input_text(browser, get_env):
     assert prod_details_page.get_text_input_attribute_placeholder() \
            == ProductDetailsPageCaptions.TEXT_PLACEHOLDER.value
 
-    prod_details_page.set_random_string_to_text_input()
+    prod_details_page.set_random_string_to_text_input(4)
     assert not prod_details_page.get_text_input_attribute_value() \
                == ProductDetailsPageCaptions.TEXT_INPUT_DEFAULT_VALUE.value

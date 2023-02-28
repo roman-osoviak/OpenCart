@@ -3,7 +3,8 @@ without providing required image upload"""
 
 from pages.product_details_page import ProductDetailsPage
 from utils.common import get_random_choice
-from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, ProductDetailsPageSelectMenu
+from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, \
+    ProductDetailsPageSelectMenu
 
 
 def test_add_to_cart_without_upload_file(browser, get_env):
@@ -15,6 +16,10 @@ def test_add_to_cart_without_upload_file(browser, get_env):
     # prod_details_page.click_on_upload_button()
     prod_details_page.click_on_radio_button(get_random_choice(ProductDetailsPageRadio))
     prod_details_page.click_on_checkbox(get_random_choice(ProductDetailsPageCheckBox))
-    prod_details_page.set_random_string_to_text_input()
-    prod_details_page.select_dropdown_option(get_random_choice(ProductDetailsPageSelectMenu).value[1])
+    prod_details_page.set_random_string_to_text_input(4)
+    prod_details_page.select_dropdown_option(
+        get_random_choice(ProductDetailsPageSelectMenu).value[1])
     # to do: bad case with 'Please Select'
+    prod_details_page.set_random_string_to_textarea(4)
+    prod_details_page.click_on_add_to_cart_button()
+    prod_details_page.verify_file_required_error_is_displayed()
