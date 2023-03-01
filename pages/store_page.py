@@ -1,11 +1,12 @@
 """
 This module describes Your Store Page
 """
+from hamcrest import assert_that, equal_to
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
-from utils.enums import Currency
+from utils.enums import Currency, StoreCurrency
 
 
 # pylint: disable=too-few-public-methods
@@ -16,11 +17,12 @@ class StoreLocators:
     PREVIOUS_ITEM_BUTTON = (By.XPATH, '//*[@id="carousel-banner-0"]//span')
     SHOPPING_CART_DROPDOWN_MENU_EXPANDED = (By.XPATH,
                                             '//div[@id="header-cart"]//p[@class="text-center"]')
-    CURRENCY = (By.XPATH, '//*[@id="form-currency"]//span')
-    CURRENCY_OPTION_COMMON = (By.XPATH, '//*[@id="form-currency"]//li')
-    CURRENCY_OPTION_EURO = (By.XPATH, '//*[@id="form-currency"]//li[1]')
-    CURRENCY_OPTION_POUNDS = (By.XPATH, '//*[@id="form-currency"]//li[2]')
-    CURRENCY_OPTION_USD = (By.XPATH, '//*[@id="form-currency"]//li[3]')
+    CURRENCY_SIGN_USD = (By.XPATH, '//*[@id="form-currency"]//strong[starts-with(text(), "$")]')
+    CURRENCY_SIGN = (By.XPATH, '//*[@id="form-currency"]//strong')
+    CURRENCY_DROP_DOWN = (By.XPATH, '//*[@id="form-currency"]//span')
+    CURRENCY_OPTION_EURO = (By.XPATH, '//*[contains(text(), "Euro")]')
+    CURRENCY_OPTION_POUNDS = (By.XPATH, '//*[contains(text(), "Pound Sterling")]')
+    CURRENCY_OPTION_USD = (By.XPATH, '//*[contains(text(), "US Dollar")]')
 
 
 class StorePage(BasePage):
@@ -45,7 +47,7 @@ class StorePage(BasePage):
 
     def click_on_drop_down_currency(self):
         """Method click on currency drop-down"""
-        self.click_on_element(StoreLocators.CURRENCY)
+        self.click_on_element(StoreLocators.CURRENCY_DROP_DOWN)
 
     def empty_shopping_cart_menu_displayed(self):
         """Checks if empty menu dropdown menu is displayed"""
@@ -58,13 +60,33 @@ class StorePage(BasePage):
             print('No such element on the page')
         return is_shown
 
-    def get_shopping_cart_default_button_text(self):
+    def get_shopping_cart_button_text(self):
         """
         Gets default text from shopping cart button
 
         :return: element text
         """
         return self.get_element_text(StoreLocators.SHOPPING_CART_BUTTON)
+
+    def verify_shopping_cart_button_text(self, text: StoreCurrency):
+        """
+        Verify text from shopping cart button
+
+        :return: None
+        """
+        text = text.value
+
+        assert_that(self.get_element_text(StoreLocators.SHOPPING_CART_BUTTON), equal_to(text))
+
+    def verify_selected_currency_dropdown(self, currency: Currency):
+        """
+        Method checks selected currency
+
+        :return: None
+        """
+        if isinstance(currency, Currency):
+            currency = currency.value[1]
+        assert_that(self.get_element_text(StoreLocators.CURRENCY_SIGN), equal_to(currency))
 
     def get_shopping_cart_empty_text(self):
         """
@@ -76,18 +98,7 @@ class StorePage(BasePage):
         self.click_on_shopping_cart()
         return self.get_element_text(StoreLocators.SHOPPING_CART_DROPDOWN_MENU_EXPANDED)
 
-    def click_on_currency_option(self, currency: Currency):
-        """Method click on currency option"""
-        # locator = ''
-        if currency == Currency.USD:
-            locator = StoreLocators.CURRENCY_OPTION_USD
-        elif currency == Currency.EURO:
-            locator = StoreLocators.CURRENCY_OPTION_EURO
-        elif currency == Currency.POUNDS:
-            locator = StoreLocators.CURRENCY_OPTION_POUNDS
-        self.click_on_element(locator)
-
-    def select_currency(self, currency: str = Currency.USD):
+    def select_currency(self, currency: Currency):
         """
         Method for selecting desired currency
 
@@ -95,4 +106,10 @@ class StorePage(BasePage):
         :return: None
         """
         self.click_on_drop_down_currency()
-        self.click_on_currency_option(currency)
+        if currency == Currency.USD:
+            locator = StoreLocators.CURRENCY_OPTION_USD
+        elif currency == Currency.EURO:
+            locator = StoreLocators.CURRENCY_OPTION_EURO
+        elif currency == Currency.POUNDS:
+            locator = StoreLocators.CURRENCY_OPTION_POUNDS
+        self.click_on_element(locator)

@@ -1,6 +1,7 @@
 """Configuration module for UI tests only"""
 
 import pytest
+
 from utils.driver_manager import BrowserDefinition, get_driver
 
 
@@ -11,4 +12,3 @@ def browser():
 
     yield driver
     driver.quit()
-

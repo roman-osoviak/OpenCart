@@ -30,6 +30,52 @@ class StoreCurrency(Enum):
 
 class Currency(Enum):
     """Store currencies"""
-    USD = 'USD'
-    EURO = 'EURO'
-    POUNDS = 'POUND STERLING'
+    USD = 'USD', '$'
+    EURO = 'EURO', '€'
+    POUNDS = 'POUND STERLING', '£'
+
+
+class ProductDetailsPageRadio(Enum):
+    """Class describes radio elements on Product Details page"""
+    RADIO_OPTION_FIRST = "Small"
+    RADIO_OPTION_SECOND = "Medium"
+    RADIO_OPTION_THIRD = "Large"
+
+
+class ProductDetailsPageCheckBox(Enum):
+    """Class describes check-box elements on Product Details page"""
+    CHECKBOX_LABEL = "Checkbox"
+    CHECKBOX_OPTION_FIRST = "Checkbox 1"
+    CHECKBOX_OPTION_SECOND = "Checkbox 2"
+    CHECKBOX_OPTION_THIRD = "Checkbox 3"
+    CHECKBOX_OPTION_FOURTH = "Checkbox 4"
+
+
+class ProductDetailsPageCaptions(Enum):
+    """Enum class consists of different placeholders per page"""
+    TEXT_PLACEHOLDER = "Text"
+    TEXT_INPUT_DEFAULT_VALUE = "test"
+
+
+class ProductDetailsPageSelectMenu(Enum):
+    """Class describes select drop-down elements on Product Details page"""
+    VALUE_ZERO = " --- Please Select --- "
+    VALUE_FIRST_GREEN = "Green", "Green (+$3.20)"
+    VALUE_SECOND_YELLOW = "Yellow", "Yellow (+$4.40)"
+    VALUE_THIRD_BLUE = "Blue", "Blue (+$5.60)"
+    VALUE_FOURTH_RED = "Red", "Red (+$6.80)"
+
+    def random(self, exclude):
+        """For generate random choice with exclude element"""
+
+
+class ProductDetailsTextarea(Enum):
+    """Class for elements in Textarea component"""
+    LABEL = "Textarea"
+    PLACEHOLDER = "Textarea"
+
+
+class ProductDetailsButton(Enum):
+    """Class for button elements"""
+    WARNING_MAX_SIZE = "Warning: The uploaded file exceeds the 20mb max file size!"
+    ERROR_FILE_REQUIRED = "File required!"
