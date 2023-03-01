@@ -9,14 +9,14 @@ def test_select_option_by_color(browser, get_env):
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
 
-    prod_details_page.select_option_by_desired_color(
+    prod_details_page.select_option_by_text_color(
         ProductDetailsPageSelectMenu.VALUE_FOURTH_RED.value[1])
 
-    prod_details_page.select_option_by_desired_color(
+    prod_details_page.select_option_by_text_color(
         ProductDetailsPageSelectMenu.VALUE_THIRD_BLUE.value[1])
 
-    prod_details_page.select_option_by_desired_color(
+    prod_details_page.select_option_by_text_color(
         ProductDetailsPageSelectMenu.VALUE_FIRST_GREEN.value[1])
 
-    prod_details_page.select_option_by_desired_color(
+    prod_details_page.select_option_by_text_color(
         ProductDetailsPageSelectMenu.VALUE_SECOND_YELLOW.value[1])

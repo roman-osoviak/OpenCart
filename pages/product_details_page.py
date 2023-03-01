@@ -224,7 +224,7 @@ class ProductDetailsPage(BasePage):
         select.select_by_value(value)
         return self
 
-    def select_option_by_desired_color(self, color_option: ProductDetailsPageSelectMenu):
+    def select_option_by_text_color(self, color_option: ProductDetailsPageSelectMenu):
         """Method selects drop-down option by provided color"""
         select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU_DROPDOWN))
 

@@ -1,6 +1,7 @@
 """Module with enumerates"""
 
 from enum import Enum
+from random import choice
 
 
 class BrowserDefinition(Enum):
@@ -65,8 +66,12 @@ class ProductDetailsPageSelectMenu(Enum):
     VALUE_THIRD_BLUE = "Blue", "Blue (+$5.60)"
     VALUE_FOURTH_RED = "Red", "Red (+$6.80)"
 
-    def random(self, exclude):
-        """For generate random choice with exclude element"""
+    @staticmethod
+    def random_with_exclude(class_choice, exclude):
+        """For generating random choice with exclude element"""
+        new_list = list(class_choice)
+        new_list.remove(exclude)
+        return choice(new_list).value[1]
 
 
 class ProductDetailsTextarea(Enum):
