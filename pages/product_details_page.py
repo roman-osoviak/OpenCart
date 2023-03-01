@@ -32,6 +32,8 @@ class ProductDetailsLocators:
     RADIO_LABEL_SMALL = (By.XPATH, '//label[contains(normalize-space(text()), "Small")]')
     RADIO_OPTION_MEDIUM = (By.XPATH, '//label[contains(normalize-space(text()), "Medium")]')
     RADIO_OPTION_LARGE = (By.XPATH, '//label[contains(normalize-space(text()), "Large")]')
+    RADIO_REQUIRED_ERROR = (By.XPATH, '//*[starts-with(@id ,"error") and text()="Radio required!"]')
+
     # checkbox
     CHECKBOX_BUTTON = lambda text: (By.XPATH, f'//label[contains(text(), "{text}")]/..//input')
     CHECKBOX_LABELS_TEXT = lambda text: \
@@ -51,6 +53,7 @@ class ProductDetailsLocators:
 
     # text input
     TEXT_INPUT = (By.XPATH, '//input[@placeholder="Text"]')
+    TEXT_INPUT_REQUIRED_TEXT_ERROR = (By.XPATH, '//*[text()="Text required!"]')
 
     # select drop down
     SELECT_MENU_LABEL = (By.XPATH, '//select/../label[contains(text(), "Select")]')
@@ -266,6 +269,16 @@ class ProductDetailsPage(BasePage):
         :return: None if error shows
         """
         assert self.find_element(ProductDetailsLocators.BUTTON_REQUIRED_ERROR).is_displayed()
+
+    def verify_text_required_error_is_displayed(self):
+        """Method checks that error about required text is shown"""
+        assert \
+            self.find_element(ProductDetailsLocators.TEXT_INPUT_REQUIRED_TEXT_ERROR).is_displayed()
+
+    def verify_radio_required_error_is_displayed(self):
+        """Method checks that error about required radio is shown"""
+        assert \
+            self.find_element(ProductDetailsLocators.RADIO_REQUIRED_ERROR).is_displayed()
 
     def set_random_string_to_text_input(self, text_length: int):
         """
