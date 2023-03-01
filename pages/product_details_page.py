@@ -70,6 +70,7 @@ class ProductDetailsLocators:
     BUTTON_MAX_SIZE_WARNING = \
         (By.XPATH,
          f'//button[@data-oc-size-error="{ProductDetailsButton.WARNING_MAX_SIZE}"]')
+    UPLOAD_FILE_DIALOG = (By.XPATH, '//input[@type="file"]')
 
     # add to cart button
     BUTTON_ADD_TO_CART = (By.XPATH, '//button[@type="submit" and text() = "Add to Cart"]')
@@ -119,6 +120,8 @@ class ProductDetailsPage(BasePage):
         :return: None
         """
         self.find_element(ProductDetailsLocators.BUTTON).click()
+        upload_file = self.find_element(ProductDetailsLocators.UPLOAD_FILE_DIALOG)
+        upload_file.send_keys("/home/administrator/requirements_12_febr")
 
     def verify_old_price_is_greater_than_new(self):
         """
