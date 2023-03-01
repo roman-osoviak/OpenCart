@@ -65,6 +65,9 @@ class ProductDetailsPageSelectMenu(Enum):
     VALUE_THIRD_BLUE = "Blue", "Blue (+$5.60)"
     VALUE_FOURTH_RED = "Red", "Red (+$6.80)"
 
+    def random(self, exclude):
+        """For generate random choice with exclude element"""
+
 
 class ProductDetailsTextarea(Enum):
     """Class for elements in Textarea component"""
