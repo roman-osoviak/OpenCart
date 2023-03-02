@@ -44,16 +44,12 @@ class ProductDetailsLocators:
     CHECKBOX_BUTTON_FOURTH = (By.XPATH, '//label[contains(text(), "Checkbox 4")]/../input')
     CHECKBOX_LABEL_FIRST = (By.XPATH,
                             '//label[contains(normalize-space(text()), "Checkbox 1 (+$14.00)")]')
-    CHECKBOX_LABEL_SECOND = (By.XPATH,
-                             '//label[contains(normalize-space(text()), "Checkbox 2 (+$26.00)")]')
-    CHECKBOX_LABEL_THIRD = (By.XPATH,
-                            '//label[contains(normalize-space(text()), "Checkbox 3 (+$38.00)")]')
-    CHECKBOX_LABEL_FOURTH = (By.XPATH,
-                             '//label[contains(normalize-space(text()), "Checkbox 4 (+$50.00)")]')
+    CHECKBOX_REQUIRED_TEXT = (By.XPATH,
+                              '//*[starts-with(@id, "error") and text()="Checkbox required!"]')
 
     # text input
     TEXT_INPUT = (By.XPATH, '//input[@placeholder="Text"]')
-    TEXT_INPUT_REQUIRED_TEXT_ERROR = (By.XPATH, '//*[text()="Text required!"]')
+    TEXT_INPUT_REQUIRED_ERROR = (By.XPATH, '//*[text()="Text required!"]')
 
     # select drop down
     SELECT_MENU_LABEL = (By.XPATH, '//select/../label[contains(text(), "Select")]')
@@ -61,9 +57,13 @@ class ProductDetailsLocators:
     SELECT_MENU_DROPDOWN_ITEM = lambda text: (By.XPATH,
                                               f'//label[text()="Select"]/../select/option[normalize-space(text())="{text}"]')
     SELECT_FOURTH_OPTION = (By.XPATH, '//option[contains(text(), "Red")]')
+    SELECT_REQUIRED_ERROR = (By.XPATH,
+                             '//*[starts-with(@id, "error") and text()="Select required!"]')
 
     # textarea
     TEXT_AREA = (By.XPATH, '//textarea[@placeholder="Textarea"]')
+    TEXT_AREA_REQUIRED_ERROR = (By.XPATH,
+                                '//*[starts-with(@id, "error") and text()="Textarea required!"]')
 
     # file upload
     BUTTON_LABEL = (By.XPATH, '//label[contains(text(), "File")]')
@@ -273,12 +273,27 @@ class ProductDetailsPage(BasePage):
     def verify_text_required_error_is_displayed(self):
         """Method checks that error about required text is shown"""
         assert \
-            self.find_element(ProductDetailsLocators.TEXT_INPUT_REQUIRED_TEXT_ERROR).is_displayed()
+            self.find_element(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR).is_displayed()
+
+    def verify_select_required_error_is_displayed(self):
+        """Method checks that error about required select is shown"""
+        assert \
+            self.find_element(ProductDetailsLocators.SELECT_REQUIRED_ERROR).is_displayed()
+
+    def verify_textarea_required_error_is_displayed(self):
+        """Method checks that error about required textarea is shown"""
+        assert \
+            self.find_element(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR).is_displayed()
 
     def verify_radio_required_error_is_displayed(self):
         """Method checks that error about required radio is shown"""
         assert \
             self.find_element(ProductDetailsLocators.RADIO_REQUIRED_ERROR).is_displayed()
+
+    def verify_checkbox_required_error_is_displayed(self):
+        """Method checks that error about required checkbox is shown"""
+        assert \
+            self.find_element(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT).is_displayed()
 
     def set_random_string_to_text_input(self, text_length: int):
         """
