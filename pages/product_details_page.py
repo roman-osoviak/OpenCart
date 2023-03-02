@@ -75,6 +75,16 @@ class ProductDetailsLocators:
          f'//button[@data-oc-size-error="{ProductDetailsButton.WARNING_MAX_SIZE}"]')
     UPLOAD_FILE_DIALOG = (By.XPATH, '//input[@type="file"]')
 
+    # date time
+    DATE_INPUT = (By.XPATH, '//label[text()="Date"]/..//input[contains(@class, "date")]')
+    TIME_INPUT = (By.XPATH, '//label[text()="Time"]/..//input[contains(@class, "time")]')
+    DATE_TIME_INPUT = (By.XPATH,
+                       '//label[text()="Date & Time"]/..//input[contains(@class, "datetime")]')
+    # quantity input
+    QUANTITY_INPUT = (By.XPATH, '//*[text()="Qty"]//following-sibling::input[1]')
+    QUANTITY_ALERT = (By.XPATH,
+                      '//*[normalize-space(text())="This product has a minimum quantity of 2"]')
+
     # add to cart button
     BUTTON_ADD_TO_CART = (By.XPATH, '//button[@type="submit" and text() = "Add to Cart"]')
 
