@@ -48,6 +48,11 @@ def get_random_last_name():
     return fake.last_name()
 
 
+def get_random_date():
+    """Function for generating random date value"""
+    return fake.date()
+
+
 def trim_currency_from_string(string_with_currency: str):
     """
     Method that trims first currency symbol from the string
