@@ -8,6 +8,8 @@ from random import choice
 
 from faker import Faker
 
+fake = Faker()
+
 
 def get_random_string(length: int, case=None):
     """
@@ -33,17 +35,17 @@ def get_random_string(length: int, case=None):
 
 def get_random_email():
     """Function for generating random email value"""
-    return Faker().email()
+    return fake.email()
 
 
 def get_random_first_name():
     """Function for generating random name value"""
-    return Faker().first_name()
+    return fake.first_name()
 
 
 def get_random_last_name():
     """Function for generating random last name value"""
-    return Faker().last_name()
+    return fake.last_name()
 
 
 def trim_currency_from_string(string_with_currency: str):

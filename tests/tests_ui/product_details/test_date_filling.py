@@ -7,3 +7,5 @@ def test_date_selection(browser, get_env):
     site_url = get_env['environment']['site_url']
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
+
+    prod_details_page.click_and_select_date_input('2023-03-02')

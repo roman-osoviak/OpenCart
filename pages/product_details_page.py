@@ -39,9 +39,6 @@ class ProductDetailsLocators:
     CHECKBOX_LABELS_TEXT = lambda text: \
         (By.XPATH, f'//label[contains(normalize-space(text()), "{text}")]')
     CHECKBOX_BUTTON_FIRST = (By.XPATH, '//label[contains(text(), "Checkbox 1")]/../input')
-    CHECKBOX_BUTTON_SECOND = (By.XPATH, '//label[contains(text(), "Checkbox 2")]/../input')
-    CHECKBOX_BUTTON_THIRD = (By.XPATH, '//label[contains(text(), "Checkbox 3")]/../input')
-    CHECKBOX_BUTTON_FOURTH = (By.XPATH, '//label[contains(text(), "Checkbox 4")]/../input')
     CHECKBOX_LABEL_FIRST = (By.XPATH,
                             '//label[contains(normalize-space(text()), "Checkbox 1 (+$14.00)")]')
     CHECKBOX_REQUIRED_TEXT = (By.XPATH,
@@ -77,11 +74,12 @@ class ProductDetailsLocators:
 
     # date time
     DATE_INPUT = (By.XPATH, '//label[text()="Date"]/..//input[contains(@class, "date")]')
+    DATE_PICKER = (By.XPATH, '//div[contains(@class, "daterangepicker")]')
     TIME_INPUT = (By.XPATH, '//label[text()="Time"]/..//input[contains(@class, "time")]')
     DATE_TIME_INPUT = (By.XPATH,
                        '//label[text()="Date & Time"]/..//input[contains(@class, "datetime")]')
     # quantity input
-    QUANTITY_INPUT = (By.XPATH, '//*[text()="Qty"]//following-sibling::input[1]')
+    QUANTITY_INPUT = (By.XPATH, '//*[text()="Qty"]/../input[@name="quantity"]')
     QUANTITY_ALERT = (By.XPATH,
                       '//*[normalize-space(text())="This product has a minimum quantity of 2"]')
 
@@ -272,38 +270,57 @@ class ProductDetailsPage(BasePage):
             assert self.is_element_displayed(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
         else:
             assert self.is_element_invisible(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
+        return self
 
-    def verify_file_required_error_is_displayed(self):
+    def verify_file_required_error_is_displayed(self, is_displayed: bool = True):
         """
         Method checks that file required error is shown
-        :return: None if error shows
         """
-        assert self.find_element(ProductDetailsLocators.BUTTON_REQUIRED_ERROR).is_displayed()
+        if is_displayed:
+            self.is_element_displayed(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
+        else:
+            self.is_element_invisible(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
+        return self
 
-    def verify_text_required_error_is_displayed(self):
+    def verify_text_required_error_is_displayed(self, is_displayed: bool = True):
         """Method checks that error about required text is shown"""
-        assert \
-            self.find_element(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR).is_displayed()
+        if is_displayed:
+            self.is_element_displayed(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR)
+        else:
+            self.is_element_invisible(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR)
+        return self
 
-    def verify_select_required_error_is_displayed(self):
+    def verify_select_required_error_is_displayed(self, is_displayed: bool = True):
         """Method checks that error about required select is shown"""
-        assert \
-            self.find_element(ProductDetailsLocators.SELECT_REQUIRED_ERROR).is_displayed()
+        if is_displayed:
+            self.is_element_displayed(ProductDetailsLocators.SELECT_REQUIRED_ERROR)
+        else:
+            self.is_element_invisible(ProductDetailsLocators.SELECT_REQUIRED_ERROR)
+        return self
 
-    def verify_textarea_required_error_is_displayed(self):
+    def verify_textarea_required_error_is_displayed(self, is_displayed: bool = True):
         """Method checks that error about required textarea is shown"""
-        assert \
-            self.find_element(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR).is_displayed()
+        if is_displayed:
+            self.is_element_displayed(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR)
+        else:
+            self.is_element_invisible(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR)
+        return self
 
-    def verify_radio_required_error_is_displayed(self):
+    def verify_radio_required_error_is_displayed(self, is_displayed: bool = True):
         """Method checks that error about required radio is shown"""
-        assert \
-            self.find_element(ProductDetailsLocators.RADIO_REQUIRED_ERROR).is_displayed()
+        if is_displayed:
+            assert self.is_element_displayed(ProductDetailsLocators.RADIO_REQUIRED_ERROR)
+        else:
+            assert self.is_element_invisible(ProductDetailsLocators.RADIO_REQUIRED_ERROR)
+        return self
 
-    def verify_checkbox_required_error_is_displayed(self):
+    def verify_checkbox_required_error_is_displayed(self, is_displayed: bool = True):
         """Method checks that error about required checkbox is shown"""
-        assert \
-            self.find_element(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT).is_displayed()
+        if is_displayed:
+            self.is_element_displayed(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
+        else:
+            self.is_element_invisible(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
+        return self
 
     def set_random_string_to_text_input(self, text_length: int):
         """
@@ -348,12 +365,20 @@ class ProductDetailsPage(BasePage):
 
         return self
 
+    @retry(10)
+    def click_and_select_date_input(self, date):
+        """Method clicks on date input and type desired date"""
+        origin = self.find_element(ProductDetailsLocators.DATE_INPUT)
+        self.type_text_in_ui_element(ProductDetailsLocators.DATE_INPUT, date)
+        origin.click()
+
     def click_on_add_to_cart_button(self):
         """
         Method clicks on "Add to Cart" button
-        :return: None
+        :return: self
         """
         self.click_on_element(ProductDetailsLocators.BUTTON_ADD_TO_CART)
+        return self
 
     def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
                                     is_selected: bool = True):
