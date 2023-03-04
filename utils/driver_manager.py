@@ -17,3 +17,6 @@ def get_driver(browser: BrowserDefinition):
     if browser == BrowserDefinition.FIREFOX:
         return webdriver.Firefox(executable_path="geckodriver")
     return webdriver.Chrome(executable_path="chromedriver", chrome_options=options)
+
+
+default_driver = get_driver(BrowserDefinition.CHROME)

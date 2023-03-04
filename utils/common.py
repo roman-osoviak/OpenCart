@@ -7,6 +7,9 @@ import time
 from random import choice
 
 from faker import Faker
+from selenium.webdriver import Keys, ActionChains
+
+from utils.driver_manager import default_driver
 
 fake = Faker()
 
@@ -46,21 +49,6 @@ def get_random_first_name():
 def get_random_last_name():
     """Function for generating random last name value"""
     return fake.last_name()
-
-
-def get_random_date():
-    """Function for generating random date value"""
-    return fake.date()
-
-
-def get_random_time():
-    """Function for generating random date value"""
-    return fake.time()
-
-
-def get_random_datetime():
-    """Function for generating random datetime value"""
-    return fake.date_time()
 
 
 def trim_currency_from_string(string_with_currency: str):
@@ -108,3 +96,15 @@ def get_random_choice(class_choice):
     :return: one of 'ProductDetailsPageRadio' choice
     """
     return choice(list(class_choice))
+
+
+class HotKeys:
+    """Describes actions with hot keys"""
+
+    def press_esc_btn(self):
+        """Method click on ESC button"""
+        ActionChains(default_driver).send_keys(Keys.ESCAPE).perform()
+        return self
+
+
+hot_keys = HotKeys()

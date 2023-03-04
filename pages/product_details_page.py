@@ -379,6 +379,7 @@ class ProductDetailsPage(BasePage):
             self.type_text_in_ui_element(ProductDetailsLocators.DATE_INPUT, date)
             logging.info("Date provided successfully")
             self.find_element(ProductDetailsLocators.DATE_INPUT).send_keys(Keys.ESCAPE)
+            # press_esc_btn()
         else:
             logging.info("Time was not provided by test choice")
 
@@ -414,58 +415,54 @@ class ProductDetailsPage(BasePage):
         else:
             logging.info("Datetime was not provided by test choice")
 
+    def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
+                                    is_selected: bool = True):
+        """
+        Method for clicking on checkbox options
 
-def click_on_add_to_cart_button(self):
-    """
-    Method clicks on "Add to Cart" button
-    :return: self
-    """
-    self.click_on_element(ProductDetailsLocators.BUTTON_ADD_TO_CART)
-    return self
+        :param checkbox_btn_option: checkbox option we should work
+        :param is_selected: True if we need to check that flag is selected, False otherwise
+        :return: if True we expect to be selected, False otherwise
+        """
+        if is_selected:
+            self.is_element_selected(
+                ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value))
+        else:
+            self.is_element_not_selected(
+                ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value))
+        return self
 
+    def verify_radio_button_is_selected(self, radio_btn_option: ProductDetailsPageRadio,
+                                        is_selected: bool = True) -> object:
+        """
+        Method that checks if radio button is selected
 
-def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
-                                is_selected: bool = True):
-    """
-    Method for clicking on checkbox options
+        :param radio_btn_option: radio option
+        :param is_selected: desired state True/False
+        :return: self
+        """
+        if is_selected:
+            self.is_element_selected(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))
+        else:
+            self.is_element_not_selected(
+                ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))
+        return self
 
-    :param checkbox_btn_option: checkbox option we should work
-    :param is_selected: True if we need to check that flag is selected, False otherwise
-    :return: if True we expect to be selected, False otherwise
-    """
-    if is_selected:
-        self.is_element_selected(
-            ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value))
-    else:
-        self.is_element_not_selected(
-            ProductDetailsLocators.CHECKBOX_BUTTON(checkbox_btn_option.value))
-    return self
+    def verify_radio_button_label(self, radio_btn_option: ProductDetailsPageRadio, label: str):
+        """
+        Method checks if label is equal to our expectations
 
+        :param radio_btn_option: Option with desired value
+        :param label: label text
+        :return: True if equal, otherwise False
+        """
+        assert self.get_element_text(
+            ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value)) == label
 
-def verify_radio_button_is_selected(self, radio_btn_option: ProductDetailsPageRadio,
-                                    is_selected: bool = True) -> object:
-    """
-    Method that checks if radio button is selected
-
-    :param radio_btn_option: radio option
-    :param is_selected: desired state True/False
-    :return: self
-    """
-    if is_selected:
-        self.is_element_selected(ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))
-    else:
-        self.is_element_not_selected(
-            ProductDetailsLocators.RADIO_BUTTON(radio_btn_option.value))
-    return self
-
-
-def verify_radio_button_label(self, radio_btn_option: ProductDetailsPageRadio, label: str):
-    """
-    Method checks if label is equal to our expectations
-
-    :param radio_btn_option: Option with desired value
-    :param label: label text
-    :return: True if equal, otherwise False
-    """
-    assert self.get_element_text(
-        ProductDetailsLocators.RADIO_OPTIONS_LABELS(radio_btn_option.value)) == label
+    def click_on_add_to_cart_button(self):
+        """
+        Method clicks on "Add to Cart" button
+        :return: self
+        """
+        self.click_on_element(ProductDetailsLocators.BUTTON_ADD_TO_CART)
+        return self
