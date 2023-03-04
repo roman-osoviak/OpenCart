@@ -1,6 +1,8 @@
 """
 This module describes Product's Details Page
 """
+import logging
+
 from hamcrest import assert_that, equal_to
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -369,21 +371,27 @@ class ProductDetailsPage(BasePage):
     def click_and_select_date_input(self, date):
         """Method clicks on date input and type desired date"""
         origin = self.find_element(ProductDetailsLocators.DATE_INPUT)
+        logging.info("Trying to input date as '%s'", date)
         self.type_text_in_ui_element(ProductDetailsLocators.DATE_INPUT, date)
+        logging.info("Date provided successfully")
         origin.click()
 
     @retry(10)
     def click_and_select_time_input(self, time):
         """Method clicks on time input and type desired time"""
         origin = self.find_element(ProductDetailsLocators.TIME_INPUT)
+        logging.info("Trying to input time as '%s'", time)
         self.type_text_in_ui_element(ProductDetailsLocators.TIME_INPUT, time)
+        logging.info("Time provided successfully")
         origin.click()
 
     def click_and_select_date_and_time_input(self, datetime):
         """Method clicks on datetime input and type desired datetime"""
         origin = self.find_element(ProductDetailsLocators.DATE_TIME_INPUT)
+        logging.info("Trying to input datetime as '%s'", datetime)
         self.type_text_in_ui_element(ProductDetailsLocators.DATE_TIME_INPUT,
                                      str(datetime))
+        logging.info("Datetime provided successfully")
         origin.click()
 
     def click_on_add_to_cart_button(self):
