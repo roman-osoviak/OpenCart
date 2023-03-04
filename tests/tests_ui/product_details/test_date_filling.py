@@ -9,6 +9,7 @@ def test_date_selection(browser, get_env):
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
 
-    prod_details_page.click_and_select_date_input(get_random_date())
+    # prod_details_page.click_and_select_date_input(get_random_date())
+    prod_details_page.select_time(get_random_date())
     prod_details_page.click_and_select_time_input(get_random_time())
     prod_details_page.click_and_select_date_and_time_input(get_random_datetime())

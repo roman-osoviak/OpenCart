@@ -80,6 +80,10 @@ class ProductDetailsLocators:
     TIME_INPUT = (By.XPATH, '//label[text()="Time"]/..//input[contains(@class, "time")]')
     DATE_TIME_INPUT = (By.XPATH,
                        '//label[text()="Date & Time"]/..//input[contains(@class, "datetime")]')
+    APPLY_EXPANDED_BUTTON = (By.XPATH,
+                             '//div[contains(@style, "display: block;")]//../button[text()= "Apply"]')
+    CANCEL_EXPANDED_BUTTON = (By.XPATH,
+                              '//div[contains(@style, "display: block;")]//../button[text()= "Cancel"]')
     # quantity input
     QUANTITY_INPUT = (By.XPATH, '//*[text()="Qty"]/../input[@name="quantity"]')
     QUANTITY_ALERT = (By.XPATH,
@@ -376,14 +380,32 @@ class ProductDetailsPage(BasePage):
         logging.info("Date provided successfully")
         origin.click()
 
-    @retry(10)
-    def click_and_select_time_input(self, time):
-        """Method clicks on time input and type desired time"""
-        origin = self.find_element(ProductDetailsLocators.TIME_INPUT)
-        logging.info("Trying to input time as '%s'", time)
-        self.type_text_in_ui_element(ProductDetailsLocators.TIME_INPUT, time)
-        logging.info("Time provided successfully")
-        origin.click()
+    # @retry(10)
+    # def click_and_select_time_input(self, time):
+    #     """Method clicks on time input and type desired time"""
+    #     origin = self.find_element(ProductDetailsLocators.TIME_INPUT)
+    #     logging.info("Trying to input time as '%s'", time)
+    #     self.type_text_in_ui_element(ProductDetailsLocators.TIME_INPUT, time)
+    #     logging.info("Time provided successfully")
+    #     origin.click()
+
+    def select_time(self, time, change_time: bool = True):
+        """
+        Method provides random time into time input and click Apply/Cancel btn
+        :param time: random time
+        :param change_time: True if we desire to change time, otherwise False
+        :return: None
+        """
+        if change_time:
+            logging.info("Trying to input time as '%s'", time)
+            self.type_text_in_ui_element(ProductDetailsLocators.TIME_INPUT, time)
+            logging.info("Time provided successfully")
+            # self.find_element(ProductDetailsLocators.APPLY_EXPANDED_BUTTON).click()
+            self.click_on_element(ProductDetailsLocators.APPLY_EXPANDED_BUTTON)
+        else:
+            logging.info("Time was not provided by test choice")
+            # self.find_element(ProductDetailsLocators.CANCEL_EXPANDED_BUTTON).click()
+            self.click_on_element(ProductDetailsLocators.CANCEL_EXPANDED_BUTTON)
 
     def click_and_select_date_and_time_input(self, datetime):
         """Method clicks on datetime input and type desired datetime"""
