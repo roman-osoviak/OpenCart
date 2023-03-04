@@ -372,6 +372,20 @@ class ProductDetailsPage(BasePage):
         self.type_text_in_ui_element(ProductDetailsLocators.DATE_INPUT, date)
         origin.click()
 
+    @retry(10)
+    def click_and_select_time_input(self, time):
+        """Method clicks on time input and type desired time"""
+        origin = self.find_element(ProductDetailsLocators.TIME_INPUT)
+        self.type_text_in_ui_element(ProductDetailsLocators.TIME_INPUT, time)
+        origin.click()
+
+    def click_and_select_date_and_time_input(self, datetime):
+        """Method clicks on datetime input and type desired datetime"""
+        origin = self.find_element(ProductDetailsLocators.DATE_TIME_INPUT)
+        self.type_text_in_ui_element(ProductDetailsLocators.DATE_TIME_INPUT,
+                                     str(datetime))
+        origin.click()
+
     def click_on_add_to_cart_button(self):
         """
         Method clicks on "Add to Cart" button

@@ -53,6 +53,16 @@ def get_random_date():
     return fake.date()
 
 
+def get_random_time():
+    """Function for generating random date value"""
+    return fake.time()
+
+
+def get_random_datetime():
+    """Function for generating random datetime value"""
+    return fake.date_time()
+
+
 def trim_currency_from_string(string_with_currency: str):
     """
     Method that trims first currency symbol from the string

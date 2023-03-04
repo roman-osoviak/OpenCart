@@ -57,11 +57,12 @@ class BasePage:
 
         :param locator: locator itself
         :param text: string to input
-        :return: None
+        :return: self
         """
         elem = self.find_element(locator)
         elem.clear()
         elem.send_keys(text)
+        return self
 
     @retry(20)
     def _trigger_checkbox(self, locator: Tuple, value: bool):
