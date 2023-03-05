@@ -379,9 +379,9 @@ class ProductDetailsPage(BasePage):
             self.type_text_in_ui_element(ProductDetailsLocators.DATE_INPUT, date)
             logging.info("Date provided successfully")
             self.find_element(ProductDetailsLocators.DATE_INPUT).send_keys(Keys.ESCAPE)
-            # press_esc_btn()
         else:
             logging.info("Time was not provided by test choice")
+        return self
 
     @retry(10)
     def select_time(self, time, change_time: bool = True):
@@ -398,6 +398,7 @@ class ProductDetailsPage(BasePage):
             self.click_on_element(ProductDetailsLocators.APPLY_EXPANDED_BUTTON)
         else:
             logging.info("Time was not provided by test choice")
+        return self
 
     def select_date_time(self, datetime, change_time: bool = True):
         """
@@ -414,6 +415,7 @@ class ProductDetailsPage(BasePage):
             self.click_on_element(ProductDetailsLocators.APPLY_EXPANDED_BUTTON)
         else:
             logging.info("Datetime was not provided by test choice")
+        return self
 
     def verify_checkbox_is_selected(self, checkbox_btn_option: ProductDetailsPageCheckBox,
                                     is_selected: bool = True):

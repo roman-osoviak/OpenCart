@@ -14,6 +14,7 @@ def test_date_selection(browser, get_env):
         prod_details_page.go_to_site()
 
     with allure.step('Select date'):
-        prod_details_page.click_and_select_date_input(fake.date())
-        prod_details_page.select_time(fake.time())
-        prod_details_page.select_date_time(fake.date_time())
+        prod_details_page \
+            .click_and_select_date_input(fake.date()) \
+            .select_time(fake.time()) \
+            .select_date_time(fake.date_time())
