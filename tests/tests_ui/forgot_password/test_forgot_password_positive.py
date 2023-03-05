@@ -3,7 +3,7 @@ Module with test case for testing forgot password positive flow
 """
 
 from pages.forgot_password_page import ForgotPasswordPage
-from utils.common import get_random_email
+from utils.common import fake
 from utils.constants import PageTitle
 
 
@@ -16,5 +16,5 @@ def test_forgot_password(browser, get_env):
 
     assert browser.title == PageTitle.FORGOT_PASSWORD_PAGE_TITLE
 
-    class_page.forgot_password(get_random_email())
+    class_page.forgot_password(fake.email())
     assert browser.title == PageTitle.FORGOT_PASSWORD_SUCCESS

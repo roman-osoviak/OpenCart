@@ -4,8 +4,7 @@ on the Registration Page
 """
 
 from pages.registration_page import RegistrationPage
-from utils.common import get_random_last_name, get_random_first_name, \
-    get_random_string
+from utils.common import get_random_string, fake
 from utils.constants import RegPageError
 from utils.enums import RegPageErrorType
 
@@ -17,7 +16,7 @@ def test_blank_email(browser, get_env):
 
     class_page = RegistrationPage(browser, site_url)
     class_page.go_to_site()
-    class_page.register_user(get_random_first_name(), get_random_last_name(),
+    class_page.register_user(fake.first_name(), fake.last_name(),
                              '', password, True)
 
     assert class_page.get_errors_count() == 1

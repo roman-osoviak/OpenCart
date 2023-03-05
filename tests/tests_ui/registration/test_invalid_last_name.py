@@ -6,8 +6,7 @@ on the Registration Page
 import pytest
 
 from pages.registration_page import RegistrationPage
-from utils.common import get_random_first_name, get_random_email, \
-    get_random_string
+from utils.common import get_random_string, fake
 from utils.constants import RegPageError
 from utils.enums import RegPageErrorType
 
@@ -26,7 +25,7 @@ def test_invalid_last_name(browser, test_input, get_env):
 
     class_page = RegistrationPage(browser, site_url)
     class_page.go_to_site()
-    class_page.register_user(get_random_first_name(), test_input, get_random_email(),
+    class_page.register_user(fake.first_name(), test_input, fake.email(),
                              password, True)
 
     assert class_page.get_errors_count() == 1

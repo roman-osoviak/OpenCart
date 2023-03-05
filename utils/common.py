@@ -36,21 +36,6 @@ def get_random_string(length: int, case=None):
     return ''.join(random.choice(letters + string.digits) for i in range(length))
 
 
-def get_random_email():
-    """Function for generating random email value"""
-    return fake.email()
-
-
-def get_random_first_name():
-    """Function for generating random name value"""
-    return fake.first_name()
-
-
-def get_random_last_name():
-    """Function for generating random last name value"""
-    return fake.last_name()
-
-
 def trim_currency_from_string(string_with_currency: str):
     """
     Method that trims first currency symbol from the string
