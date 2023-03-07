@@ -49,9 +49,7 @@ class RegistrationPage(BasePage):
         :param first_name: First Name need to be entered
         :return: None
         """
-        self.type_text_in_ui_element(
-            self.driver.find_element(*RegistrationLocators.FIRST_NAME_INPUT),
-            first_name)
+        self.type_text_in_ui_element(RegistrationLocators.FIRST_NAME_INPUT, first_name)
 
     def set_last_name(self, last_name: str):
         """
@@ -60,20 +58,16 @@ class RegistrationPage(BasePage):
         :param last_name: Last Name need to be entered
         :return: None
         """
-        self.type_text_in_ui_element(
-            self.driver.find_element(*RegistrationLocators.LAST_NAME_INPUT),
-            last_name)
+        self.type_text_in_ui_element(RegistrationLocators.LAST_NAME_INPUT, last_name)
 
     def set_email(self, email: str):
         """
         Input email field
 
-        :param email: Email address need to enter
+        :param email: Email address need to be entered
         :return: None
         """
-        self.type_text_in_ui_element(
-            self.driver.find_element(*RegistrationLocators.EMAIL_INPUT),
-            email)
+        self.type_text_in_ui_element(RegistrationLocators.EMAIL_INPUT, email)
 
     def set_password(self, password: str):
         """
@@ -82,9 +76,7 @@ class RegistrationPage(BasePage):
         :param password: Password need to enter
         :return: None
         """
-        self.type_text_in_ui_element(
-            self.driver.find_element(*RegistrationLocators.PASSWORD_INPUT),
-            password)
+        self.type_text_in_ui_element(RegistrationLocators.PASSWORD_INPUT, password)
 
     def set_subscribe_flag(self, subscribe_state: bool):
         """
