@@ -3,18 +3,9 @@ This module describes Login Page
 LoginPage is inherited from BasePage
 """
 from selenium.common import NoSuchElementException
-from selenium.webdriver.common.by import By
 
+from locators.forgot_password_locators import ForgotPasswordPageLocators
 from pages.base_page import BasePage
-
-
-# pylint: disable=too-few-public-methods
-class ForgotPasswordPageLocators:
-    """Locators for Forgotten Password page"""
-    EMAIL_ADDRESS_INPUT = (By.XPATH, '//*[@name="email"]')
-    BACK_BUTTON = (By.XPATH, '//*[contains(text(), "Back")]')
-    CONTINUE_BUTTON = (By.XPATH, '//*[@type="submit"]')
-    WARNING_NOT_FOUND_RECORD = (By.XPATH, '//*[@id="alert"]/div')
 
 
 class ForgotPasswordPage(BasePage):
@@ -42,8 +33,7 @@ class ForgotPasswordPage(BasePage):
         :param email: Customer Email
         :return: None
         """
-        self.type_text_in_ui_element(self.find_element
-                                     (ForgotPasswordPageLocators.EMAIL_ADDRESS_INPUT),
+        self.type_text_in_ui_element(ForgotPasswordPageLocators.EMAIL_ADDRESS_INPUT,
                                      email)
 
     def click_continue_button(self):
@@ -52,12 +42,14 @@ class ForgotPasswordPage(BasePage):
 
     def get_alert_text(self):
         """Return text alert or empty string in case no alert is displayed"""
+        element_text = ''
         try:
             element = self.driver.find_element(*ForgotPasswordPageLocators.WARNING_NOT_FOUND_RECORD)
 
             if element.is_displayed():
-                return element.text
-            return ''
+                element_text = element.text
 
         except NoSuchElementException:
             print('No such element on the page')
+
+        return element_text
