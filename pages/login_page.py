@@ -4,18 +4,8 @@ LoginPage is inherited from BasePage
 """
 import logging
 
-from selenium.webdriver.common.by import By
-
+from locators.login_locators import LoginPageLocators
 from pages.base_page import BasePage
-
-
-# pylint: disable=too-few-public-methods
-class LoginPageLocators:
-    """Locators for Login page"""
-    EMAIL_INPUT = (By.ID, 'input-email')
-    PASSWORD_INPUT = (By.ID, 'input-password')
-    LOGIN_BUTTON = (By.XPATH, '//*[@type="submit"]')
-    CONTINUE_BUTTON = (By.XPATH, '//*[contains(text(), "Continue")]')
 
 
 class LoginPage(BasePage):
@@ -32,7 +22,7 @@ class LoginPage(BasePage):
 
        :param email: email address to login with
        :param password:  password to login with
-       :return:
+       :return: None
        """
         logging.info("Trying to register user with %s email and '%s' as a password",
                      email, password)
@@ -46,7 +36,7 @@ class LoginPage(BasePage):
         Input email field
 
         :param email: email address need to enter
-        :return:
+        :return: None
         """
         self.type_text_in_ui_element(self.driver.find_element(*LoginPageLocators.EMAIL_INPUT),
                                      email)
@@ -56,7 +46,7 @@ class LoginPage(BasePage):
         Input password field
 
         :param password: password field need to enter
-        :return:
+        :return: None
         """
         self.type_text_in_ui_element(self.driver.find_element(*LoginPageLocators.PASSWORD_INPUT),
                                      password)

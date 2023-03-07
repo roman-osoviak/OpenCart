@@ -6,23 +6,9 @@ import logging
 
 from selenium.webdriver.common.by import By
 
+from locators.registration_locators import RegistrationLocators
 from pages.base_page import BasePage
 from utils.enums import RegPageErrorType
-
-
-# pylint: disable=too-few-public-methods
-class RegistrationLocators:
-    """Locators for Registration page"""
-    FIRST_NAME_INPUT = (By.XPATH, '//*[@id="input-firstname"]')
-    LAST_NAME_INPUT = (By.XPATH, '//*[@id="input-lastname"]')
-    EMAIL_INPUT = (By.XPATH, '//*[@id="input-email"]')
-    PASSWORD_INPUT = (By.XPATH, '//*[@id="input-password"]')
-    SUBSCRIBE_YES = (By.CSS_SELECTOR, '#input-newsletter-yes')
-    SUBSCRIBE_NO = (By.CSS_SELECTOR, '#input-newsletter-no')
-    SUBSCRIBE_FLAG = (By.NAME, 'agree')
-    CONTINUE_BUTTON = (By.XPATH, '//*[@type="submit"]')
-    ERRORS_TEXT_ON_PAGE = (By.XPATH, '//*[@class="text-danger"]')
-    ERROR_XPATH = '//input[@id="{}"]/following-sibling::*'
 
 
 class RegistrationPage(BasePage):
@@ -33,6 +19,7 @@ class RegistrationPage(BasePage):
         """Open registration page method"""
         return self.driver.get(self.base_url + self._URL_PATH)
 
+    # pylint: disable=too-many-arguments
     def register_user(self, first_name: str, last_name: str, email: str,
                       password: str, subscribe_flag: bool):
         """
@@ -54,8 +41,6 @@ class RegistrationPage(BasePage):
         self.set_subscribe_flag(subscribe_flag)
         self.click_on_continue_btn()
         logging.info("User is successfully registered")
-
-    # pylint: disable=too-many-arguments
 
     def set_first_name(self, first_name: str):
         """
