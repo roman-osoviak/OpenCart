@@ -38,7 +38,7 @@ class LoginPage(BasePage):
         :param email: email address need to enter
         :return: None
         """
-        self.type_text_in_ui_element(self.driver.find_element(*LoginPageLocators.EMAIL_INPUT),
+        self.type_text_in_ui_element(LoginPageLocators.EMAIL_INPUT,
                                      email)
 
     def set_password(self, password: str):
@@ -48,7 +48,7 @@ class LoginPage(BasePage):
         :param password: password field need to enter
         :return: None
         """
-        self.type_text_in_ui_element(self.driver.find_element(*LoginPageLocators.PASSWORD_INPUT),
+        self.type_text_in_ui_element(LoginPageLocators.PASSWORD_INPUT,
                                      password)
 
     def click_login_button(self):
