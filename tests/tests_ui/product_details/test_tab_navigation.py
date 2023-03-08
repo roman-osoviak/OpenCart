@@ -9,5 +9,12 @@ def test_tab_navigation(browser, get_env):
     prod_details_page = ProductDetailsPage(browser, site_url)
     prod_details_page.go_to_site()
 
-    prod_details_page.click_on_tab_lower(ProductDetailsTabsLower.TAB_SPECIFICATION)
-    prod_details_page.verify_tab_is_active(ProductDetailsTabsLower.TAB_SPECIFICATION)
+    # check navigation through the tabs
+    prod_details_page \
+        .verify_tab_is_active(ProductDetailsTabsLower.TAB_DESCRIPTION) \
+        .click_on_tab_lower(ProductDetailsTabsLower.TAB_SPECIFICATION) \
+        .verify_tab_is_active(ProductDetailsTabsLower.TAB_SPECIFICATION) \
+        .click_on_tab_lower(ProductDetailsTabsLower.TAB_REVIEWS) \
+        .verify_tab_is_active(ProductDetailsTabsLower.TAB_REVIEWS) \
+        .click_on_tab_lower(ProductDetailsTabsLower.TAB_DESCRIPTION) \
+        .verify_tab_is_active(ProductDetailsTabsLower.TAB_DESCRIPTION)

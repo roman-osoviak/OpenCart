@@ -30,7 +30,6 @@ class ProductDetailsAttributes(Enum):
     ATTRIBUTE_PLACEHOLDER = 'placeholder'
     ATTRIBUTE_VALUE = 'value'
     ATTRIBUTE_TEXT = 'text'
-    ATTRIBUTE_CLASS = 'class'
 
 
 # pylint: disable=too-many-public-methods
@@ -265,8 +264,15 @@ class ProductDetailsPage(BasePage):
         """Checks if tab is currently active"""
         if tab == ProductDetailsTabsLower.TAB_SPECIFICATION:
             class_value = self.get_element_attribute(SpecificationLocators.TAB_SPECIFICATION,
-                                                     ProductDetailsAttributes.ATTRIBUTE_CLASS.value)
+                                                     'class')
+        elif tab == ProductDetailsTabsLower.TAB_DESCRIPTION:
+            class_value = self.get_element_attribute(DescriptionLocators.TAB_DESCRIPTION,
+                                                     'class')
+        else:
+            class_value = self.get_element_attribute(ReviewsLocators.TAB_REVIEWS,
+                                                     'class')
         assert 'active' in class_value
+        return self
 
     def set_random_string_to_text_input(self, text_length: int):
         """
@@ -409,9 +415,10 @@ class ProductDetailsPage(BasePage):
 
     def click_on_tab_lower(self, tab: ProductDetailsTabsLower):
         """Method for clicking on lower tab"""
-        if tab.value == ProductDetailsTabsLower.TAB_DESCRIPTION.value:
+        if tab == ProductDetailsTabsLower.TAB_DESCRIPTION:
             self.click_on_element(DescriptionLocators.TAB_DESCRIPTION)
-        elif tab.value == ProductDetailsTabsLower.TAB_SPECIFICATION.value:
+        elif tab == ProductDetailsTabsLower.TAB_SPECIFICATION:
             self.click_on_element(SpecificationLocators.TAB_SPECIFICATION)
         else:
             self.click_on_element(ReviewsLocators.TAB_REVIEWS)
+        return self
