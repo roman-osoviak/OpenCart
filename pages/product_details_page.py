@@ -2,17 +2,19 @@
 This module describes Product's Details Page
 """
 import logging
+from enum import Enum
 
 from hamcrest import assert_that, equal_to
 from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
 
-from locators.product_details_locators import DescriptionLocators, ProductDetailsLocators
+from locators.product_details_locators import DescriptionLocators, \
+    ProductDetailsLocators, SpecificationLocators, ReviewsLocators
 from pages.base_page import BasePage
 from utils.common import retry
 from utils.common import trim_currency_from_string, get_random_string
 from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, \
-    ProductDetailsPageSelectMenu, ProductDetailsTextarea
+    ProductDetailsPageSelectMenu, ProductDetailsTextarea, ProductDetailsTabsLower
 
 
 class _DescriptionTab:
@@ -23,11 +25,12 @@ class _DescriptionTab:
         self.description_instance = DescriptionLocators()
 
 
-class ProductDetailsAttributes:
+class ProductDetailsAttributes(Enum):
     """Class describes attribute names"""
     ATTRIBUTE_PLACEHOLDER = 'placeholder'
     ATTRIBUTE_VALUE = 'value'
     ATTRIBUTE_TEXT = 'text'
+    ATTRIBUTE_CLASS = 'class'
 
 
 # pylint: disable=too-many-public-methods
@@ -258,6 +261,13 @@ class ProductDetailsPage(BasePage):
             self.is_element_invisible(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
         return self
 
+    def verify_tab_is_active(self, tab: ProductDetailsTabsLower):
+        """Checks if tab is currently active"""
+        if tab == ProductDetailsTabsLower.TAB_SPECIFICATION:
+            class_value = self.get_element_attribute(SpecificationLocators.TAB_SPECIFICATION,
+                                                     ProductDetailsAttributes.ATTRIBUTE_CLASS.value)
+        assert 'active' in class_value
+
     def set_random_string_to_text_input(self, text_length: int):
         """
         Generate string of desired length and inputs it into text field
@@ -396,3 +406,12 @@ class ProductDetailsPage(BasePage):
         """
         self.click_on_element(ProductDetailsLocators.BUTTON_ADD_TO_CART)
         return self
+
+    def click_on_tab_lower(self, tab: ProductDetailsTabsLower):
+        """Method for clicking on lower tab"""
+        if tab.value == ProductDetailsTabsLower.TAB_DESCRIPTION.value:
+            self.click_on_element(DescriptionLocators.TAB_DESCRIPTION)
+        elif tab.value == ProductDetailsTabsLower.TAB_SPECIFICATION.value:
+            self.click_on_element(SpecificationLocators.TAB_SPECIFICATION)
+        else:
+            self.click_on_element(ReviewsLocators.TAB_REVIEWS)

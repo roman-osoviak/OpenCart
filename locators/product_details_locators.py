@@ -3,17 +3,21 @@ from selenium.webdriver.common.by import By
 
 from utils.enums import ProductDetailsButton
 
+
 # pylint: disable=too-few-public-methods
 class DescriptionLocators:
     """Locators in Description Tab"""
+    TAB_DESCRIPTION = (By.XPATH, '//a[contains(@id,"description") and text()="Description"]')
 
 
 class SpecificationLocators:
     """Locators in Specification Tab"""
+    TAB_SPECIFICATION = (By.XPATH, '//a[contains(@id,"specification") and text()="Specification"]')
 
 
 class ReviewsLocators:
     """Locators on Reviews Tab"""
+    TAB_REVIEWS = (By.XPATH, '//a[contains(@id,"review") and contains(text(), "Reviews")]')
 
 
 class ProductDetailsLocators:

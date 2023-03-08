@@ -84,3 +84,10 @@ class ProductDetailsButton(Enum):
     """Class for button elements"""
     WARNING_MAX_SIZE = "Warning: The uploaded file exceeds the 20mb max file size!"
     ERROR_FILE_REQUIRED = "File required!"
+
+
+class ProductDetailsTabsLower(Enum):
+    """Class for lower tabs"""
+    TAB_DESCRIPTION = 'Description'
+    TAB_SPECIFICATION = 'Specification'
+    TAB_REVIEWS = 'Reviews (0)'
