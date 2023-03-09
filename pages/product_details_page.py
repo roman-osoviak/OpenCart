@@ -4,6 +4,7 @@ This module describes Product's Details Page
 import logging
 from enum import Enum
 
+import allure
 from hamcrest import assert_that, equal_to
 from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
@@ -262,16 +263,17 @@ class ProductDetailsPage(BasePage):
 
     def verify_tab_is_active(self, tab: ProductDetailsTabsLower):
         """Checks if tab is currently active"""
-        if tab == ProductDetailsTabsLower.TAB_SPECIFICATION:
-            class_value = self.get_element_attribute(SpecificationLocators.TAB_SPECIFICATION,
-                                                     'class')
-        elif tab == ProductDetailsTabsLower.TAB_DESCRIPTION:
-            class_value = self.get_element_attribute(DescriptionLocators.TAB_DESCRIPTION,
-                                                     'class')
-        else:
-            class_value = self.get_element_attribute(ReviewsLocators.TAB_REVIEWS,
-                                                     'class')
-        assert 'active' in class_value
+        with allure.step(f'Verify if {tab.value} is active'):
+            if tab == ProductDetailsTabsLower.TAB_SPECIFICATION:
+                class_value = self.get_element_attribute(SpecificationLocators.TAB_SPECIFICATION,
+                                                         'class')
+            elif tab == ProductDetailsTabsLower.TAB_DESCRIPTION:
+                class_value = self.get_element_attribute(DescriptionLocators.TAB_DESCRIPTION,
+                                                         'class')
+            else:
+                class_value = self.get_element_attribute(ReviewsLocators.TAB_REVIEWS,
+                                                         'class')
+            assert 'active' in class_value
         return self
 
     def set_random_string_to_text_input(self, text_length: int):

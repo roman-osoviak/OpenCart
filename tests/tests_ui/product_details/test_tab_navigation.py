@@ -8,9 +8,9 @@ from utils.enums import ProductDetailsTabsLower
 def test_tab_navigation(browser, get_env):
     """Verifying that navigation through tabs works as expected"""
     site_url = get_env['environment']['site_url']
+    prod_details_page = ProductDetailsPage(browser, site_url)
 
     with allure.step(f'Opening {site_url}'):
-        prod_details_page = ProductDetailsPage(browser, site_url)
         prod_details_page.go_to_site()
 
     # check navigation through the tabs

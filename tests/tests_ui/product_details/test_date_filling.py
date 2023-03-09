@@ -8,9 +8,9 @@ from utils.common import fake
 def test_date_selection(browser, get_env):
     """Positive date selection case"""
     site_url = get_env['environment']['site_url']
+    prod_details_page = ProductDetailsPage(browser, site_url)
 
     with allure.step(f'Opening {site_url}'):
-        prod_details_page = ProductDetailsPage(browser, site_url)
         prod_details_page.go_to_site()
 
     with allure.step('Select date'):
