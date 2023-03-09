@@ -83,6 +83,11 @@ def get_random_choice(class_choice):
     return choice(list(class_choice))
 
 
+# def rgb_to_hex(color_rgba):
+#     color_hex = '#{:02x}{:02x}{:02x}'.format(*color_rgba)
+#     return color_hex
+
+
 class HotKeys:
     """Describes actions with hot keys"""
 

@@ -149,3 +149,13 @@ class BasePage:
         :return: value of the attribute
         """
         return self.find_element(locator).get_attribute(attribute)
+
+    def get_value_of_css_property(self, locator: Tuple, css_property: str):
+        """
+        Method that returns css property value
+
+        :param locator: locator itself
+        :param css_property: desired property name
+        :return: str - value of property
+        """
+        return self.find_element(locator).value_of_css_property(css_property)

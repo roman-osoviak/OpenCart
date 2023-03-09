@@ -91,3 +91,8 @@ class ProductDetailsTabsLower(Enum):
     TAB_DESCRIPTION = 'Description'
     TAB_SPECIFICATION = 'Specification'
     TAB_REVIEWS = 'Reviews (0)'
+
+
+class ColorsInHexString(Enum):
+    """Class with colors"""
+    OLD_PRICE = '#dc512c'
