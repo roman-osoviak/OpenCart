@@ -8,6 +8,9 @@ from utils.enums import ProductDetailsButton
 class DescriptionLocators:
     """Locators in Description Tab"""
     TAB_DESCRIPTION = (By.XPATH, '//a[contains(@id,"description") and text()="Description"]')
+    HEADER_FEATURES = (By.XPATH, '//*[@id="tab-description"]//../h3[contains(text(), "Features")]')
+    HEADER_TECH_SPECIFICATION = \
+        (By.XPATH, '//*[@id="tab-description"]//../h3[contains(text(), "Technical specification")]')
 
 
 class SpecificationLocators:
@@ -96,3 +99,7 @@ class ProductDetailsLocators:
 
     # add to cart button
     BUTTON_ADD_TO_CART = (By.XPATH, '//button[@type="submit" and text() = "Add to Cart"]')
+
+    # low level part
+    HEADER_RELATED_PRODUCTS = \
+        By.XPATH, '//*[@id="content"]//../h3[contains(text(), "Related Products")]'
