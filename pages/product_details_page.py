@@ -7,7 +7,6 @@ from enum import Enum
 import allure
 from hamcrest import assert_that, equal_to
 from selenium.webdriver import Keys
-from selenium.webdriver.support.color import Color
 from selenium.webdriver.support.select import Select
 
 from locators.product_details_locators import DescriptionLocators, \
@@ -120,13 +119,6 @@ class ProductDetailsPage(BasePage):
         """
         return self.get_element_attribute(ProductDetailsLocators.TEXT_AREA,
                                           ProductDetailsAttributes.ATTRIBUTE_PLACEHOLDER)
-
-    def get_old_price_color(self):
-        """Method returns color of old price text"""
-        rgb_color_value = self.get_value_of_css_property(ProductDetailsLocators.OLD_PRICE, 'color')
-        # rgb_color = rgb_color_value[rgb_color_value.find('(') + 1:rgb_color_value.find(')')]
-        rgb_color = Color.from_string(rgb_color_value).hex
-        return rgb_color
 
     def verify_textarea_placeholder(self):
         """Method verifying placeholder text"""

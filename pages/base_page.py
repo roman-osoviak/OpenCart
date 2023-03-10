@@ -7,9 +7,11 @@ from typing import Tuple
 from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.color import Color
 from selenium.webdriver.support.wait import WebDriverWait
 
 from utils.common import retry
+from utils.enums import ColorsInHexString
 
 
 class BasePage:
@@ -149,6 +151,12 @@ class BasePage:
         :return: value of the attribute
         """
         return self.find_element(locator).get_attribute(attribute)
+
+    def verify_element_color(self, locator: Tuple, color: ColorsInHexString):
+        """Verifying that color value is as expected"""
+        rgb_color_value = self.get_value_of_css_property(locator, 'color')
+        hex_color_string = Color.from_string(rgb_color_value).hex
+        assert hex_color_string == color.value
 
     def get_value_of_css_property(self, locator: Tuple, css_property: str):
         """

@@ -95,4 +95,4 @@ class ProductDetailsTabsLower(Enum):
 
 class ColorsInHexString(Enum):
     """Class with colors"""
-    OLD_PRICE = '#dc512c'
+    ORANGE_COLOR = '#dc512c'
