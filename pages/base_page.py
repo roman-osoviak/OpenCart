@@ -158,6 +158,11 @@ class BasePage:
         hex_color_string = Color.from_string(rgb_color_value).hex
         assert hex_color_string == color.value
 
+    def verify_elements_availability(self, *args: Tuple):
+        """Method checks if elements are displayed"""
+        for arg in args:
+            assert self.find_element(arg).is_displayed()
+
     def get_value_of_css_property(self, locator: Tuple, css_property: str):
         """
         Method that returns css property value
