@@ -276,6 +276,14 @@ class ProductDetailsPage(BasePage):
             assert 'active' in class_value
         return self
 
+    def verify_specification_table_text_is_proper(self):
+        """Methods checks that expected text in the table is desired one"""
+        if self.verify_tab_is_active(ProductDetailsTabsLower.TAB_SPECIFICATION):
+            elem = self.find_elements(SpecificationLocators.TABLE_RECORDS)
+        assert_that(elem[0].text, equal_to('Processor'))
+        assert_that(elem[1].text, equal_to('Clockspeed'))
+        assert_that(elem[2].text, equal_to('100mhz'))
+
     def set_random_string_to_text_input(self, text_length: int):
         """
         Generate string of desired length and inputs it into text field

@@ -16,6 +16,9 @@ class DescriptionLocators:
 class SpecificationLocators:
     """Locators in Specification Tab"""
     TAB_SPECIFICATION = (By.XPATH, '//a[contains(@id,"specification") and text()="Specification"]')
+    PROCESSORS = (By.XPATH, '//*[@id="tab-specification"]//*[contains(text(), "Processor")]')
+    CLOCKSPEED = (By.XPATH, '//*[@id="tab-specification"]//*[contains(text(), "Clockspeed")]')
+    TABLE_RECORDS = (By.XPATH, '//*[@id="tab-specification"]/..//td')
 
 
 class ReviewsLocators:
