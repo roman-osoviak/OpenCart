@@ -278,11 +278,10 @@ class ProductDetailsPage(BasePage):
 
     def verify_specification_table_text_is_proper(self):
         """Methods checks that expected text in the table is desired one"""
-        if self.verify_tab_is_active(ProductDetailsTabsLower.TAB_SPECIFICATION):
-            elem = self.find_elements(SpecificationLocators.TABLE_RECORDS)
-        assert_that(elem[0].text, equal_to('Processor'))
-        assert_that(elem[1].text, equal_to('Clockspeed'))
-        assert_that(elem[2].text, equal_to('100mhz'))
+        elements = self.find_elements(SpecificationLocators.TABLE_RECORDS)
+        assert_that(elements[0].text, equal_to('Processor'))
+        assert_that(elements[1].text, equal_to('Clockspeed'))
+        assert_that(elements[2].text, equal_to('100mhz'))
 
     def set_random_string_to_text_input(self, text_length: int):
         """
