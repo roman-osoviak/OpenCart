@@ -15,7 +15,7 @@ from pages.base_page import BasePage
 from utils.common import retry
 from utils.common import trim_currency_from_string, get_random_string
 from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, \
-    ProductDetailsPageSelectMenu, ProductDetailsTextarea, ProductDetailsTabsLower
+    ProductDetailsPageSelectMenu, ProductDetailsTextarea, ProductDetailsTabsLower, ProductDetailsFileResources
 
 
 class _DescriptionTab:
@@ -293,8 +293,11 @@ class ProductDetailsPage(BasePage):
     def verify_inner_text_vs_file_with_dom(self, locator):
         """Compare real innerHTML with text expectations"""
         text = self.get_dump_of_element_source(locator)
-        with open("dom_tab_description", "r") as file:
-            file_content = file.readlines()
+
+        with open(ProductDetailsFileResources.DESCRIPTION_FILE.value, "r",
+                  encoding="utf-8") as file:
+            file_content = file.read()
+
         assert text == file_content
 
     def set_random_string_to_text_input(self, text_length: int):

@@ -1,4 +1,4 @@
-<div id="tab-description" class="tab-pane fade show active mb-4" role="tabpanel" aria-labelledby="description-tab"><p>
+<p>
 <font face="helvetica,geneva,arial" size="2"><font face="Helvetica" size="2">The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed specifically for the creative professional, this display provides more space for easier access to all the tools and palettes needed to edit, format and composite your work. Combine this display with a Mac Pro, MacBook Pro, or PowerMac G5 and there's no limit to what you can achieve. <br>
 <br>
 </font><font face="Helvetica" size="2">The Cinema HD features an active-matrix liquid crystal display that produces flicker-free images that deliver twice the brightness, twice the sharpness and twice the contrast ratio of a typical CRT display. Unlike other flat panels, it's designed with a pure digital interface to deliver distortion-free images that never need adjusting. With over 4 million digital pixels, the display is uniquely suited for scientific and technical applications such as visualizing molecular structures or analyzing geological data. <br>
@@ -248,4 +248,3 @@ PowerBook G4 with dual-link DVI support</li>
 <li>
 Windows PC and graphics card that supports DVI ports with dual-link digital bandwidth and VESA DDC standard for plug-and-play setup</li>
 </ul>
-</div>
