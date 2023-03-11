@@ -18,5 +18,10 @@ def test_description_tab(browser, get_env):
     prod_details_page.click_on_tab_lower(ProductDetailsTabsLower.TAB_SPECIFICATION)
     time.sleep(2)
     prod_details_page.verify_tab_is_active(ProductDetailsTabsLower.TAB_SPECIFICATION)
-    prod_details_page.verify_elements_availability(DescriptionLocators.HEADER_FEATURES,
-                                                   DescriptionLocators.HEADER_TECH_SPECIFICATION)
+    # prod_details_page.verify_elements_availability(DescriptionLocators.HEADER_FEATURES,
+    #                                                DescriptionLocators.HEADER_TECH_SPECIFICATION)
+
+    prod_details_page.click_on_tab_lower(ProductDetailsTabsLower.TAB_DESCRIPTION)
+    time.sleep(2)
+    # prod_details_page.verify_elements_boldness()
+    prod_details_page.verify_inner_text_vs_file_with_dom(DescriptionLocators.TAB_DESCRIPTION_CONTENT)

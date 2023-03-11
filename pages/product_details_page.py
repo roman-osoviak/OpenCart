@@ -283,6 +283,20 @@ class ProductDetailsPage(BasePage):
         assert_that(elements[1].text, equal_to('Clockspeed'))
         assert_that(elements[2].text, equal_to('100mhz'))
 
+    def verify_elements_boldness(self):
+        """Verifying if elements are bold"""
+        elements = self.find_elements(DescriptionLocators.COMMON_BOLDERS)
+        for item in elements:
+            weight_value = self.get_value_of_css_property(elements[elements.index(item)], 'font-weight')
+            assert weight_value == 'bolder'
+
+    def verify_inner_text_vs_file_with_dom(self, locator):
+        """Compare real innerHTML with text expectations"""
+        text = self.get_dump_of_element_source(locator)
+        with open("dom_tab_description", "r") as file:
+            file_content = file.readlines()
+        assert text == file_content
+
     def set_random_string_to_text_input(self, text_length: int):
         """
         Generate string of desired length and inputs it into text field

@@ -96,3 +96,10 @@ class ProductDetailsTabsLower(Enum):
 class ColorsInHexString(Enum):
     """Class with colors"""
     ORANGE_COLOR = '#dc512c'
+
+
+class DescriptionTabElements(Enum):
+    """Class with text of elements in Description tab"""
+    HEADER_FEATURES = 'Features'
+    HEADER_TECH_SPECIFICATION = 'Technical specification'
+    SCREEN_SIZE = 'Screen size'

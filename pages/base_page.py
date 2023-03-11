@@ -172,3 +172,9 @@ class BasePage:
         :return: str - value of property
         """
         return self.find_element(locator).value_of_css_property(css_property)
+
+    def get_dump_of_element_source(self, locator: Tuple):
+        """Crawler to get text from some part of the page"""
+        element = self.find_element(locator)
+        element_source = element.get_attribute('innerHTML')
+        return element_source

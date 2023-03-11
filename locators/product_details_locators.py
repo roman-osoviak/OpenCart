@@ -8,9 +8,48 @@ from utils.enums import ProductDetailsButton
 class DescriptionLocators:
     """Locators in Description Tab"""
     TAB_DESCRIPTION = (By.XPATH, '//a[contains(@id,"description") and text()="Description"]')
+    TAB_DESCRIPTION_CONTENT = (By.XPATH, '//*[@id="tab-description"]')
+    COMMON_BOLDERS = (By.XPATH, '//h3[contains(text(), "Technical specification")]/..//b')
     HEADER_FEATURES = (By.XPATH, '//*[@id="tab-description"]//../h3[contains(text(), "Features")]')
     HEADER_TECH_SPECIFICATION = \
         (By.XPATH, '//*[@id="tab-description"]//../h3[contains(text(), "Technical specification")]')
+    SCREEN_SIZE = (By.XPATH,
+                   '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Screen size")]')
+    SCREEN_TYPE = (By.XPATH,
+                   '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Screen type")]')
+    RESOLUTIONS = (By.XPATH,
+                   '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Resolutions")]')
+    DISPLAY_COLORS = (By.XPATH,
+                      '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Display colors (maximum)")]')
+    VIEWING_ANGLE = (By.XPATH,
+                     '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Viewing angle (typical)")]')
+    BRIGHTNESS = (By.XPATH,
+                  '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Brightness (typical)")]')
+    CONTRAST = (
+        By.XPATH,
+        '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Contrast ratio (typical)")]')
+    RESPONSE = (
+        By.XPATH,
+        '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Response time (typical)")]')
+    PIXEL_PITCH = (By.XPATH, '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Pixel pitch")]')
+    SCREEN_TREATMENT = (By.XPATH,
+                        '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Screen treatment")]')
+    USER_CONTROLS = (By.XPATH,
+                     '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "User controls (hardware and software)")]')
+    CONNECTORS_CABLES = (
+        By.XPATH, '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Connectors and cables")]')
+    VESA_ADAPTER = (By.XPATH,
+                    '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "VESA mount adapter")]')
+    ELECTRICAL_REQUIREMENTS = (By.XPATH,
+                               '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Electrical requirements")]')
+    ENVIRONMENTAL_REQUIREMENTS = (By.XPATH,
+                                  '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Environmental requirements")]')
+    AGENCY_APPROVALS = (By.XPATH,
+                        '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Agency approvals")]')
+    SIZE_WEIGHT = (By.XPATH,
+                   '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "Size and weight")]')
+    SYSTEM_REQUIREMENTS = (By.XPATH,
+                           '//*[contains(text(), "Technical specifications")]/..//*[contains(text(), "System Requirements")]')
 
 
 class SpecificationLocators:
