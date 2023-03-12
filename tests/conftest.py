@@ -9,15 +9,17 @@ import allure
 import pytest
 import yaml
 
+from utils.common import HotKeys
+
 
 @pytest.fixture(scope="session")
-def get_env(request):
+def get_env():
     """
      Get environment fixture
      Reading config yml file
      """
     project_path = os.path.dirname(os.path.dirname(__file__))
-    with open(f"{project_path}/config.yml", "r") as ymlfile:
+    with open(f"{project_path}/config.yml", "r", encoding="utf-8") as ymlfile:
         cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
     return cfg
 
@@ -49,13 +51,19 @@ def pytest_runtest_makereport(item) -> None:
     outcome = yield
     report = outcome.get_result()
 
-    if report.when == 'call' or report.when == "setup":
+    if report.when in ('call', 'setup'):
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             allure_folder = pathlib.Path(__file__).parent / "allure_result_folder"
             now_time = datetime.now().strftime("%Y%m%d%H%M%S")
-            screen_path = os.path.join(allure_folder, "{}.png".format(now_time))
+            screen_path = os.path.join(allure_folder, f"{now_time}.png")
             feature_request = item.funcargs['request']
             driver = feature_request.getfixturevalue("browser")
             driver.save_screenshot(screen_path)
             allure.attach.file(screen_path, now_time, allure.attachment_type.PNG)
+
+
+@pytest.fixture(scope="function")
+def hotkeys(browser):
+    """Fixture for Hot Keys"""
+    return HotKeys(browser)

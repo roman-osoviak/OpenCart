@@ -19,4 +19,4 @@ def get_driver(browser: BrowserDefinition):
     return webdriver.Chrome(executable_path="chromedriver", chrome_options=options)
 
 
-default_driver = get_driver(BrowserDefinition.CHROME)
+# default_driver = get_driver(BrowserDefinition.CHROME)

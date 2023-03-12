@@ -15,7 +15,7 @@ from pages.base_page import BasePage
 from utils.common import retry
 from utils.common import trim_currency_from_string, get_random_string
 from utils.enums import ProductDetailsPageRadio, ProductDetailsPageCheckBox, \
-    ProductDetailsPageSelectMenu, ProductDetailsTextarea, ProductDetailsTabsLower, ProductDetailsFileResources
+    ProductDetailsPageSelectMenu, ProductDetailsTextarea, ProductDetailsTabsLower
 
 
 class _DescriptionTab:
@@ -287,6 +287,7 @@ class ProductDetailsPage(BasePage):
         """Verifying if elements are bold"""
         elements = self.find_elements(DescriptionLocators.COMMON_BOLDERS)
         for item in elements:
+            # weight_value = self.get_value_of_css_property(elements[elements.index(item)], 'font-weight')
             weight_value = self.get_value_of_css_property(elements[elements.index(item)], 'font-weight')
             assert weight_value == 'bolder'
 
@@ -294,7 +295,7 @@ class ProductDetailsPage(BasePage):
         """Compare real innerHTML with text expectations"""
         text = self.get_dump_of_element_source(locator)
 
-        with open(ProductDetailsFileResources.DESCRIPTION_FILE.value, "r",
+        with open('/home/administrator/PycharmProjects/OpenCart/resources/dom_tab_description', "r",
                   encoding="utf-8") as file:
             file_content = file.read()
 

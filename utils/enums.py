@@ -103,8 +103,3 @@ class DescriptionTabElements(Enum):
     HEADER_FEATURES = 'Features'
     HEADER_TECH_SPECIFICATION = 'Technical specification'
     SCREEN_SIZE = 'Screen size'
-
-
-class ProductDetailsFileResources(Enum):
-    """Class with file resources path"""
-    DESCRIPTION_FILE = '/home/administrator/PycharmProjects/OpenCart/resources/dom_tab_description'

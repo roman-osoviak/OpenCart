@@ -163,6 +163,12 @@ class BasePage:
         for arg in args:
             assert self.find_element(arg).is_displayed()
 
+    @retry(5)
+    def verify_elements_is_not_visible(self, *args: Tuple):
+        """Method checks if elements are not displayed"""
+        for arg in args:
+            assert not self.find_element(arg).is_displayed()
+
     def get_value_of_css_property(self, locator: Tuple, css_property: str):
         """
         Method that returns css property value

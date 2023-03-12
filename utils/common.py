@@ -9,8 +9,6 @@ from random import choice
 from faker import Faker
 from selenium.webdriver import Keys, ActionChains
 
-from utils.driver_manager import default_driver
-
 fake = Faker()
 
 
@@ -88,10 +86,11 @@ def get_random_choice(class_choice):
 class HotKeys:
     """Describes actions with hot keys"""
 
+    def __init__(self, driver):
+        """Constructor"""
+        self.driver = driver
+
     def press_esc_btn(self):
         """Method click on ESC button"""
-        ActionChains(default_driver).send_keys(Keys.ESCAPE).perform()
+        ActionChains(self.driver).send_keys(Keys.ESCAPE).perform()
         return self
-
-
-hot_keys = HotKeys()
