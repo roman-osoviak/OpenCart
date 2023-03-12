@@ -33,6 +33,30 @@ class ProductDetailsAttributes(Enum):
     ATTRIBUTE_TEXT = 'text'
 
 
+class BoldStrings(Enum):
+    """Class with text from boldness elements"""
+    HEADER_FEATURES = 'Features'
+    HEADER_TECH_SPECIFICATION = 'Technical specification'
+    SCREEN_SIZE = 'Screen size'
+    SCREEN_TYPE = 'Screen type'
+    RESOLUTIONS = 'Resolutions'
+    DISPLAY_COLORS = 'Display colors (maximum)'
+    VIEWING_ANGLE = 'Viewing angle (typical)'
+    BRIGHTNESS = 'Brightness (typical)'
+    CONTRAST = 'Contrast ratio (typical)'
+    RESPONSE = 'Response time (typical)'
+    PIXEL_PITCH = 'Pixel pitch'
+    SCREEN_TREATMENT = 'Screen treatment'
+    USER_CONTROLS = 'User controls (hardware and software)'
+    CONNECTORS_CABLES = 'Connectors and cables'
+    VESA_ADAPTER = 'VESA mount adapter'
+    ELECTRICAL_REQUIREMENTS = 'Electrical requirements'
+    ENVIRONMENTAL_REQUIREMENTS = 'Environmental requirements'
+    AGENCY_APPROVALS = 'Agency approvals'
+    SIZE_WEIGHT = 'Size and weight'
+    SYSTEM_REQUIREMENTS = 'System Requirements'
+
+
 # pylint: disable=too-many-public-methods
 class ProductDetailsPage(BasePage):
     """Class for Product's Details Page"""
@@ -208,7 +232,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             assert self.is_element_displayed(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
         else:
-            assert self.is_element_invisible(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
+            assert self.is_element_not_exists(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
         return self
 
     def verify_file_required_error_is_displayed(self, is_displayed: bool = True):
@@ -218,7 +242,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
         else:
-            self.is_element_invisible(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
+            self.is_element_not_exists(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
         return self
 
     def verify_text_required_error_is_displayed(self, is_displayed: bool = True):
@@ -226,7 +250,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR)
         else:
-            self.is_element_invisible(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR)
+            self.is_element_not_exists(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR)
         return self
 
     def verify_select_required_error_is_displayed(self, is_displayed: bool = True):
@@ -234,7 +258,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.SELECT_REQUIRED_ERROR)
         else:
-            self.is_element_invisible(ProductDetailsLocators.SELECT_REQUIRED_ERROR)
+            self.is_element_not_exists(ProductDetailsLocators.SELECT_REQUIRED_ERROR)
         return self
 
     def verify_textarea_required_error_is_displayed(self, is_displayed: bool = True):
@@ -242,7 +266,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR)
         else:
-            self.is_element_invisible(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR)
+            self.is_element_not_exists(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR)
         return self
 
     def verify_radio_required_error_is_displayed(self, is_displayed: bool = True):
@@ -250,7 +274,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             assert self.is_element_displayed(ProductDetailsLocators.RADIO_REQUIRED_ERROR)
         else:
-            assert self.is_element_invisible(ProductDetailsLocators.RADIO_REQUIRED_ERROR)
+            assert self.is_element_not_exists(ProductDetailsLocators.RADIO_REQUIRED_ERROR)
         return self
 
     def verify_checkbox_required_error_is_displayed(self, is_displayed: bool = True):
@@ -258,7 +282,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
         else:
-            self.is_element_invisible(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
+            self.is_element_not_exists(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
         return self
 
     def verify_tab_is_active(self, tab: ProductDetailsTabsLower):
@@ -287,7 +311,6 @@ class ProductDetailsPage(BasePage):
         """Verifying if elements are bold"""
         elements = self.find_elements(DescriptionLocators.COMMON_BOLDERS)
         for item in elements:
-            # weight_value = self.get_value_of_css_property(elements[elements.index(item)], 'font-weight')
             weight_value = self.get_value_of_css_property(elements[elements.index(item)], 'font-weight')
             assert weight_value == 'bolder'
 

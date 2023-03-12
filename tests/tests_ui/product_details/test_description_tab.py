@@ -19,8 +19,8 @@ def test_description_tab(browser, get_env):
     prod_details_page.verify_tab_is_active(ProductDetailsTabsLower.TAB_SPECIFICATION)
     # prod_details_page.verify_elements_availability(DescriptionLocators.HEADER_FEATURES,
     #                                                DescriptionLocators.HEADER_TECH_SPECIFICATION)
-    prod_details_page.verify_elements_is_not_visible(DescriptionLocators.HEADER_FEATURES,
-                                                     DescriptionLocators.HEADER_TECH_SPECIFICATION)
+    prod_details_page.verify_elements_are_not_visible(DescriptionLocators.HEADER_FEATURES,
+                                                      DescriptionLocators.HEADER_TECH_SPECIFICATION)
 
     prod_details_page.click_on_tab_lower(ProductDetailsTabsLower.TAB_DESCRIPTION)
     time.sleep(2)

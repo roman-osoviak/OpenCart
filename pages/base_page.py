@@ -129,9 +129,9 @@ class BasePage:
         """
         assert not self.find_element(locator).is_selected()
 
-    def is_element_invisible(self, locator: Tuple):
+    def is_element_not_exists(self, locator: Tuple):
         """
-        Method that checks if element is displayed without 10 sec pause
+        Method that checks if element is not displayed without 10 sec pause
 
         :param locator: locator itself
         :return: True if element displayed, otherwise False
@@ -141,6 +141,19 @@ class BasePage:
             return False
         except NoSuchElementException:
             return True
+
+    def is_element_exists(self, locator: Tuple):
+        """
+        Method that checks if element is displayed without 10 sec pause
+
+        :param locator: locator itself
+        :return: True if element displayed, otherwise False
+        """
+        try:
+            self.driver.find_element(By.XPATH, locator[1])
+            return True
+        except NoSuchElementException:
+            return False
 
     def get_element_attribute(self, locator: Tuple, attribute: str):
         """
@@ -158,13 +171,13 @@ class BasePage:
         hex_color_string = Color.from_string(rgb_color_value).hex
         assert hex_color_string == color.value
 
-    def verify_elements_availability(self, *args: Tuple):
+    def verify_elements_are_visible(self, *args: Tuple):
         """Method checks if elements are displayed"""
         for arg in args:
             assert self.find_element(arg).is_displayed()
 
     @retry(5)
-    def verify_elements_is_not_visible(self, *args: Tuple):
+    def verify_elements_are_not_visible(self, *args: Tuple):
         """Method checks if elements are not displayed"""
         for arg in args:
             assert not self.find_element(arg).is_displayed()
