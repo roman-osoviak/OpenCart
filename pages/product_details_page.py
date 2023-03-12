@@ -314,11 +314,11 @@ class ProductDetailsPage(BasePage):
             weight_value = self.get_value_of_css_property(elements[elements.index(item)], 'font-weight')
             assert weight_value == 'bolder'
 
-    def verify_inner_text_vs_file_with_dom(self, locator):
+    def verify_inner_text_vs_file_with_dom(self, locator, get_project_path):
         """Compare real innerHTML with text expectations"""
         text = self.get_dump_of_element_source(locator)
 
-        with open('/home/administrator/PycharmProjects/OpenCart/resources/dom_tab_description', "r",
+        with open(get_project_path + '/resources/dom_tab_description', "r",
                   encoding="utf-8") as file:
             file_content = file.read()
 

@@ -8,7 +8,7 @@ from pages.product_details_page import ProductDetailsPage
 from utils.enums import ProductDetailsTabsLower
 
 
-def test_description_tab(browser, get_env):
+def test_description_tab(browser, get_env, get_project_path):
     """Verifying Description tab method"""
     site_url = get_env['environment']['site_url']
     prod_details_page = ProductDetailsPage(browser, site_url)
@@ -24,4 +24,5 @@ def test_description_tab(browser, get_env):
     prod_details_page.click_on_tab_lower(ProductDetailsTabsLower.TAB_DESCRIPTION)
     time.sleep(2)
     # prod_details_page.verify_elements_boldness()
-    prod_details_page.verify_inner_text_vs_file_with_dom(DescriptionLocators.TAB_DESCRIPTION_CONTENT)
+    prod_details_page.verify_inner_text_vs_file_with_dom(DescriptionLocators.TAB_DESCRIPTION_CONTENT,
+                                                         get_project_path)
