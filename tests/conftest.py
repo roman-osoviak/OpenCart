@@ -13,15 +13,20 @@ from utils.common import HotKeys
 
 
 @pytest.fixture(scope="session")
-def get_env():
+def get_env(get_project_path):
     """
      Get environment fixture
      Reading config yml file
      """
-    project_path = os.path.dirname(os.path.dirname(__file__))
+    project_path = get_project_path
     with open(f"{project_path}/config.yml", "r", encoding="utf-8") as ymlfile:
         cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
     return cfg
+
+
+@pytest.fixture(scope="session")
+def get_project_path():
+    return os.path.dirname(os.path.dirname(__file__))
 
 
 def pytest_configure(config):
@@ -29,7 +34,6 @@ def pytest_configure(config):
     project_path = os.path.dirname(os.path.dirname(__file__))
     log_format = "%(levelname)s %(asctime)s - %(message)s"
     logging.basicConfig(
-        # filename='{}/my_log.log'.format(project_path),
         filename=f'{project_path}/my_log.log',
         level=logging.INFO, format=log_format, filemode='w')
 
