@@ -22,5 +22,4 @@ def test_add_to_cart_without_upload_file(browser, get_env):
         ProductDetailsPageSelectMenu.random_with_exclude(ProductDetailsPageSelectMenu,
                                                          ProductDetailsPageSelectMenu.VALUE_ZERO))
     prod_details_page.set_random_string_to_textarea(4)
-    prod_details_page.click_on_add_to_cart_button()
     prod_details_page.verify_file_required_error_is_displayed()

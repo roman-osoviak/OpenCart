@@ -257,7 +257,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
         else:
-            self.is_element_not_exists(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
+            self.verify_is_element_not_exists(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
         return self
 
     def verify_text_required_error_is_displayed(self, is_displayed: bool = True):
