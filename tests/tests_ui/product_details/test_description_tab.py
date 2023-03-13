@@ -26,3 +26,5 @@ def test_description_tab(browser, get_env, get_project_path):
     # prod_details_page.verify_elements_boldness()
     prod_details_page.verify_inner_text_vs_file_with_dom(DescriptionLocators.TAB_DESCRIPTION_CONTENT,
                                                          get_project_path)
+    prod_details_page.verify_b_tag_elements()
+

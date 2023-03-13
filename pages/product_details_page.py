@@ -33,11 +33,25 @@ class ProductDetailsAttributes(Enum):
     ATTRIBUTE_TEXT = 'text'
 
 
-class BoldStrings(Enum):
-    """Class with text from boldness elements"""
+class BaseEnum(Enum):
+    """Base enum class"""
+
+    @classmethod
+    def get_values_from_enum(cls):
+        """Returns list of values from enum class"""
+        list_values = [e.value for e in cls]
+        return list_values
+
+
+class HeaderStrings(BaseEnum):
+    """Class with text from h3 elements"""
     HEADER_FEATURES = 'Features'
     HEADER_TECH_SPECIFICATION = 'Technical specification'
-    SCREEN_SIZE = 'Screen size'
+
+
+class BoldStrings(BaseEnum):
+    """Class with text from boldness elements"""
+    SCREEN_SIZE = 'Screen size (diagonal viewable image size)'
     SCREEN_TYPE = 'Screen type'
     RESOLUTIONS = 'Resolutions'
     DISPLAY_COLORS = 'Display colors (maximum)'
@@ -313,6 +327,14 @@ class ProductDetailsPage(BasePage):
         for item in elements:
             weight_value = self.get_value_of_css_property(elements[elements.index(item)], 'font-weight')
             assert weight_value == 'bolder'
+
+    def verify_b_tag_elements(self):
+        """Verifying list of b tag elements in description tab"""
+        elements = self.find_elements(DescriptionLocators.COMMON_BOLDERS)
+        list_of_enum_text = BoldStrings.get_values_from_enum()
+        for item in elements:
+            value = item.text
+            assert value == list_of_enum_text[elements.index(item)]
 
     def verify_inner_text_vs_file_with_dom(self, locator, get_project_path):
         """Compare real innerHTML with text expectations"""

@@ -129,18 +129,17 @@ class BasePage:
         """
         assert not self.find_element(locator).is_selected()
 
-    def is_element_not_exists(self, locator: Tuple):
-        """
-        Method that checks if element is not displayed without 10 sec pause
+    def verify_is_element_visible(self, locator):
+        """Method checks if element is  displayed"""
+        assert self.find_element(locator).is_displayed()
 
-        :param locator: locator itself
-        :return: True if element displayed, otherwise False
-        """
-        try:
-            self.driver.find_element(By.XPATH, locator[1])
-            return False
-        except NoSuchElementException:
-            return True
+    def verify_is_element_invisible(self, locator):
+        """Method checks if elements is not displayed"""
+        assert not self.find_element(locator).is_displayed()
+
+    def verify_is_element_not_exists(self, locator):
+        """Method checks if element is exists"""
+        assert not self.is_element_exists(locator)
 
     def is_element_exists(self, locator: Tuple):
         """
@@ -154,6 +153,10 @@ class BasePage:
             return True
         except NoSuchElementException:
             return False
+
+    def verify_is_element_exists(self, locator):
+        """Method checks if element is exists"""
+        assert self.is_element_exists(locator)
 
     def get_element_attribute(self, locator: Tuple, attribute: str):
         """
@@ -171,16 +174,28 @@ class BasePage:
         hex_color_string = Color.from_string(rgb_color_value).hex
         assert hex_color_string == color.value
 
-    def verify_elements_are_visible(self, *args: Tuple):
+    def verify_elements_are_visible(self, *locators: Tuple):
         """Method checks if elements are displayed"""
-        for arg in args:
-            assert self.find_element(arg).is_displayed()
+        for locator in locators:
+            # assert self.find_element(arg).is_displayed()
+            self.verify_is_element_visible(locator)
+
+    # @retry(5)
+    # def verify_elements_are_not_visible(self, *args: Tuple):
+    #     """Method checks if elements are not displayed"""
+    #     for arg in args:
+    #         assert not self.find_element(arg).is_displayed()
 
     @retry(5)
-    def verify_elements_are_not_visible(self, *args: Tuple):
-        """Method checks if elements are not displayed"""
-        for arg in args:
-            assert not self.find_element(arg).is_displayed()
+    def verify_elements_are_not_visible(self, *locators: Tuple):
+        """
+        Method checks if elements are not displayed
+
+        :param locators: list of locators
+        :return: None
+        """
+        for locator in locators:
+            self.verify_is_element_invisible(locator)
 
     def get_value_of_css_property(self, locator: Tuple, css_property: str):
         """
