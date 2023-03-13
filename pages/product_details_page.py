@@ -237,6 +237,7 @@ class ProductDetailsPage(BasePage):
         select = Select(self.find_element(ProductDetailsLocators.SELECT_MENU_DROPDOWN))
         return select.first_selected_option.text
 
+    @retry(10)
     def verify_alert_is_displayed(self, is_displayed: bool = True):
         """
         Check if our alert element is shown
@@ -244,9 +245,9 @@ class ProductDetailsPage(BasePage):
         :return: True if success, otherwise None
         """
         if is_displayed:
-            assert self.is_element_displayed(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
+            self.verify_is_element_visible(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
         else:
-            assert self.is_element_not_exists(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
+            self.verify_is_element_not_exists(ProductDetailsLocators.MUST_TO_LOGIN_WISH_LIST)
         return self
 
     def verify_file_required_error_is_displayed(self, is_displayed: bool = True):
