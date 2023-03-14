@@ -109,7 +109,7 @@ class ProductDetailsPage(BasePage):
         """
         self.find_element(ProductDetailsLocators.BUTTON).click()
         upload_file = self.find_element(ProductDetailsLocators.UPLOAD_FILE_DIALOG)
-        upload_file.send_keys("/home/administrator/requirements_12_febr")
+        upload_file.send_keys("/resources/image.png")
 
     def verify_old_price_is_greater_than_new(self):
         """
@@ -255,7 +255,8 @@ class ProductDetailsPage(BasePage):
         Method checks that file required error is shown
         """
         if is_displayed:
-            self.is_element_displayed(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
+            # self.is_element_displayed(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
+            self.verify_is_element_visible(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
         else:
             self.verify_is_element_not_exists(ProductDetailsLocators.BUTTON_REQUIRED_ERROR)
         return self
@@ -265,7 +266,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR)
         else:
-            self.is_element_not_exists(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR)
+            self.verify_is_element_not_exists(ProductDetailsLocators.TEXT_INPUT_REQUIRED_ERROR)
         return self
 
     def verify_select_required_error_is_displayed(self, is_displayed: bool = True):
@@ -273,7 +274,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.SELECT_REQUIRED_ERROR)
         else:
-            self.is_element_not_exists(ProductDetailsLocators.SELECT_REQUIRED_ERROR)
+            self.verify_is_element_not_exists(ProductDetailsLocators.SELECT_REQUIRED_ERROR)
         return self
 
     def verify_textarea_required_error_is_displayed(self, is_displayed: bool = True):
@@ -281,7 +282,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR)
         else:
-            self.is_element_not_exists(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR)
+            self.verify_is_element_not_exists(ProductDetailsLocators.TEXT_AREA_REQUIRED_ERROR)
         return self
 
     def verify_radio_required_error_is_displayed(self, is_displayed: bool = True):
@@ -289,7 +290,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             assert self.is_element_displayed(ProductDetailsLocators.RADIO_REQUIRED_ERROR)
         else:
-            assert self.is_element_not_exists(ProductDetailsLocators.RADIO_REQUIRED_ERROR)
+            self.verify_is_element_not_exists(ProductDetailsLocators.RADIO_REQUIRED_ERROR)
         return self
 
     def verify_checkbox_required_error_is_displayed(self, is_displayed: bool = True):
@@ -297,7 +298,7 @@ class ProductDetailsPage(BasePage):
         if is_displayed:
             self.is_element_displayed(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
         else:
-            self.is_element_not_exists(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
+            self.verify_is_element_not_exists(ProductDetailsLocators.CHECKBOX_REQUIRED_TEXT)
         return self
 
     def verify_tab_is_active(self, tab: ProductDetailsTabsLower):
@@ -352,20 +353,22 @@ class ProductDetailsPage(BasePage):
         Generate string of desired length and inputs it into text field
 
         :param text_length: text length
-        :return: None
+        :return: self
         """
         self.type_text_in_ui_element(ProductDetailsLocators.TEXT_INPUT,
                                      get_random_string(text_length))
+        return self
 
     def set_random_string_to_textarea(self, text_length: int):
         """
         Inputs string of desired length into text area element
 
         :param text_length: text length
-        :return: None
+        :return: self
         """
         self.type_text_in_ui_element(ProductDetailsLocators.TEXT_AREA,
                                      get_random_string(text_length))
+        return self
 
     def click_on_radio_button(self, radio_btn_option: ProductDetailsPageRadio):
         """

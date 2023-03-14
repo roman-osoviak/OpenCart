@@ -94,3 +94,8 @@ class HotKeys:
         """Method click on ESC button"""
         ActionChains(self.driver).send_keys(Keys.ESCAPE).perform()
         return self
+
+    def press_enter_btn(self):
+        """Method click on ENTER button"""
+        ActionChains(self.driver).send_keys(Keys.ENTER).perform()
+        return self
