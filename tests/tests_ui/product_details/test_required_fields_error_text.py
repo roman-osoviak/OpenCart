@@ -20,13 +20,15 @@ def test_if_required_fields_are_required_indeed(browser, get_env):
             .verify_file_required_error_is_displayed(False)
 
     # preconditions for required error text
-    prod_details_page.set_random_string_to_text_input(0)
+    with allure.step('Blank input precondition for required field error'):
+        prod_details_page.set_random_string_to_text_input(0)
 
-    prod_details_page \
-        .click_on_add_to_cart_button() \
-        .verify_radio_required_error_is_displayed() \
-        .verify_checkbox_required_error_is_displayed() \
-        .verify_text_required_error_is_displayed() \
-        .verify_select_required_error_is_displayed() \
-        .verify_textarea_required_error_is_displayed() \
-        .verify_file_required_error_is_displayed()
+    with allure.step('Verifying that required fields errors is visible'):
+        prod_details_page \
+            .click_on_add_to_cart_button() \
+            .verify_radio_required_error_is_displayed() \
+            .verify_checkbox_required_error_is_displayed() \
+            .verify_text_required_error_is_displayed() \
+            .verify_select_required_error_is_displayed() \
+            .verify_textarea_required_error_is_displayed() \
+            .verify_file_required_error_is_displayed()
